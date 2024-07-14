@@ -31,7 +31,7 @@ const Header = () => {
 
 
   window.onscroll = () => {
-    if (window.scrollY > 60 && window.scrollY < 300) {
+    if (window.scrollY > 60 && window.scrollY < 301) {
       settrans(true);
     } else if (window.scrollY > 130) {
       settrans(false);
