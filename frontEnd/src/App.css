@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto+Slab:wght@100..900&display=swap');
+
+
+#root {
+  
+ 
+  margin: 0 ;
+  padding: 0;
+ text-transform: capitalize;
+ font-family: "Roboto Slab", serif;
+ font-optical-sizing: auto;
+ /* font-weight: <weight>; */
+ font-style: normal;
+}
