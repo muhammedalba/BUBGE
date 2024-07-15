@@ -7,7 +7,7 @@ const {
   getCart,
   removeCartItem,
   clearCart,
-  updateCartItemQuantity,
+  // updateCartItemQuantity,
   applayCoupon,
 } = require("../Controllers/cartControler");
 
@@ -16,6 +16,8 @@ router.use(protect, allowedTo(role.USER, role.ADMIN));
 router.route("/").post(addProductToCart).get(getCart).delete(clearCart);
 router
   .route("/applayCoupon").put(applayCoupon)
-router.route("/:itemid").put(updateCartItemQuantity).delete(removeCartItem);
+router.route("/:itemid")
+// .put(updateCartItemQuantity)
+.delete(removeCartItem);
 
 module.exports = router;

@@ -44,6 +44,7 @@ exports.createcashOrder = asyncHandler(async (req, res, next) => {
         update: { $inc: { sold: +item.quantity, quantity: -item.quantity } },
       },
     }));
+    console.log(bulkoptions);
     //  تقوم بعمل اكثر من اوبريشن في كوماند واحد
     await productModel.bulkWrite(bulkoptions,{});
     // 5-clear cart depend on cardid
@@ -156,36 +157,36 @@ exports.checkoutSession = asyncHandler(async (req, res, next) => {
 
 
 const createCardOrder =async(session)=>{
-const cartId = session.client_reference_id;
-const shippingAddress = session.metadata;
-const orderPrice = session.amount_total / 100;
+    const cartId = session.client_reference_id;
+    const shippingAddress = session.metadata;
+    const orderPrice = session.amount_total / 100;
 
-console.log(session.customer_email);
-const cart =await cartModel.findById(cartId);
-const user =await UserModel.findOne({email:session.customer_email});
-  // 3- create order with default paymentMethod card
-  const order = await orderModul.create({
-    user: user._id,
-    cartItems: cart.cartItems,
-    shippingAddress,
-    totalOrderPrice:orderPrice,
-    isPaid:true,
-    paidAt:Date.now(),
-    paymentMethodType:'card'
-  });
-   // 4_ after creating order,increment product sold,decrement product quantity
-  if (order) {
-    const bulkoptions = cart.cartItems.map((item) => ({
-      updateOne: {
-        filter: { _id: item.product },
-        update: { $inc: { sold: + item.quantity, quantity: - item.quantity } },
-      },
-    }));
-    //  تقوم بعمل اكثر من اوبريشن في كوماند واحد
-    await productModel.bulkWrite(bulkoptions,{});
-    // 5-clear cart depend on cardid
-    await cartModel.findByIdAndDelete(cartId);
-  }
+    console.log(session.customer_email);
+    const cart =await cartModel.findById(cartId);
+    const user =await UserModel.findOne({email:session.customer_email});
+      // 3- create order with default paymentMethod card
+      const order = await orderModul.create({
+        user: user._id,
+        cartItems: cart.cartItems,
+        shippingAddress,
+        totalOrderPrice:orderPrice,
+        isPaid:true,
+        paidAt:Date.now(),
+        paymentMethodType:'card'
+      });
+      // 4_ after creating order,increment product sold,decrement product quantity
+      if (order) {
+        const bulkoptions = cart.cartItems.map((item) => ({
+          updateOne: {
+            filter: { _id: item.product },
+            update: { $inc: { sold: + item.quantity, quantity: - item.quantity } },
+          },
+        }));
+        //  تقوم بعمل اكثر من اوبريشن في كوماند واحد
+        await productModel.bulkWrite(bulkoptions,{});
+        // 5-clear cart depend on cardid
+        await cartModel.findByIdAndDelete(cartId);
+      }
   
 
 }

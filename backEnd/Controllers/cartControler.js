@@ -39,12 +39,16 @@ exports.addProductToCart = asyncHandler(async (req, res, next) => {
     // 2-check if product is exist in cart
     const productIndex = cart.cartItems.findIndex(
       (item) =>
-        item.product.toString() === productId.toString() &&
-        item.color.toString() === color.toString()
+        item.product.toString() === productId.toString()
+      //  &&
+        // item.color.toString() === color.toString()
     );
     if (productIndex > -1) {
-      cart.cartItems[productIndex].quantity += 1;
-    } else {
+      // cart.cartItems[productIndex].quantity += 1;
+      return next(
+        new ApiError(`This item already exists${req.user._id} `, 404)
+      );
+    } 
       // if product is not exist in cart
       cart.cartItems.push({
         product: productId,
@@ -52,11 +56,12 @@ exports.addProductToCart = asyncHandler(async (req, res, next) => {
         color,
         quantity: 1,
       });
-    }
+    
   }
 
   //   calculate total cart price
   calcTotalCartPrice(cart);
+ 
 
   await cart.save();
 
@@ -78,6 +83,7 @@ exports.getCart = asyncHandler(async (req, res, next) => {
   }
   //   calculate total cart price
   calcTotalCartPrice(cart);
+  
 
   res
     .status(200)
@@ -87,12 +93,13 @@ exports.getCart = asyncHandler(async (req, res, next) => {
 // remove item from cart
 // delet http://localhost:4000/api/cart/:itemid
 exports.removeCartItem = asyncHandler(async (req, res, next) => {
+  console.log(req.params.itemid);
   const cart = await cartModel.findOneAndUpdate(
     { user: req.user._id },
     {
       $pull: {
         cartItems: {
-          _id: req.params.itemid,
+          product: req.params.itemid,
         },
       },
     },
@@ -117,33 +124,34 @@ exports.clearCart = asyncHandler(async (req, res, next) => {
 });
 // update cart item quantity
 // put http://localhost:4000/api/cart/:itemid
-exports.updateCartItemQuantity = asyncHandler(async (req, res, next) => {
-  const { quantity } = req.body;
-  const cart = await cartModel.findOne({ user: req.user._id });
+// exports.updateCartItemQuantity = asyncHandler(async (req, res, next) => {
+//   const { quantity } = req.body;
+//   const cart = await cartModel.findOne({ user: req.user._id });
 
-  if (!cart) {
-    return next(
-      new ApiError(` there is no cart for user  ${req.user._id} `, 404)
-    );
-  }
-  const productIndex = cart.cartItems.findIndex(
-    (item) => item._id.toString() === req.params.itemid.toString()
-  );
-  if (productIndex > -1) {
-    cart.cartItems[productIndex].quantity = quantity;
-  } else {
-    return next(
-      new ApiError(` there is no item for id  ${req.params.itemid} `, 404)
-    );
-  }
-  await cart.save();
-  calcTotalCartPrice(cart);
-  res.status(201).json({
-    resnumOfCartItems: cart.cartItems.length,
-    data: cart,
-    msg: " updated item success",
-  });
-});
+//   if (!cart) {
+//     return next(
+//       new ApiError(` there is no cart for user  ${req.user._id} `, 404)
+//     );
+//   }
+//   const productIndex = cart.cartItems.findIndex(
+//     (item) => item._id.toString() === req.params.itemid.toString()
+//   );
+
+//   if (productIndex > -1) {
+//     cart.cartItems[productIndex].quantity = quantity;
+//   } else {
+//     return next(
+//       new ApiError(` there is no item for id  ${req.params.itemid} `, 404)
+//     );
+//   }
+//   await cart.save();
+//   calcTotalCartPrice(cart);
+//   res.status(201).json({
+//     resnumOfCartItems: cart.cartItems.length,
+//     data: cart,
+//     msg: " updated item success",
+//   });
+// });
 
 // Applay coupon on logged cart
 // put http://localhost:4000/api/cart/applayCoupon

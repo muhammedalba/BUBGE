@@ -59,13 +59,7 @@ const userSchema = new mongoose.Schema(
         autopopulate: true,
       },
     ],
-    // transfer: [
-    //   {
-    //     type: mongoose.Schema.ObjectId,
-    //     ref:'Transfer',
-    //     autopopulate: true,
-    //   },
-    // ],
+    
     addresses: [
       {
         id: { type: mongoose.Schema.Types.ObjectId },
