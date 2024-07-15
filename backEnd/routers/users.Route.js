@@ -18,14 +18,17 @@ const {
   updateUserValidator,
   deletUserValidator,
   changePasswordValidator,
-  updatLoggedUserValidator
+  updatLoggedUserValidator,
 } = require("../utils/validators/userValidator");
 const { protect } = require("../Controllers/auth.Controler");
 const allowedTo = require("../utils/allowedTo");
 const role = require("../utils/userRoles");
 const { resizeImge } = require("../middleWare/uploadImgeMiddlewRE.JS");
+const TransferRouter = require("./TransferRouter");
 
 const router = express.Router();
+
+router.use("/:userid/transfer", TransferRouter);
 // user
 router.get(
   "/getMe",
@@ -41,14 +44,16 @@ router.put(
   allowedTo(role.USER),
   updateLoggedUserPassword
 );
-router.put("/updatLoggedUser", protect, allowedTo(role.USER),uploadUserImge,updatLoggedUserValidator, resizeImge, updatLoggedUser);
+router.put(
+  "/updatLoggedUser",
+  protect,
+  allowedTo(role.USER),
+  uploadUserImge,
+  updatLoggedUserValidator,
+  resizeImge,
+  updatLoggedUser
+);
 router.delete("/deletme", protect, allowedTo(role.USER), deletLoggedUserData);
-
-
-
-
-
-
 
 // admin routes
 

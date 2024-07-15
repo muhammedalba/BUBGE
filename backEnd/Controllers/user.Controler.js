@@ -65,6 +65,7 @@ const changeUserPassword = asyncHandler(async (req, res, next) => {
 // get http://localhost:4000/api/users/getMe
 const getLoggedUserData = asyncHandler(async (req, res, next) => {
   req.params.id = req.user._id;
+ 
   next();
 });
 

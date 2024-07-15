@@ -29,10 +29,10 @@ const userSchema = new mongoose.Schema(
       required: [true, "password required"],
       minlength: [6, "too short password"],
     },
-phone: {
-      type: String,
+    // phone: {
+    //   type: String,
   
-    },
+    // },
     passwordChangeAt:  { type: Date,},
     passwordResetCode: { type: String,},
     passwordResetExpires: { type: Date,},
@@ -59,6 +59,13 @@ phone: {
         autopopulate: true,
       },
     ],
+    // transfer: [
+    //   {
+    //     type: mongoose.Schema.ObjectId,
+    //     ref:'Transfer',
+    //     autopopulate: true,
+    //   },
+    // ],
     addresses: [
       {
         id: { type: mongoose.Schema.Types.ObjectId },
@@ -73,6 +80,21 @@ phone: {
         isDefault: { type: Boolean, default: false },
       },
     ],
+     wallet:{
+      type:Number,
+      default: 0,
+    },
+
+    vip:{
+      type:Number,
+      default: 0,
+    },
+    AmountTransferred:{
+      type:Number,
+      default: 0,
+    },
+
+
   },
 
   { timestamps: true }

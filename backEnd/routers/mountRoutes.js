@@ -10,6 +10,7 @@ const addressRouter = require("./adressesRout");
 const couponRouter = require("./couponRouter");
 const ordertRouter = require("./orderRoute");
 const cartRouter = require("./cartRouter");
+const TransferRouter = require("./TransferRouter");
 
 
 
@@ -25,6 +26,7 @@ exports.MountRoutes=(app)=>{
     // Routes
 
 app.use("/api/users", userRouter);
+app.use("/api/transfers", TransferRouter);
 app.use("/api/users/auth", authRouter);
 app.use("/api/categories", categoryRouter);
 app.use("/api/subcategory", subcategoryRouter);
