@@ -17,6 +17,7 @@ const multerOptions = () => {
   const multerStorage = multer.memoryStorage();
   const fileFilter = (req, file, cb) => {
     const imagType = file.mimetype.split("/")[0];
+
     if (imagType === "image") {
       cb(null, true);
     } else {
@@ -25,7 +26,7 @@ const multerOptions = () => {
   };
 
   const upload = multer({ storage: multerStorage, fileFilter: fileFilter });
-
+   
   return upload;
 };
 // upload single image
@@ -92,49 +93,50 @@ exports.resizeImge = asyncHandler(async (req, res, next) => {
       .jpeg({ quality: 90 })
       .toFile(filePath);
   }
+
   if (req.files){
- if (req.files.imageCover) {
-    const filename = `${path}-imageCover-${Date.now()}-${uuidv4()}.jpeg`;
-    await processAndSaveImage(
-      req.files.imageCover[0].buffer,
-      `uploads/${path}/${filename}`,
-      2000,
-      1333
-    );
-    req.body.imageCover = filename; // Save image into our db
-  
-  }
+      if (req.files.imageCover) {
+          const filename = `${path}-imageCover-${Date.now()}-${uuidv4()}.jpeg`;
+          await processAndSaveImage(
+            req.files.imageCover[0].buffer,
+            `uploads/${path}/${filename}`,
+            2000,
+            1333
+          );
+          req.body.imageCover = filename; // Save image into our db
+        
+        }
 
-  // Resize and save single image
-  if (req.files.image) {
-    const filename = `${path}-${Date.now()}-${uuidv4()}.jpeg`;
-    await processAndSaveImage(
-      req.files.image[0].buffer,
-      `uploads/${path}/${filename}`,
-      600,
-      600
-    );
-    req.body.image = filename; // Save image into our db
-  
-  }
+        // Resize and save single image
+        if (req.files.image) {
+          const filename = `${path}-${Date.now()}-${uuidv4()}.jpeg`;
+          await processAndSaveImage(
+            req.files.image[0].buffer,
+            `uploads/${path}/${filename}`,
+            600,
+            600
+          );
+          req.body.image = filename; // Save image into our db
+        
+        }
 
-  // Resize and save multiple images
-  if (req.files.images) {
+        // Resize and save multiple images
+        if (req.files.images) {
 
-    req.body.images = [];
-    await Promise.all(
-      req.files.images.map(async (image, index) => {
-        const filename = `${path}-image-${index + 1}-${Date.now()}-${uuidv4()}.jpeg`;
-        await processAndSaveImage(
-          image.buffer,
-          `uploads/${path}/${filename}`,
-          800,
-          800
-        );
-        req.body.images.push(filename); // Save image into our db
-      })
-    );
-  }
+          req.body.images = [];
+          await Promise.all(
+            req.files.images.map(async (image, index) => {
+              const filename = `${path}-image-${index + 1}-${Date.now()}-${uuidv4()}.jpeg`;
+              await processAndSaveImage(
+                image.buffer,
+                `uploads/${path}/${filename}`,
+                800,
+                800
+              );
+              req.body.images.push(filename); // Save image into our db
+            })
+          );
+        }
   }
 
   // Resize and save image cover

@@ -21,6 +21,10 @@ const TransfersSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  confirmed: {
+    type: Boolean,
+    default: true,
+  },
 });
 // // mongoose  query middeware
 TransfersSchema.pre(/^find/, function (next) {
@@ -35,32 +39,46 @@ TransfersSchema.pre(/^find/, function (next) {
 // Middleware to update AmountTransferred before saving
 TransfersSchema.pre("save", async function (next) {
   const transfer = this;
+  // To start a session,It creates the transaction as one part, and when any error occurs, it cancels the changes without saving
+  const session = await mongoose.startSession();
+    session.startTransaction();
+
   try {
-    // find the user by id and update their amountTransferred
-    const user = await UserModel.findById(transfer.user._id);
-    if (user) {
-      // If the transfer is not verified, add the amount to the checklist
+     // find the user by id and update their amountTransferred
+    const user = await UserModel.findById(transfer.user._id).session(session);
+    if(user){
+          // If the transfer is not verified, add the amount to the checklist
       if (!transfer.CheckTheTransfer) {
         user.AmountTransferred += transfer.amount;
-        await user.save();
-      } else {
-        // If the transfer is verified, Add the amount to the user's wallet and vip
-        user.wallet += transfer.amount;
-        user.vip += transfer.amount;
-        // Reset the amountTransferred and the transfer status after the transfer
-        user.AmountTransferred = 0;
-        transfer.amount = 0;
-        transfer.CheckTheTransfer = false;
-        await user.save();
-        console.log(user, 'true');
+        transfer.confirmed=false;
+       
+      } 
+      // If the transfer is verified, Add the amount to the user's wallet and vip
+
+      else if (transfer.CheckTheTransfer) {
+        user.wallet +=  transfer.amount;
+        user.vip +=  transfer.amount;
+         // Reset the amountTransferred and the transfer status after the transfer
+         user.AmountTransferred = 0;
+         transfer.amount = 0;
+         transfer.CheckTheTransfer = false;
+         transfer.confirmed=true;
       }
+      await user.save({ session });
     }
+    // Save the changes if there are no errors
+    await session.commitTransaction();
+    session.endSession();
+
     next();
   } catch (err) {
+    // Discard the changes and do not save them 
+    await session.abortTransaction();
+    session.endSession();
+
     return next(new ApiError(` no document for the id ${transfer.user}`, 404));
   }
 });
-
 // Middleware to update AmountTransferred after removing a transfer
 // TransfersSchema.post('remove', async (doc) => {
 //   try {

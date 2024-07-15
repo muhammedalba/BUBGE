@@ -119,7 +119,7 @@ exports.updateOne = (model) =>
 
     // trigger "save" event when update document
   
-    if ( req.baseUrl === '/api/review' )await document.save(); 
-    await document.save(); 
+    if ( req.baseUrl === '/api/review' || req.baseUrl ===  '/api/transfers')await document.save(); 
+    
     return res.status(201).json({status:'success', data: document ,imageUrl});
   });

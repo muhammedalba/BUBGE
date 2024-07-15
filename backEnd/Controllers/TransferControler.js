@@ -50,7 +50,7 @@ const getTransferById = factory.getOne(TransfersModule);
 
 // update  Transfer
 //route  patch http://localhost:4000/api/Transfers/:id
-const updateTransfer = factory.updateOne(TransfersModule);
+const ConfirmTransfer = factory.updateOne(TransfersModule);
 
 // delet  Transfer
 //route  delet  http://localhost:4000/api/Transfer/:id
@@ -59,7 +59,7 @@ module.exports = {
   createTransfer,
   getTransfers,
   getTransferById,
-  updateTransfer,
+  ConfirmTransfer,
   deletTransfer,
   createFilteropject,
   uploadTransferImge
