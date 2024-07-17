@@ -58,7 +58,7 @@ const Header = () => {
 
   // handel Logout
   const Logout = () => {
-    console.log("logout");
+   
     const cookies = new Cookies();
     cookies.remove();
     cookies.remove("token");
@@ -174,12 +174,12 @@ const Header = () => {
           <div className=" d-flex w-100 px-2 py-2  justify-content-between container-fluid">
             {/* logo start */}
             <div className="logo  d-flex   align-items-center">
-              <img className="logo    d-sm-block  " src={logo} alt="logo" />
+              <img style={{width:'50px ',height:'50px'}} className="logo  rounded-circle  d-sm-block  " src={logo} alt="logo" />
               <p
                 style={{ color: "var(--text-color)"   , whiteSpace: 'nowrap' }}
-                className=" mb-0 d-none d-sm-block"
+                className="  mb-0 d-none d-sm-block px-1"
               >
-                   مجرة السماء للتجارة
+                     متجرك بين يديك
               </p>
             </div>
             {/* logo end */}

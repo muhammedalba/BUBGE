@@ -229,7 +229,7 @@ const Products = () => {
 
   // view brands
   const showbrands = useMemo(() => {
-    if (loadingbrands) return <option value="">لايوجد معلومات</option>;
+    if (loadingbrands && brands?.data?.length ===0) return <option value="">لايوجد معلومات</option>;
     return brands?.data?.map((brand, index) => (
       <option key={index} value={brand._id}>
         {brand.name}
@@ -239,7 +239,7 @@ const Products = () => {
 
   // view categories
   const showCategorie = useMemo(() => {
-    if (loadingcategories) return <option value="">nodata</option>;
+    if (loadingcategories && categories?.data?.length ===0 ) return <option value="">nodata</option>;
     return categories?.data?.map((category, index) => (
       <option key={index} value={category._id}>
         {category.name}

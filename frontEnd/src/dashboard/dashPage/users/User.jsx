@@ -13,6 +13,7 @@ const User = () => {
   const { userId } = useParams();
   //get data (rtk redux) 
   const { isLoading, isSuccess, data, error } = useGetOneQuery(`users/${userId}`);
+  console.log(data);
   // update data (rtk redux)
   const [updateOne, { error: updateError, isLoading: updateLoading, isSuccess: updateSuccess, data: updatedUser }] = useUpdateOneMutation();
   // states

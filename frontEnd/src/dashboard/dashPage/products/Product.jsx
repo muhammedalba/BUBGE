@@ -33,7 +33,7 @@ const Product = () => {
     data: product,
     error,
   } = useGetOneQuery(`products/${productId}`);
-  console.log(product?.data);
+  // console.log(product?.data);
   // get categories from db
   const {
     isLoading: loadingCatego,
@@ -47,7 +47,7 @@ const Product = () => {
       isLoading:loadingSub,
       isSuccess:SuccessSub,
     } = useGetDataQuery(`brands`);
-    console.log(Brands,'Brands');
+    // console.log(Brands,'Brands');
 
   // delete products from the database
   const [deletOne, { error: errorDelet, isLoading: LoadingDelet }] =
@@ -161,7 +161,8 @@ const Product = () => {
       setErrorMsge(" يجب ان لايكون السعر بعد التخفيض اكبر من السعر ");
       return;
     }
-    if (formData.category === undefined || formData.category == ''|| formData.brand === undefined || formData.brand == '') {
+    if (formData.category === undefined || formData.category == ''||
+         formData.brand === undefined || formData.brand == '') {
       infoNotify(" يجب ان لايكون القسم او الشركه فارغ  ");
       setErrorMsge(" يجب ان لايكون القسم او الشركه فارغ  ");
       return;
@@ -225,6 +226,7 @@ const Product = () => {
   // };
 
   const handleImageChange = (event) => {
+  
     const file = event.target.files[0];
     if (file) {
       setimageCover(file);
@@ -283,6 +285,7 @@ const Product = () => {
   // handleChange
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
+    console.log(formData);
   };
 
   // handle rating change
@@ -360,6 +363,7 @@ const Product = () => {
       return (
         <option key={index} value={brand._id}>
           {brand.name}
+     
         </option>
       );
     })
@@ -650,7 +654,7 @@ const Product = () => {
           {/* category brand */}
           <div className="col-sm-12">
             <div className="row">
-              <div className="col-sm-6">
+            <div className="col-sm-6">
                 <label
                   className="pt-2  fs-5 d-flex align-items-center gap-2"
                   htmlFor="category"
@@ -661,12 +665,13 @@ const Product = () => {
                 <select
                   required
                   id="category"
+                  name="category"
                   onChange={handleChange}
                   className="form-select  py-2"
                   value={formData.category}
                   aria-label="Default select example"
                 >
-                  <option disabled>اختر القسم</option>
+                  <option value='' disabled>اختر الشركه</option>
                   {showCategorie}
                 </select>
               </div>
@@ -687,7 +692,7 @@ const Product = () => {
                   value={formData.brand}
                   aria-label="Default select example"
                 >
-                  <option disabled>اختر الشركه</option>
+                  <option value='' disabled>اختر الشركه</option>
                   {showbrands}
                 </select>
               </div>

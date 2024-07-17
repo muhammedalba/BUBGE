@@ -58,7 +58,7 @@ const CreatProduct = () => {
     },
   ] = useCreateOneMutation();
 
-  // console.log(error);
+  console.log(error);
   // console.log(isLoading);
   // console.log(isSuccess);
   // console.log(product);
@@ -69,7 +69,7 @@ const CreatProduct = () => {
     priceAfterDiscount: "",
     quantity: "",
     category: '',
-    brand: {},
+    brand: '',
   });
   // const [ProductData, setProductData] = useState({
   //   title: "",
@@ -130,6 +130,11 @@ const CreatProduct = () => {
     if (formData.category === undefined || formData.category=='') {
       errorNotify(" يجب ان لايكون القسم فارغ  ");
       setErrorMsge(" يجب ان لايكون القسم فارغ  ");
+      return;
+    }
+    if (formData.brand === undefined || formData.brand=='') {
+      errorNotify(" يجب ان لايكون الشركه فارغ  ");
+      setErrorMsge(" يجب ان لايكون الشركه فارغ  ");
       return;
     }
     if (
@@ -252,7 +257,7 @@ const CreatProduct = () => {
       // view categories
   const showBrands =
   SucccessCatego && !loadingCatego ? (
-    Brands.data?.map((brand, index) => {
+    Brands?.data?.map((brand, index) => {
       return (
         <option key={index} value={brand._id}>
           {brand.name}
@@ -465,12 +470,13 @@ const CreatProduct = () => {
                 <select
                   required
                   id="category"
+                  name="category"
                   onChange={handleChange}
                   className="form-select  py-2"
                   value={formData.category}
                   aria-label="Default select example"
                 >
-                  <option disabled>اختر القسم</option>
+                  <option value='' disabled>اختر القسم</option>
                   {showCategorie}
                 </select>
               </div>
@@ -480,29 +486,27 @@ const CreatProduct = () => {
           {/* brand subcategory */}
           <div className="col-sm-12">
             <div className="row">
-
-               <div className="col-sm-6">
-                  <label
-                    className="pt-2  fs-5 d-flex align-items-center gap-2"
-                    htmlFor="brand"
-                  >
+            <div className="col-sm-6">
+                <label
+                  className="pt-2  fs-5 d-flex align-items-center gap-2"
+                  htmlFor="brand"
+                >
                   <MdOutlineCategory color="var(--spanColor)" fontSize="1rem" />
-                  اختر الشركه
-                 </label>
-                 <select
-                  
+                  اختر القسم
+                </label>
+                <select
+                  required
                   id="brand"
                   name="brand"
-                  className="form-select  py-2"
                   onChange={handleChange}
+                  className="form-select  py-2"
+                  value={formData.brand}
                   aria-label="Default select example"
                 >
-                  <option disabled>اختر القسم</option>
+                  <option value='' disabled>اختر الشركه</option>
                   {showBrands}
-
-                
                 </select>
-              </div> 
+              </div>
               {/* supcategory */}
               {/* <div className="col-sm-6">
                 <label

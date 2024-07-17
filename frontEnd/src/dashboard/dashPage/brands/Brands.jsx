@@ -203,7 +203,7 @@ const Brands = () => {
       {/*  create buttun  && length data && limit data */}
       <QuantityResults
         handelLimetData={handelLimetData}
-        isSuccess
+        isSuccess={isSuccess}
         path={"createbrand"}
         dataLength={filteredUsers?.length}
       />

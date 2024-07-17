@@ -23,7 +23,7 @@ const QuantityResults = ({handelLimetData,path,isSuccess,dataLength}) => {
                     <RiAddCircleLine/>
                       <Link 
                       // to={'createproduct'}
-                        to={isSuccess && dataLength > 0 && path}
+                        to={isSuccess &&  path}
                        className="text-white">
                     اضف عنصر 
                       </Link>            
