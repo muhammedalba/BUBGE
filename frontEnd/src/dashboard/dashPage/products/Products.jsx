@@ -60,25 +60,18 @@ const Products = () => {
 
   //handel navigation bar start
   // currentPage
-  const handelcurrentPagePagination = (currentPage) => {
-    setPagination(currentPage);
-  };
+  const handelcurrentPagePagination = useCallback((currentPage) =>  setPagination(currentPage), [])
   // next page
-  const handelPlusPagination = () => {
-    setPagination((pre) => pre + 1);
-  };
+  const handelPlusPagination = useCallback(() =>  setPagination((pre) => pre + 1), [])
   // prev page
-  const handelminusPagination = () => {
-    // Pagination >1 && Pagination--
-    setPagination((pre) => pre - 1);
-  };
+  const handelminusPagination =  useCallback(() =>  setPagination((pre) => pre - 1), [])
+
   // The number of items to be displayed
   const handelLimetData = (limitData) => {
-    if (limitData.target.value > 0 && limitData.target.value <= 50) {
-      setlimit(limitData.target.value);
-    } else {
-      infoNotify("   يجب ان تكون القيمه اقل من 50 واكبر من 0");
-    }
+    const value = parseInt(limitData.target.value, 10);
+   (value > 0 && value <= 50) ?setlimit(value): infoNotify("يجب ان تكون القيمه اقل من 50 واكبر من 0");
+     
+   
   };
   
   //handel navigation bar end
@@ -267,7 +260,7 @@ const Products = () => {
       <QuantityResults
         path={"createproduct"}
         handelLimetData={handelLimetData}
-        isSuccess
+        isSuccess={isSuccess}
         dataLength={filteredProducts?.length}
       />
       {/* category   brand  and reset data button*/}
@@ -284,7 +277,10 @@ const Products = () => {
             <select
               disabled={isLoading}
               className="form-select  py-2"
-              onChange={(e) => setFilter(`category=${e.target.value}`)}
+              onChange={ useCallback((e) => {
+                setFilter(`category=${e.target.value}`)
+              }, [])}
+              // onChange={(e) => setFilter(`category=${e.target.value}`)}
               id="category"
               value={''}
               aria-label="Default select example"
@@ -308,7 +304,7 @@ const Products = () => {
               id="brand"
               name="brand"
               aria-label="Default select example"
-              onChange={(e) => setFilter(`brand=${e.target.value}`)}
+              onChange={useCallback((e) => setFilter(`brand=${e.target.value}`), [])}
               value=''        >
               <option disabled value=''> اختر الشركه  </option>
               {showbrands}

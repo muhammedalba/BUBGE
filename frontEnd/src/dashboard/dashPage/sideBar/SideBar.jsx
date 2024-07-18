@@ -60,7 +60,11 @@ const handelchang=() => {
             path: "products",
             icon:<FaProductHunt/> ,
           }, 
-     
+          {
+            title: "طلبات التحويل ",
+            path: "transfers",
+            icon:<FaProductHunt/> ,
+          }, 
       ];
     
       // get property
@@ -79,7 +83,7 @@ const handelchang=() => {
             <NavLink
             style={{height:'40px'}}
                 to={link.path}
-                className="nav-link p-2 d-flex  align-items-center fs-5 "
+                className="nav-link p-2 d-flex w-auto align-items-center fs-5 "
               >
                  {link.icon  }
                 <span style={{display:open ? 'block':'none' }} className=" text-nowrap me-2 ">
@@ -93,8 +97,8 @@ const handelchang=() => {
     return (
         <div style={{width:open?'175px':'60px'}} className='sidebar overflow-hidden pt-5 px-2 
           '>
-        {  display && <div className='p-2'>< FaBarsStaggered onClick={handelchang} className='m-2' cursor={'pointer'}  /></div>}
-           <ul className='p-0 w-100'>
+           <ul style={{position:'fixed'}} className='p-0 '>
+            {  display && <div className='py-2'>< FaBarsStaggered onClick={handelchang} className='m-2'fontSize={'25px'} cursor={'pointer'}  /></div>}
              {nav_link_show}
 
           </ul>

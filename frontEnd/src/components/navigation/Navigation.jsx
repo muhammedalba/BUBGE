@@ -1,6 +1,7 @@
+import React, { useCallback } from "react";
 import PropTypes from "prop-types";
-import { useCallback } from "react";
 
+// eslint-disable-next-line react-refresh/only-export-components
 const Navigation = ({
   isSuccess,
   status,
@@ -88,12 +89,13 @@ Navigation.propTypes = {
   status: PropTypes.shape({
     numperOfPages: PropTypes.number,
     currentPage: PropTypes.number,
-    prevPage: PropTypes.bool,
-    nextPage: PropTypes.bool,
+    prevPage: PropTypes.number,
+    nextPage: PropTypes.number,
   }).isRequired,
   PlusAction: PropTypes.func.isRequired,
   minusAction: PropTypes.func.isRequired,
   currentPage: PropTypes.func.isRequired,
 };
 
-export default Navigation;
+// eslint-disable-next-line react-refresh/only-export-components
+export default React.memo(Navigation);

@@ -30,6 +30,7 @@ import CreateSubCategory from "./src/dashboard/dashPage/subcategory/CreateSubCat
 import Brands from "./src/dashboard/dashPage/brands/Brands";
 import CreateBrands from "./src/dashboard/dashPage/brands/CreateBrands";
 import Brand from "./src/dashboard/dashPage/brands/Brand";
+import Transfers from "./src/dashboard/dashPage/transfers/transfers";
 
 
 // export const routes = createBrowserRouter(
@@ -148,6 +149,20 @@ export const routes = createBrowserRouter([
         path: "brands/:brandId",
         element: < Brand/>,
       },
+      // transfers
+      {
+        path: "transfers",
+        element: <Transfers />,
+      }, 
+      {
+        path: "transfers/createtransfers",
+        element: <CreateBrands />,
+      }, 
+      {
+        path: "transfers/:transfersId",
+        element: < Brand/>,
+      },
+
     ],
   },
 ]);

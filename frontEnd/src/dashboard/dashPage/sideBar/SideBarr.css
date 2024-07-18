@@ -8,6 +8,6 @@
     .active{
         background-color: var(--text-color);
         color: var(--bgColor) !important;
-      
+      width: 100%;
     }
 }
