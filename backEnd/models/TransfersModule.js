@@ -7,6 +7,10 @@ const TransfersSchema = new mongoose.Schema({
     type: Number,
     required: [true, "The amount to be transferred is required"],
   },
+  Quantitytransferred: {
+    type: Number,
+    default: 0,
+  },
   image: {
     type: String,
     required: [true, "The image to be transferred"],
@@ -30,7 +34,7 @@ const TransfersSchema = new mongoose.Schema({
 TransfersSchema.pre(/^find/, function (next) {
   this.populate({
     path: "user",
-    select: "firstname wallet AmountTransferred CheckTheTransfer",
+    select: "firstname email AmountTransferred CheckTheTransfer",
   });
 
   next();
@@ -58,6 +62,7 @@ TransfersSchema.pre("save", async function (next) {
       else if (transfer.CheckTheTransfer) {
         user.wallet +=  transfer.amount;
         user.vip +=  transfer.amount;
+        transfer.Quantitytransferred =  transfer.amount;
          // Reset the amountTransferred and the transfer status after the transfer
          user.AmountTransferred = 0;
          transfer.amount = 0;

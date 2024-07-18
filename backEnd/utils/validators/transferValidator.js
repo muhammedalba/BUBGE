@@ -47,6 +47,12 @@ exports.createTransfersValidator = [
             new Error(`no user for this id ${userid}`)
             );
         }
+        if(user && user.AmountTransferred >0){
+          return Promise.reject(
+            new Error(`There is an amount already transferred that has not been confirmed`)
+          );
+        }
+  
         })
     ),
 
