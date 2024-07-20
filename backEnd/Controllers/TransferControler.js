@@ -33,7 +33,18 @@ const createFilteropject = (req, res, next) => {
 next();
   
 };
+const userid = (req, res, next) => {
+  if (!req.body.user && req.user.id ) {
+    const {id} = req.user;
+    req.body.user=id
 
+
+     
+  }
+ 
+next();
+  
+};
 
 //get all getTransfers
 //route  get http://localhost:4000/api/Transfers
@@ -62,5 +73,6 @@ module.exports = {
   ConfirmTransfer,
   deletTransfer,
   createFilteropject,
+  userid,
   uploadTransferImge
 };
