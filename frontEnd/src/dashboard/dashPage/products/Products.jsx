@@ -258,6 +258,7 @@ const Products = () => {
       />
       {/*  create buttun  && length data && limit data */}
       <QuantityResults
+      isLoading={isLoading}
         path={"createproduct"}
         handelLimetData={handelLimetData}
         isSuccess={isSuccess}

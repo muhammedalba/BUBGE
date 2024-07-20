@@ -7,13 +7,15 @@ import PropTypes from "prop-types";
 
 
 
-const QuantityResults = ({handelLimetData,path,isSuccess,dataLength}) => { 
-   
+const QuantityResults = ({handelLimetData,path,isSuccess,dataLength,isLoading}) => { 
+   console.log(isLoading,'isLoading');
+   console.log(dataLength,'dataLength');
      {/* heade create buttun  && length data && limit data */}
     return (
 
       <div className="d-flex flex-wrap align-items-center justify-content-between px-2 border-bottom my-2">
             <button 
+            disabled={!isSuccess}
               className= { 
                 // isSuccess && dataLength > 0  ?
                 " btn btn-primary d-flex flex-wrap align-items-center gap-2 "
@@ -22,7 +24,7 @@ const QuantityResults = ({handelLimetData,path,isSuccess,dataLength}) => {
                  }>
                     <RiAddCircleLine/>
                       <Link 
-                      // to={'createproduct'}
+                
                         to={isSuccess &&  path}
                        className="text-white">
                     اضف عنصر 
@@ -45,7 +47,7 @@ const QuantityResults = ({handelLimetData,path,isSuccess,dataLength}) => {
                                 />
                   </div>
                   {/*  */}
-                  {isSuccess && dataLength >0 ? <span className='fs-3 '>عدد النتايج ({dataLength})</span>:
+                  {!isLoading && dataLength > 0  ? <span className='fs-3 '>عدد النتايج ({dataLength})</span>:
                    <span className='  d-flex align-items-center skeleton-loading fs-3 w-auto p-3'>عدد النتايج </span>
                   }
 

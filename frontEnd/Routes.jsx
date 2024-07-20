@@ -31,6 +31,7 @@ import Brands from "./src/dashboard/dashPage/brands/Brands";
 import CreateBrands from "./src/dashboard/dashPage/brands/CreateBrands";
 import Brand from "./src/dashboard/dashPage/brands/Brand";
 import Transfers from "./src/dashboard/dashPage/transfers/transfers";
+import Transfer from "./src/dashboard/dashPage/transfers/Transfer";
 
 
 // export const routes = createBrowserRouter(
@@ -160,7 +161,7 @@ export const routes = createBrowserRouter([
       }, 
       {
         path: "transfers/:transfersId",
-        element: < Brand/>,
+        element: < Transfer/>,
       },
 
     ],

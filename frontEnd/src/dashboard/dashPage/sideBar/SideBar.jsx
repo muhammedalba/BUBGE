@@ -1,12 +1,13 @@
 import { NavLink } from 'react-router-dom';
 import'./SideBarr.css';
+import { useEffect, useState } from 'react';
 // icons
 import { FaUsers } from "react-icons/fa";
 import { BsClipboardMinus } from "react-icons/bs";
 import { FaProductHunt } from "react-icons/fa6";
 import { MdOutlineMapsHomeWork } from "react-icons/md";
 import { FaBarsStaggered } from "react-icons/fa6";
-import { useEffect, useState } from 'react';
+import { TbTransfer } from "react-icons/tb";
 
 
 
@@ -63,7 +64,7 @@ const handelchang=() => {
           {
             title: "طلبات التحويل ",
             path: "transfers",
-            icon:<FaProductHunt/> ,
+            icon:<TbTransfer/> ,
           }, 
       ];
     
