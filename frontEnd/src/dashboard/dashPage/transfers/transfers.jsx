@@ -292,16 +292,19 @@ const Transfers = () => {
       {/*  create buttun  && length data && limit data */}
       <QuantityResults
         handelLimetData={handelLimetData}
-        isSuccess
+        isSuccess={isSuccess}
+        dBtn={false}
         path={"createtransfer"}
         dataLength={filteredUsers?.length}
         isLoading={isLoading}
       />
       <div
         onClick={useCallback(() => setconfirmed(!confirmed), [confirmed])}
-        className="w-100 text-center fs-3"
+        className="w-100 text-center fs-3 text-primary user-select-none"
+        style={{cursor: 'pointer'}}
       >
-        {!confirmed ? "الطلبات الحاليه  " : " الطلبات المؤكدة"}
+        {!confirmed ? "الطلبات التحويل الحاليه  " : " الطلبات التحويل المؤكدة"}
+        {!confirmed ? <TiArrowSortedUp />  : <TiArrowSortedDown /> }
       </div>
       {/* data table */}
       <table className="table pt-5 mt-3">

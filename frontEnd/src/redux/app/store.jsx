@@ -3,6 +3,10 @@ import { configureStore } from "@reduxjs/toolkit";
 import { apiSlice } from "../features/api/apiSlice";
 import { authSlice } from "../features/api/users/AuthSlice";
 import SerchSlice from "../features/Slice/SerchSlice";
+import  CartSlice  from "../features/Slice/CartSlice";
+
+
+
 
 const store = configureStore({
   reducer: {
@@ -12,6 +16,7 @@ const store = configureStore({
     [authSlice.reducerPath]: authSlice.reducer,
 
     serch: SerchSlice,
+    cart: CartSlice
   },
   // إعداد middleware الخاص بـ RTK Query
   middleware: (getDefaultMiddleware) =>

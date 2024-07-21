@@ -237,7 +237,8 @@ const handelLimetData=(limitData)=>{
       {/*  create buttun  && length data && limit data */}
       <QuantityResults
        handelLimetData={handelLimetData}  
-        isSuccess 
+        isSuccess ={isSuccess}
+        isLoading={isLoading}
        path={'createUser'}
        dataLength={filteredUsers?.length}/>
             

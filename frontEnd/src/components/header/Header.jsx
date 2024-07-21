@@ -17,7 +17,7 @@ import { FaRegUser } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 
 import "./header.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { searchItem } from "../../redux/features/Slice/SerchSlice";
 
 const Header = () => {
@@ -29,7 +29,8 @@ const Header = () => {
   const dispatch = useDispatch();
   const [trans, settrans] = useState(false);
 
-
+const cart=useSelector(state=>state.cart)
+console.log(cart,'cart');
   window.onscroll = () => {
     if (window.scrollY > 60 && window.scrollY < 301) {
       settrans(true);
@@ -111,7 +112,7 @@ const Header = () => {
     },
     {
       title: "سلة مشترياتي",
-      path: "/contactus",
+      path: "/cart",
       icon: <BsCart2 fontSize={"1.7rem"} color="var( --text-color)" />,
     },
     {
@@ -148,7 +149,7 @@ const Header = () => {
           className="nav-link p-2 d-flex  align-items-center "
         >
           <span className="px-1 d-none d-md-block ">{link.title}</span>
-          {link.icon}
+          {link.icon}{link.path === '/cart'&& ( cart.length )}
         </NavLink>
       </li>
     );

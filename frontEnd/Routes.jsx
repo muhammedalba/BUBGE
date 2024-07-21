@@ -3,7 +3,7 @@ import {
   createBrowserRouter,
   // createRoutesFromElements,
 } from "react-router-dom";
-
+import App from "./src/App";
 import SignUp from "./src/auth/signup/SignUp";
 import Login from "./src/auth/login/Login";
 import Dashboard from "./src/dashboard/dashPage/Dashboard";
@@ -16,7 +16,7 @@ import Users from "./src/dashboard/dashPage/users/Users";
 import Verifyresetcode from "./src/auth/Verifyresetcode/VerifyResetCode";
 import User from "./src/dashboard/dashPage/users/User";
 import Categories from "./src/dashboard/dashPage/categories/Categories";
-import Category from "./src/dashboard/dashPage/categories/Category";
+
 import Createcategory from "./src/dashboard/dashPage/categories/Createcategory";
 
 import Products from "./src/dashboard/dashPage/products/Products";
@@ -32,7 +32,10 @@ import CreateBrands from "./src/dashboard/dashPage/brands/CreateBrands";
 import Brand from "./src/dashboard/dashPage/brands/Brand";
 import Transfers from "./src/dashboard/dashPage/transfers/transfers";
 import Transfer from "./src/dashboard/dashPage/transfers/Transfer";
-
+import ProtectedRoute from "./src/utils/ProtectedRoute";
+import Category from "./src/dashboard/dashPage/categories/Category";
+import ProductsCategory from "./src/pages/ProductsCategory";
+import Cart from "./src/pages/Cart";
 
 // export const routes = createBrowserRouter(
 //     createRoutesFromElements([
@@ -56,114 +59,49 @@ import Transfer from "./src/dashboard/dashPage/transfers/Transfer";
 export const routes = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
+    element: <App />,
     children: [
-      {
-        path: "signup",
-        element: <SignUp />,
-      },
-      {
-        path: "login",
-        element: <Login />,
-      },
-      {
-        path: "forgotPassword",
-        element: <ForgotPassword />,
-      },
-      {
-        path: "resetPassword",
-        element: <ResetPassword />,
-      },
-      {
-        path: "verifyresetcode",
-        element: <Verifyresetcode />,
-      },
+      { path: "", element: <HomePage /> },
+      { path: "category/:CategoryId", element: <ProductsCategory /> },
+      { path: "verifyresetcode", element: <Verifyresetcode /> },
+      { path: "resetPassword", element: <ResetPassword /> },
+      { path: "signup", element: <SignUp /> },
+      { path: "login", element: <Login /> },
+      { path: "forgotPassword", element: <ForgotPassword /> },
+      { path: "cart", element: <Cart /> },
     ],
   },
-  { 
-    path: "/dashboard",
-    element: <Dashboard />,
-    children: [
-    // users
-      {
-        path: "users",
-        element: <Users />,
 
-      },
+  //  dashboard
+  {
+    path: "/dashboard",
+    element: (
+      <ProtectedRoute>
+        <Dashboard />
+      </ProtectedRoute>
+    ),
+    children: [
+      { path: "users", element: <Users /> },
+      { path: "users/createUser", element: <CreateUser /> },
+      { path: "users/:userId", element: <User /> },
+      { path: "categories", element: <Categories /> },
+      { path: "categories/:CategoryId", element: <Category /> },
+      { path: "categories/createCategory", element: <Createcategory /> },
+      { path: "subcategories", element: <SubCategories /> },
+      { path: "subcategories/:subcategoryId", element: <SubCategory /> },
       {
-        path: "users/createUser",
-        element: <CreateUser />,
-      },
-      {
-        path: "users/:userId",
-        element: <User />,
-      },
-      //categories
-      {
-        path: "categories",
-        element: <Categories />,
-      },
-      {
-        path: "categories/:CategoryId",
-        element: <Category />,
-      },
-      {
-        path: "categories/createcategory",
-        element: <Createcategory />,
-      },
-         //subcategory
-      {
-        path: "subcategories",
-        element: <SubCategories />,
-      },
-      {
-        path: "subcategories/:subcategoryId",
-        element: <SubCategory />,
-      },
-      {
-        path: "subcategories/createsubcategory",
+        path: "subcategories/createSubCategory",
         element: <CreateSubCategory />,
       },
-      // products
-      {
-        path: "products",
-        element: <Products />,
-      },
-      {
-        path: "products/createproduct",
-        element:<CreatProduct/> ,
-      }, 
-      {
-        path: "products/:productId",
-        element: <Product />,
-      },
-      // brands
-      {
-        path: "brands",
-        element: <Brands />,
-      }, 
-      {
-        path: "brands/createbrand",
-        element: <CreateBrands />,
-      }, 
-      {
-        path: "brands/:brandId",
-        element: < Brand/>,
-      },
-      // transfers
-      {
-        path: "transfers",
-        element: <Transfers />,
-      }, 
-      {
-        path: "transfers/createtransfers",
-        element: <CreateBrands />,
-      }, 
-      {
-        path: "transfers/:transfersId",
-        element: < Transfer/>,
-      },
-
+      { path: "products", element: <Products /> },
+      { path: "products/createProduct", element: <CreatProduct /> },
+      { path: "products/:productId", element: <Product /> },
+      { path: "brands", element: <Brands /> },
+      { path: "brands/createBrand", element: <CreateBrands /> },
+      { path: "brands/:brandId", element: <Brand /> },
+      { path: "transfers", element: <Transfers /> },
+      { path: "transfers/createTransfers", element: <CreateBrands /> },
+      { path: "transfers/:transfersId", element: <Transfer /> },
     ],
   },
 ]);

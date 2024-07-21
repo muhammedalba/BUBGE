@@ -7,19 +7,19 @@ import './index.css'
 // import { RouterProvider } from 'react-router-dom'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle.js'
+import { RouterProvider } from 'react-router-dom'
+import { routes } from '../Routes.jsx'
 
 
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
-   <React.StrictMode>
-
-
-      <App />
-
-  
-  </React.StrictMode>,
-  </Provider>,
+    <RouterProvider router={routes} >
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+    </RouterProvider>
+  </Provider>
  
 )

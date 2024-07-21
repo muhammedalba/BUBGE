@@ -185,7 +185,8 @@ console.log(errorDelet);
       {/*  create buttun  && length data && limit data */}
       <QuantityResults
         handelLimetData={handelLimetData}
-        isSuccess
+        isSuccess={isSuccess}
+        isLoading={isLoading}
         path={"createsubcategory"}
         dataLength={filteredUsers?.length}
       />

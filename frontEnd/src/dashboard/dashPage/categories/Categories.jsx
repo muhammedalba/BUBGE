@@ -216,7 +216,8 @@ const Categories = () => {
       {/*  create buttun  && length data && limit data */}
       <QuantityResults
         handelLimetData={handelLimetData}
-        isSuccess
+        isSuccess={isSuccess}
+        isLoading={isLoading}
         path={"createcategory"}
         dataLength={filteredUsers?.length}
       />

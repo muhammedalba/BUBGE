@@ -205,6 +205,7 @@ const Brands = () => {
         handelLimetData={handelLimetData}
         isSuccess={isSuccess}
         path={"createbrand"}
+        isLoading={isLoading}
         dataLength={filteredUsers?.length}
       />
 

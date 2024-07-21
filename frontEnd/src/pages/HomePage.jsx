@@ -1,16 +1,30 @@
-import React from "react";
-import Header from "../components/header/Header";
-import { Outlet } from "react-router-dom";
+
+
 import './hmepage.css'
+import Categories from "../components/Category/Categories";
 
 
 const HomePage = () => {
+  // const matches = useMatches();
+  // const isChildRouteActive = matches.length > 1;
+  // console.log(isChildRouteActive);
+
+
+
+
+  
   return (<>
-      <Header/>
-  <div className=" homePage">
       
-      <Outlet/>
-  </div>
+    <div className=" homePage pt-3 ">
+
+
+
+
+
+        <Categories />
+    
+     
+    </div>
   
   
   
