@@ -12,7 +12,7 @@ cartItems:[{
        
         default: 1,
     },
-    color:{type :String},
+    Playerid:{type :String},
     price: {type:Number}
 }],
 user:{
@@ -34,6 +34,13 @@ user:{
 
 
 }, { timestamps: true });
-
+catrSchema.pre(/^find/, function (next) {
+    this.populate({
+      path: "cartItems.product",
+      select: "title  price priceAfterDiscount description  imageCover images",
+    });
+  
+    next();
+  });
 const cartModel=mongoose.model("Cart", catrSchema);
 module.exports =cartModel;

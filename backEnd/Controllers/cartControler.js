@@ -18,7 +18,7 @@ const calcTotalCartPrice = (cart) => {
 
 // post http://localhost:4000/api/cart
 exports.addProductToCart = asyncHandler(async (req, res, next) => {
-  const { productId, color } = req.body;
+  const { productId, Playerid } = req.body;
   // get productbyID
   const product = await productModel.findById(productId);
 
@@ -31,7 +31,7 @@ exports.addProductToCart = asyncHandler(async (req, res, next) => {
         {
           product: productId,
           price: product.price,
-          color,
+          Playerid,
         },
       ],
     });
@@ -39,21 +39,31 @@ exports.addProductToCart = asyncHandler(async (req, res, next) => {
     // 2-check if product is exist in cart
     const productIndex = cart.cartItems.findIndex(
       (item) =>
-        item.product.toString() === productId.toString()
-      //  &&
-        // item.color.toString() === color.toString()
+        
+        item.product._id.toString() === productId.toString()
+       &&
+        item.Playerid.toString() === Playerid.toString()
     );
+   
     if (productIndex > -1) {
-      // cart.cartItems[productIndex].quantity += 1;
-      return next(
-        new ApiError(`This item already exists${req.user._id} `, 404)
-      );
+      cart.cartItems[productIndex].quantity += 1;
+        //   calculate total cart price
+        calcTotalCartPrice(cart);
+
+        await cart.save();
+
+  return  res.status(201).json({
+    resnumOfCartItems: cart.cartItems.length,
+    data: cart,
+    msg: " product aded success",
+  });
+       
     } 
       // if product is not exist in cart
       cart.cartItems.push({
         product: productId,
         price: product.price,
-        color,
+        Playerid,
         quantity: 1,
       });
     

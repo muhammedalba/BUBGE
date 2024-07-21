@@ -34,7 +34,7 @@ next();
   
 };
 const userid = (req, res, next) => {
-  if (!req.body.user && req.user.id ) {
+  if (!req.body.user && req.user._id ) {
     const {id} = req.user;
     req.body.user=id
 

@@ -41,11 +41,12 @@ const productSchema = new mongoose.Schema(
       trim: true,
       maxlength: [20, "Too long product price "],
     },
-    colors: [String],
+    Playerid: [String],
     imageCover: {
       type: String,
       required: [true, "produc imageCover is required"],
     },
+    // image:{type: String,},
     images: [String],
     category: {
       type: mongoose.Schema.ObjectId,
@@ -89,44 +90,44 @@ const productSchema = new mongoose.Schema(
   
 );
 // mongoose  query middeware
-productSchema.pre(/^find/, function(next){
-  this.populate([
-    {
-      path: 'category',
-      select: 'name',
-    },
-    {
-      path: 'brand',
-      select: 'name',
-    }
-  ]);
+// productSchema.pre(/^find/, function(next){
+//   this.populate([
+//     {
+//       path: 'category',
+//       select: 'name',
+//     },
+//     {
+//       path: 'brand',
+//       select: 'name',
+//     }
+//   ]);
 
-  next();
-})
+//   next();
+// })
 
 // const setImageURL = (doc) => {
 
 //   if (doc.imageCover) {
 //     const imageUrl = `${process.env.BASE_URL}/uploads/products/${doc.imageCover}`;
-//     doc.imageCover = imageUrl;
+//     doc.image = imageUrl;
   
 //   }
-//   if (doc.images) {
-//     const imagesList = [];
-//     doc.images.forEach((image) => {
-//       const imageUrl = `${process.env.BASE_URL}/uploads/products/${image}`;
+// //   if (doc.images) {
+// //     const imagesList = [];
+// //     doc.images.forEach((image) => {
+// //       const imageUrl = `${process.env.BASE_URL}/uploads/products/${image}`;
       
-//       imagesList.push(imageUrl)
-//     });
-// doc.images = imagesList
-//   }
+// //       imagesList.push(imageUrl)
+// //     });
+// // doc.images = imagesList
+// //   }
 // };
 
-// //update , findOne and findAll
+//update , findOne and findAll
 // productSchema.post("init", (doc) => {
 //   setImageURL(doc);
 // });
-// //  creat
+//  creat
 // productSchema.post("save", (doc) => {
 //   setImageURL(doc);
 // });

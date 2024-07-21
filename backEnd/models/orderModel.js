@@ -18,6 +18,7 @@ const orderSchema = new mongoose.Schema(
         },
         color: { type: String },
         price: { type: Number },
+       
       },
     ],
     taxtPrice: {
@@ -33,6 +34,7 @@ const orderSchema = new mongoose.Schema(
       phone: String,
       city: String,
       postalCode: String,
+      Playerid: Number ,
     },
     totalOrderPrice: { type: Number },
     paymentMethodType: {
@@ -51,7 +53,7 @@ const orderSchema = new mongoose.Schema(
 orderSchema.pre(/^find/, function (next) {
   this.populate({
     path: "user",
-    select: "firstname image phone email",
+    select: "firstname image phone email wallet",
   }).populate({
     path: "cartItems.product",
     select: "title price imageCover",
