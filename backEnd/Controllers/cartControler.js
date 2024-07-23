@@ -41,23 +41,23 @@ exports.addProductToCart = asyncHandler(async (req, res, next) => {
       (item) =>
         
         item.product._id.toString() === productId.toString()
-       &&
-        item.Playerid.toString() === Playerid.toString()
+      //  &&
+      //   item.Playerid.toString() === Playerid.toString()
     );
    
     if (productIndex > -1) {
-      cart.cartItems[productIndex].quantity += 1;
+      // cart.cartItems[productIndex].quantity += 1;
         //   calculate total cart price
-        calcTotalCartPrice(cart);
+  //       calcTotalCartPrice(cart);
 
-        await cart.save();
+  //       await cart.save();
 
-  return  res.status(201).json({
-    resnumOfCartItems: cart.cartItems.length,
-    data: cart,
-    msg: " product aded success",
-  });
-       
+  // return  res.status(201).json({
+  //   resnumOfCartItems: cart.cartItems.length,
+  //   data: cart,
+  //   msg: " product aded success",
+  // });
+       return next(new ApiError('This item already exists',400));
     } 
       // if product is not exist in cart
       cart.cartItems.push({
