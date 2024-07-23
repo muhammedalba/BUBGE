@@ -36,6 +36,7 @@ import ProtectedRoute from "./src/utils/ProtectedRoute";
 import Category from "./src/dashboard/dashPage/categories/Category";
 import ProductsCategory from "./src/pages/ProductsCategory";
 import Cart from "./src/pages/Cart";
+import Cart2 from "./src/pages/cart/Cart2";
 
 // export const routes = createBrowserRouter(
 //     createRoutesFromElements([
@@ -68,7 +69,7 @@ export const routes = createBrowserRouter([
       { path: "signup", element: <SignUp /> },
       { path: "login", element: <Login /> },
       { path: "forgotPassword", element: <ForgotPassword /> },
-      { path: "cart", element: <Cart /> },
+      { path: "cart", element: <Cart2 /> },
     ],
   },
 

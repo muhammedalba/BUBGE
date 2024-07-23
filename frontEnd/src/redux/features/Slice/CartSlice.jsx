@@ -2,15 +2,21 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const CartSlice = createSlice({
   name: "CartSlice",
-  initialState: [ ],
+  initialState: [],
   reducers: {
     cartitems: (state, action) => {
-      console.log(action.payload,"action");
-      console.log(action,"state2");
-      console.log(state,"state1");
-      return [...state,action.payload];
+      const exists = state.find(product => product.productId === action.payload.productId) ;
+     
+      console.log(exists,'exists');
+
+   if (!exists) {
+ 
+     return [...state, action.payload];
+   }
+
     },
   },
 });
+
 export const { cartitems } = CartSlice.actions;
 export default CartSlice.reducer;

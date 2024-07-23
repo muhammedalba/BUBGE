@@ -11,8 +11,6 @@ import { IoIosPricetag } from "react-icons/io";
 import { MdOutlineTitle } from "react-icons/md";
 import { FaAudioDescription } from "react-icons/fa";
 import { FaStore } from "react-icons/fa6";
-
-
 import { MdOutlineCategory } from "react-icons/md";
 
 import { ToastContainer } from "react-toastify";

@@ -3,6 +3,13 @@ import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import logo from "../imges/logo.png";
+// icons
+import { FaChartLine, FaImage } from "react-icons/fa";
+import { IoIosPricetag } from "react-icons/io";
+import { MdOutlineTitle } from "react-icons/md";
+import { FaAudioDescription } from "react-icons/fa";
+import { FaStore } from "react-icons/fa6";
+import { MdOutlineCategory } from "react-icons/md";
 
 import { useDispatch, useSelector } from "react-redux";
 import { cartitems } from "../redux/features/Slice/CartSlice";
@@ -10,11 +17,12 @@ import {
   useCreateOneMutation,
   useGetDataQuery,
 } from "../redux/features/api/apiSlice";
-import { errorNotify, successNotify } from "../utils/Toast";
+import { errorNotify, infoNotify, successNotify, warnNotify } from "../utils/Toast";
+import Cookies from "universal-cookie";
 
 const ProductsCategory = () => {
   // Get the lookup value from the store
-  const search = '';
+  const search = useSelector((state) => state.serch);
   const cart = useSelector((state) => state.cart);
   console.log(cart,'cart');
   // Bring the product
@@ -39,13 +47,14 @@ const ProductsCategory = () => {
     },
   ] = useCreateOneMutation();
 
-  // console.log(createError, "createError");
-  // console.log(createdata, "createdata");
+  console.log(createError, "createError");
+  console.log(createdata, "createdata");
   const [ProductData, setProductData] = useState([]);
   const [formData, setformData] = useState({
     productId: "",
     Playerid: "",
   });
+  const cookies=new Cookies()
   const [display, setdisplay] = useState(false);
   products && console.log(products?.data);
   
@@ -61,15 +70,45 @@ const ProductsCategory = () => {
 
  
   useEffect(() => {
+
     if (createsuccess) {
-    
+
       setdisplay(false);
       successNotify(" تم اضافة المنتج بنجاح ");
+
+
     }
-    if (error) {
+    if (createError ) {
+      if(createError.status === 401){
+      errorNotify('لم تقم بتسجيل الدخول، يرجى تسجيل الدخول لتتمكن من الوصول إلى هذا الطريق');
+      setdisplay(false);
+    
+        }
+  else if(createError.status === 400){
+
+        infoNotify('هذا العنصر موجود بالفعل');
+
+        setdisplay(false);
+      
+  }else{
       errorNotify("خطأ في الخادم الداخلي");
+      setdisplay(false);
+
     }
-  }, [error, isSuccess, products, createsuccess]);
+
+
+           
+    }
+    if(error){
+      errorNotify("خطأ في الخادم الداخلي");
+      setdisplay(false);
+    }
+  
+
+
+    
+   
+  }, [error, createsuccess, createError?.status, createError]);
 
   // Filter your search by symbols
   const escapeRegExp = (string) => {
@@ -119,7 +158,7 @@ const ProductsCategory = () => {
     ) : (
       <div className="w-100 text-center">
         <p className="text-center p-3 fs-5 text-primary ">
-          العنصر المراد البحث عنه غير موجود
+          لايوجد عناصر
         </p>
       </div>
     );
@@ -152,14 +191,22 @@ const ProductsCategory = () => {
     setformData({ ...formData, Playerid: id.target.value });
   };
   // handle Submit
-  const handleSubmit = () => {
-    event.preventDefault();
-    createOne({
-      url: "/cart",
-      body: formData,
-      method: "post",
-    });
-    dispatch(cartitems(formData));
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const token= cookies.get('token');
+    if(token){
+      createOne({
+        url: "/cart",
+        body: formData,
+        method: "post",
+      });
+      dispatch(cartitems(formData));
+
+
+    } else{
+            warnNotify('يجب تسجيل الدخول أولا');
+      return;
+    }
   };
 
   return (
@@ -177,171 +224,181 @@ const ProductsCategory = () => {
         theme="colored"
       />
 
-      <div className="container-fluid position-relative">
+      <div className="container-fluid ">
         <div className="w-100 d-flex row-gap-3 mt-3  gap-2 flex-wrap align-items-center justify-content-between">
           {/*product card */}
-
           {isLoading ? spinner : showData}
         </div>
+
       </div>
-      {/* order */}
-      <div
-        style={{
-          backgroundColor: "#0a0a0ab0",
-          display: display ? "block" : "none",
-        }}
-        className="order top-0  w-100 h-100 pt-5 mt-5 z-3 position-absolute"
-      >
-        <div className="mt-5 pt-5">
-          <form
-            style={{
-              backgroundColor: "var(--bgColor)",
-              color: "var(--text-color)",
+          {/* order form start */}
+          <div className=" top-0 px-4 w-100 h-100 pt-5 mt-5 z-3 position-absolute"
+           style={{
+              backgroundColor: "#0a0a0ab0",
+              display: display ? "block" : "none",
             }}
-            onSubmit={handleSubmit}
-            className="m-auto p-3 rounded-4 "
+           
           >
-            {/* title */}
-            <div className="col-sm-12 py-2">
-              <label
-                className="p-1 fs-5 d-flex align-items-center gap-1"
-                htmlFor={"title"}
-              >
-                {/* <MdOutlineTitle /> */}
-                الاسم المنتج
-              </label>
+              
+                <form
+                  style={{
+                    backgroundColor: "var(--bgColor)",
+                    color: "var(--text-color)",
+                  }}
+                  onSubmit={handleSubmit}
+                  className="m-auto p-3 rounded-4 mt-5 "
+                >
+                  {/* title */}
+                  <div className="col-sm-12 py-2">
+                    <label
+                      className="p-1 fs-5 d-flex align-items-center gap-1"
+                      htmlFor={"title"}
+                    >
+                  
+                      <MdOutlineTitle/>
+                      الاسم المنتج
+                    </label>
 
-              <input
-                disabled
-                className="form-control"
-                id={"title"}
-                name={"title"}
-                type={"Text"}
-                placeholder={"ادخل الاسم المنتج"}
-                defaultValue={ProductData.title}
-              />
-            </div>
+                    <input
+                      disabled
+                      className="form-control"
+                      id={"title"}
+                      name={"title"}
+                      type={"Text"}
+                      placeholder={"ادخل الاسم المنتج"}
+                      defaultValue={ProductData.title}
+                    />
+                  </div>
 
-            {/* priceAfterDiscount  price */}
-            <div className="col-sm-12 py-2">
-              <div className="row">
-                <div className="col-sm-6">
-                  <label
-                    className="p-1 fs-5 d-flex align-items-center gap-1"
-                    htmlFor={"price"}
-                  >
-                    {/* <IoIosPricetag /> */}
-                    سعرالمنتج
-                  </label>
-                  <input
-                    disabled
-                    className="form-control"
-                    id={"price"}
-                    name={"price"}
-                    type={"text"}
-                    placeholder={" سعر المنتج"}
-                    defaultValue={`$ ${ProductData.price} `}
-                  />
-                </div>
-                <div className="col-sm-6">
-                  <label
-                    className="p-1 fs-5 d-flex align-items-center gap-1"
-                    htmlFor={"priceAfterDiscount"}
-                  >
-                    {/* <IoIosPricetag /> */}
-                    سعر المنتج بعد الخصم
-                  </label>
-                  <input
-                    disabled
-                    className="form-control"
-                    id={"priceAfterDiscount"}
-                    name={"priceAfterDiscount"}
-                    type={"text"}
-                    placeholder={"   سعر المنتج بعد الخصم"}
-                    defaultValue={`$ ${ProductData.priceAfterDiscount} `}
-                  />
-                </div>
-              </div>
-            </div>
-            {/* quantity and  sold*/}
-            <div className="col-md-12 py-2">
-              <div className="row">
-                <div className="col-sm-6">
-                  <label
-                    className="p-1 fs-5 d-flex align-items-center gap-1"
-                    htmlFor={"quantity"}
-                  >
-                    {/* <FaStore /> */}
-                    (id) ايدي اللاعب
-                  </label>
-                  <input
-                    minLength={5}
-                    required
-                    className="form-control"
-                    id={"quantity"}
-                    name={"quantity"}
-                    type={"text"}
-                    placeholder={"ادخل  (id) ايدي اللاعب"}
-                    defaultValue={formData.Playerid}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="col-sm-6">
-                  <label
-                    className="p-1 fs-5 d-flex align-items-center gap-1"
-                    htmlFor={"sold"}
-                  >
-                    {/* <FaChartLine /> */}
-                    المبيعات
-                  </label>
-                  <input
-                    disabled
-                    className="form-control"
-                    id={"sold"}
-                    name={"sold"}
-                    type={"number"}
-                    placeholder={" عدد المبيعات"}
-                    defaultValue={ProductData.sold}
-                  />
-                </div>
-              </div>
-            </div>
+                  {/* priceAfterDiscount  price */}
+                  <div className="col-sm-12 py-2">
+                    <div className="row">
+                      <div className="col-sm-6">
+                        <label
+                          className="p-1 fs-5 d-flex align-items-center gap-1"
+                          htmlFor={"price"}
+                        >
+                          <IoIosPricetag />
+                          سعرالمنتج
+                        </label>
+                        <input
+                          disabled
+                          className="form-control"
+                          id={"price"}
+                          name={"price"}
+                          type={"text"}
+                          placeholder={" سعر المنتج"}
+                          defaultValue={`$ ${ProductData.price} `}
+                        />
+                      </div>
+                      <div className="col-sm-6">
+                        <label
+                          className="p-1 fs-5 d-flex align-items-center gap-1"
+                          htmlFor={"priceAfterDiscount"}
+                        >
+                          <IoIosPricetag />
+                          سعر المنتج بعد الخصم
+                        </label>
+                        <input
+                          disabled
+                          className="form-control"
+                          id={"priceAfterDiscount"}
+                          name={"priceAfterDiscount"}
+                          type={"text"}
+                          placeholder={"   سعر المنتج بعد الخصم"}
+                          defaultValue={`$ ${ProductData.priceAfterDiscount} `}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  {/* quantity and  sold*/}
+                  <div className="col-md-12 py-2">
+                    <div className="row">
+                      <div className="col-sm-6">
+                        <label
+                          className="p-1 fs-5 d-flex align-items-center gap-1"
+                          htmlFor={"quantity"}
+                        >
+                          <FaStore />
+                          (id) ايدي اللاعب
+                        </label>
+                        <input
+                          minLength={5}
+                          required
+                          className="form-control"
+                          id={"quantity"}
+                          name={"quantity"}
+                          type={"text"}
+                          placeholder={"ادخل  (id) ايدي اللاعب"}
+                          defaultValue={formData.Playerid}
+                          onChange={handleChange}
+                        />
+                      </div>
+                      <div className="col-sm-6">
+                        <label
+                          className="p-1 fs-5 d-flex align-items-center gap-1"
+                          htmlFor={"sold"}
+                        >
+                        
+                          <FaChartLine/>
+                          المبيعات
+                        </label>
+                        <input
+                          disabled
+                          className="form-control"
+                          id={"sold"}
+                          name={"sold"}
+                          type={"number"}
+                          placeholder={" عدد المبيعات"}
+                          defaultValue={ProductData.sold}
+                        />
+                      </div>
+                    </div>
+                  </div>
 
-            {/* error msg */}
-            {/* {ErrorMsge && (
-                <span className="w-100 text-center d-block text-danger pt-3">
-                  {ErrorMsge}
-                </span>
-              )} */}
-            <div className=" d-flex align-items-center justify-content-between">
-              <button
-                disabled={isLoading ? true : false}
-                className="btn btn-primary my-4 d-flex align-items-center"
-                type="submit"
-              >
-                {isLoading ? (
-                  <span className="spinner-border"></span>
-                ) : (
-                  <span className="">اضافه الى السله </span>
-                )}
-              </button>
-              <span
-                onClick={useCallback(() => {
-                  setdisplay(false);
-                }, [])}
-                disabled={isLoading ? true : false}
-                className="btn btn-danger my-4 d-flex align-items-center"
-              >
-                {isLoading ? (
-                  <span className="spinner-border"></span>
-                ) : (
-                  <span className="">الغاء</span>
-                )}
-              </span>
-            </div>
-          </form>
-        </div>
-      </div>
+                  {/* error msg */}
+                  {/* {ErrorMsge && (
+                      <span className="w-100 text-center d-block text-danger pt-3">
+                        {ErrorMsge}
+                      </span>
+                    )} */}
+      
+                        <div className=" d-flex align-items-center justify-content-between">
+                          <button
+                            disabled={isLoading ? true : false}
+                            className="btn btn-primary my-4 d-flex align-items-center"
+                            type="submit"
+                          >
+                            {isLoading ? (
+                              <span className="spinner-border"></span>
+                            ) : (
+                              <span className="">اضافه الى السله </span>
+                            )}
+                          </button>
+                          <span
+                            onClick={useCallback(() => {
+                              setdisplay(false);
+                            }, [])}
+                            disabled={isLoading ? true : false}
+                            className="btn btn-danger my-4 d-flex align-items-center"
+                          >
+                            {isLoading ? (
+                              <span className="spinner-border"></span>
+                            ) : (
+                              <span className="">الغاء</span>
+                            )}
+                          </span>
+                        </div> 
+                  
+
+                </form>
+             
+          </div>
+         {/* order form end */}
+
+
+      
+
     </div>
   );
 };
