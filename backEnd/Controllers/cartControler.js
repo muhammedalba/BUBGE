@@ -85,6 +85,13 @@ exports.addProductToCart = asyncHandler(async (req, res, next) => {
 // get all items from cart
 // get http://localhost:4000/api/cart
 exports.getCart = asyncHandler(async (req, res, next) => {
+
+  // imge url
+  const imageUrl=`${req.protocol}://${req.get('host')}/uploads/${req.baseUrl.split("/").slice(2).join("/")}`;
+  const newUrl = imageUrl.replace("cart", "products");
+
+
+
   const cart = await cartModel.findOne({ user: req.user._id });
   if (!cart) {
     return next(
@@ -97,7 +104,7 @@ exports.getCart = asyncHandler(async (req, res, next) => {
 
   res
     .status(200)
-    .json({ resnumOfCartItems: cart.cartItems.length, data: cart });
+    .json({ resnumOfCartItems: cart.cartItems.length, data: cart,imageUrl:newUrl });
 });
 
 // remove item from cart
