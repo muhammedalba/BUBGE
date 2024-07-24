@@ -35,8 +35,8 @@ import Transfer from "./src/dashboard/dashPage/transfers/Transfer";
 import ProtectedRoute from "./src/utils/ProtectedRoute";
 import Category from "./src/dashboard/dashPage/categories/Category";
 import ProductsCategory from "./src/pages/ProductsCategory";
-import Cart from "./src/pages/Cart";
-import Cart2 from "./src/pages/cart/Cart2";
+import Cart from "./src/pages/cart/Cart";
+
 
 // export const routes = createBrowserRouter(
 //     createRoutesFromElements([
@@ -69,7 +69,7 @@ export const routes = createBrowserRouter([
       { path: "signup", element: <SignUp /> },
       { path: "login", element: <Login /> },
       { path: "forgotPassword", element: <ForgotPassword /> },
-      { path: "cart", element: <Cart2 /> },
+      { path: "cart", element: <Cart /> },
     ],
   },
 

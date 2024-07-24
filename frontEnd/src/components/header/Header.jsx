@@ -149,7 +149,7 @@ console.log(cart,'cart');
           className="nav-link p-2 d-flex  align-items-center "
         >
           <span className="px-1 d-none d-md-block ">{link.title}</span>
-          {link.icon}{link.path === '/cart'&& ( cart.length )}
+          {link.icon}{link.path === '/cart'&& ( cart )}
         </NavLink>
       </li>
     );

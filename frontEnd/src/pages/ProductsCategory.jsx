@@ -4,12 +4,11 @@ import { useParams } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import logo from "../imges/logo.png";
 // icons
-import { FaChartLine, FaImage } from "react-icons/fa";
+import { FaChartLine } from "react-icons/fa";
 import { IoIosPricetag } from "react-icons/io";
 import { MdOutlineTitle } from "react-icons/md";
-import { FaAudioDescription } from "react-icons/fa";
 import { FaStore } from "react-icons/fa6";
-import { MdOutlineCategory } from "react-icons/md";
+
 
 import { useDispatch, useSelector } from "react-redux";
 import { cartitems } from "../redux/features/Slice/CartSlice";
@@ -70,13 +69,9 @@ const ProductsCategory = () => {
 
  
   useEffect(() => {
-
     if (createsuccess) {
-
       setdisplay(false);
       successNotify(" تم اضافة المنتج بنجاح ");
-
-
     }
     if (createError ) {
       if(createError.status === 401){
@@ -84,31 +79,23 @@ const ProductsCategory = () => {
       setdisplay(false);
     
         }
-  else if(createError.status === 400){
-
+        else if(createError.status === 400){
         infoNotify('هذا العنصر موجود بالفعل');
-
         setdisplay(false);
-      
-  }else{
+     
+        }
+        else{
       errorNotify("خطأ في الخادم الداخلي");
       setdisplay(false);
 
     }
-
-
-           
+        
     }
     if(error){
       errorNotify("خطأ في الخادم الداخلي");
       setdisplay(false);
     }
-  
-
-
-    
-   
-  }, [error, createsuccess, createError?.status, createError]);
+    }, [error, createsuccess, createError?.status, createError]);
 
   // Filter your search by symbols
   const escapeRegExp = (string) => {
@@ -223,7 +210,6 @@ const ProductsCategory = () => {
         pauseOnHover
         theme="colored"
       />
-
       <div className="container-fluid ">
         <div className="w-100 d-flex row-gap-3 mt-3  gap-2 flex-wrap align-items-center justify-content-between">
           {/*product card */}
@@ -231,16 +217,15 @@ const ProductsCategory = () => {
         </div>
 
       </div>
-          {/* order form start */}
-          <div className=" top-0 px-4 w-100 h-100 pt-5 mt-5 z-3 position-absolute"
+      {/* order form start */}
+      <div className=" top-0 px-4 w-100 h-100 pt-5 mt-5 z-3 position-absolute"
            style={{
               backgroundColor: "#0a0a0ab0",
               display: display ? "block" : "none",
             }}
            
-          >
-              
-                <form
+          >  
+              <form
                   style={{
                     backgroundColor: "var(--bgColor)",
                     color: "var(--text-color)",
@@ -369,7 +354,7 @@ const ProductsCategory = () => {
                             className="btn btn-primary my-4 d-flex align-items-center"
                             type="submit"
                           >
-                            {isLoading ? (
+                            {isLoading && Createloading? (
                               <span className="spinner-border"></span>
                             ) : (
                               <span className="">اضافه الى السله </span>
@@ -391,15 +376,14 @@ const ProductsCategory = () => {
                         </div> 
                   
 
-                </form>
-             
-          </div>
-         {/* order form end */}
+              </form>
+      </div>
+      {/* order form end */}
 
 
       
 
-    </div>
+     </div>
   );
 };
 

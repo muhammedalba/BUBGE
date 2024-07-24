@@ -232,7 +232,7 @@ const Products = () => {
 
   // view categories
   const showCategorie = useMemo(() => {
-    if (loadingcategories && categories?.data?.length ===0 ) return <option value="">nodata</option>;
+    if (loadingcategories && categories?.data?.length ===0 ) return <option value="">لايوجد بيانات</option>;
     return categories?.data?.map((category, index) => (
       <option key={index} value={category._id}>
         {category.name}

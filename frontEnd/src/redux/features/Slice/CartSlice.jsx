@@ -5,14 +5,18 @@ export const CartSlice = createSlice({
   initialState: [],
   reducers: {
     cartitems: (state, action) => {
-      const exists = state.find(product => product.productId === action.payload.productId) ;
-     
-      console.log(exists,'exists');
-
-   if (!exists) {
+  //     const exists = state.find(product => product.productId === action.payload.productId) ;
+    
  
-     return [...state, action.payload];
-   }
+  //  if (!exists &&typeof(action.payload) !== 'number') {
+  //   console.log(action.payload=== Number);
+  //    return [...state, action.payload];
+  //  }
+   if (typeof(action.payload) === 'number') {
+ 
+    // return action.payload;
+    return  action.payload;
+  }
 
     },
   },
