@@ -187,16 +187,18 @@ console.log(cart,'cart');
             <div className=" d-lg-block">
               <ul className="my-0 h-100 d-flex  align-items-center ">
                 {nav_link_show}
-
-                <img
-                  className="logo d-none d-sm-block rounded-circle dropdown-toggle border-1"
-                  src={
-                    !image || image === "undefined"
-                      ? avatar
-                      : `${imgeUrl}/${image}`
-                  }
-                  alt="avatar"
-                />
+                
+                <Link to={'ProfileAccount'}>
+                  <img
+                    className="logo d-none d-sm-block rounded-circle dropdown-toggle border-1"
+                    src={
+                      !image || image === "undefined"
+                        ? avatar
+                        : `${imgeUrl}/${image}`
+                    }
+                    alt="avatar"
+                  />
+                </Link>
               </ul>
             </div>
           </div>

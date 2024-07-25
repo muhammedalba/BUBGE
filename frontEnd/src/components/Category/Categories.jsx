@@ -167,6 +167,7 @@ import { errorNotify } from "../../utils/Toast";
                 </button>
             </div>
             {/* Carousel end */}
+            
             <div className="w-100 d-flex row-gap-3 mt-5  gap-2 flex-wrap align-items-center
                                 justify-content-between">
                 {/*category card */}

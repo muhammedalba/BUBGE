@@ -1,18 +1,19 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useUpdateOneMutation, useGetOneQuery } from '../../../redux/features/api/apiSlice';
-import { errorNotify, infoNotify, successNotify } from '../../../utils/Toast';
+
 
 // icons
 import { FaImage, FaUser } from 'react-icons/fa';
 import { MdOutlineEmail } from "react-icons/md";
 import { ToastContainer } from 'react-toastify';
+import { useGetOneQuery, useUpdateOneMutation } from '../../redux/features/api/apiSlice';
+import { errorNotify, infoNotify, successNotify } from '../../utils/Toast';
 
 const User = () => {
   // Bring the user number Id 
   const { userId } = useParams();
   //get data (rtk redux) 
-  const { isLoading, isSuccess, data, error } = useGetOneQuery(`users/${userId}`);
+  const { isLoading, isSuccess, data, error } = useGetOneQuery(`users/getMe`);
   console.log(data);
   // update data (rtk redux)
   const [updateOne, { error: updateError, isLoading: updateLoading, isSuccess: updateSuccess, data: updatedUser }] = useUpdateOneMutation();
@@ -77,13 +78,13 @@ const User = () => {
       });
     } else {
       infoNotify('كلمة المرور يجب أن تكون أكثر من 6 حروف');
-    }
-  }, [password, updateOne, userId]);
+    }}, [password, updateOne, userId]);
 
   // handleChange
   const handleChange = useCallback((e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   }, [formData]);
+
 
 
 // handle Image Change
@@ -98,6 +99,7 @@ const User = () => {
       reader.readAsDataURL(file);
     }
   }, []);
+
 
 
 
@@ -124,9 +126,18 @@ const User = () => {
           />
         </div>
         {isSuccess && (
-          <h2 className="w-75 text-center m-auto py-2 border-bottom">
-            {formData.firstname}
-          </h2>
+          <><h2 className="w-75 text-center m-auto py-2 border-bottom">
+                      محفظتي:
+                      {data?.data.wallet}$
+                  </h2><h2 className="w-75 text-center m-auto py-2 border-bottom">
+                  vip:
+                          {data?.data.vip}$
+                      </h2>
+                    {  data?.data.AmountTransferred > 0 && <h2 className="w-75 text-center m-auto py-2 border-bottom">
+                          المبلغ الذي في انتظار التاكيد:
+                          {data?.data.AmountTransferred}$
+                      </h2>}
+                      </>
         )}
         <div className="col-md-12 py-2">
           <label className="p-1 fs-5 d-flex align-items-center gap-1" htmlFor="firstname">
@@ -207,7 +218,7 @@ const User = () => {
         </div>
         <div className="col-md-12 py-2">
           <label className="p-1 fs-5 d-flex align-items-center gap-1" htmlFor="image">
-            <FaImage color="var(--spanColor)" fontSize="1rem" /> صورة الشخصية (اختياري)
+            <FaImage color="var(--spanColor)" fontSize="1rem" /> صورة الشخصية 
           </label>
           <input
             disabled={isDisabled}
@@ -218,29 +229,8 @@ const User = () => {
             onChange={handleImageChange}
           />
         </div>
-        <select
-          id="role"
-          onChange={handleChange}
-          className="form-select my-3 py-2"
-          defaultValue={formData.role}
-          aria-label="Default select example"
-        >
-          <option disabled>{formData.role}</option>
-          <option value="user">user</option>
-          <option value="admin">admin</option>
-          <option value="manager">manager</option>
-        </select>
-        <select
-          id="active"
-          onChange={handleChange}
-          className="form-select my-3 py-2"
-          defaultValue={formData.active}
-          aria-label="Default select example"
-        >
-          <option value="true">اختر الحالة</option>
-          <option disabled={formData.active} value="true">نشط</option>
-          <option disabled={!formData.active} value="false">غير نشط</option>
-        </select>
+
+
         {error && (
           <span className="w-100 text-center d-block text-danger pt-3">
             {error.status === 400 ? 'لايوجد مستخدم' : 'خطأ في الخادم'}
@@ -254,8 +244,7 @@ const User = () => {
           {isDisabled ? <span className="spinner-border"></span> : 'تعديل'}
         </button>
       </form>
-      <p>العنوين</p>
-      <p>المفضلة</p>
+ 
     </div>
   );
 };

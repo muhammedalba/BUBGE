@@ -36,6 +36,7 @@ import ProtectedRoute from "./src/utils/ProtectedRoute";
 import Category from "./src/dashboard/dashPage/categories/Category";
 import ProductsCategory from "./src/pages/ProductsCategory";
 import Cart from "./src/pages/cart/Cart";
+import ProfileAccount from "./src/pages/ProfileAccount/ProfileAccount";
 
 
 // export const routes = createBrowserRouter(
@@ -70,6 +71,7 @@ export const routes = createBrowserRouter([
       { path: "login", element: <Login /> },
       { path: "forgotPassword", element: <ForgotPassword /> },
       { path: "cart", element: <Cart /> },
+      { path: "ProfileAccount", element: <ProfileAccount /> },
     ],
   },
 

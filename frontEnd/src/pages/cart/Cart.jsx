@@ -19,14 +19,18 @@ const Cart = () => {
     deletOne,
     { error: errorDelet, isLoading: LoadingDelet, isSuccess: SuccessDelet },
   ] = useDeletOneMutation();
-
+console.log(error);
 
 const dispatch=useDispatch();
 
 console.log(products);
 useEffect(() =>{
   dispatch(cartitems(products?.resnumOfCartItems));
-  if(errorDelet ||error)errorNotify('خطا في الخادم');
+  
+  if(   errorDelet ){
+    errorNotify('خطا في الخادم');
+
+}
   if(SuccessDelet) {
     successNotify('تم حذف العنصر بنجاح');  
   } 
