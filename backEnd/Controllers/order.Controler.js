@@ -16,8 +16,8 @@ exports.createcashOrder = asyncHandler(async (req, res, next) => {
   // app settings
   const shippingPrice = 0;
   const taxtPrice = 0;
-
-  // 1- get cart depend on cardid
+  console.log(req.user);
+  // 1- get cart depend on cardid 
   const cart = await cartModel.findById(req.params.cartId);
   if (!cart) {
     return next(new ApiError(`cart not found id${req.params.cartId}`, 404));
@@ -28,25 +28,29 @@ exports.createcashOrder = asyncHandler(async (req, res, next) => {
     ? cart.totalPriceAfterDiscount
     : cart.totalCartPrice;
   const totalOrderPrice = cartPrice + taxtPrice + shippingPrice;
+// تاكد من وجود اموال كافيه في المحفظة
+  if (req.user.wallet < cart.totalCartPrice) {
+    return next(new ApiError("Not enough money in wallet", 400));
+  }
 
   // 3- create order with default paymentMethod cash
+
   const order = await orderModul.create({
     user: req.user._id,
     cartItems: cart.cartItems,
-    shippingAddress: req.body.shippingAddress,
+    // shippingAddress: req.body.shippingAddress,
     totalOrderPrice,
   });
   // 4_ after creating order,increment product sold,decrement product quantity
   if (order) {
-    const bulkoptions = cart.cartItems.map((item) => ({
-      updateOne: {
-        filter: { _id: item.product },
-        update: { $inc: { sold: +item.quantity, quantity: -item.quantity } },
-      },
-    }));
+    const bulkoptions =[ {updateOne: {
+        filter: { _id: req.user._id },
+        update: { $inc: { wallet: -cart.totalCartPrice } },
+      },}]
+  
     console.log(bulkoptions);
     //  تقوم بعمل اكثر من اوبريشن في كوماند واحد
-    await productModel.bulkWrite(bulkoptions,{});
+    await UserModel.bulkWrite(bulkoptions,{});
     // 5-clear cart depend on cardid
     await cartModel.findByIdAndDelete(req.params.cartId);
   }

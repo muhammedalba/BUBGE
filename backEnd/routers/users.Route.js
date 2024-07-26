@@ -33,7 +33,7 @@ router.use("/:userid/transfer", TransferRouter);
 router.get(
   "/getMe",
   protect,
-  allowedTo(role.USER),
+  // allowedTo(role.USER),
   getLoggedUserData,
   getUserValidator,
   getUserById
