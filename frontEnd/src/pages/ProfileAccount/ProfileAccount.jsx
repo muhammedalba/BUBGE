@@ -1,88 +1,107 @@
 import { useEffect, useState, useCallback } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 // icons
 import { FaImage, FaUser } from 'react-icons/fa';
 import { MdOutlineEmail } from "react-icons/md";
 import { ToastContainer } from 'react-toastify';
+import { IoWalletOutline } from "react-icons/io5";
+import { BiTransfer } from "react-icons/bi";
+
+
+
 import { useGetOneQuery, useUpdateOneMutation } from '../../redux/features/api/apiSlice';
 import { errorNotify, infoNotify, successNotify } from '../../utils/Toast';
+import { RiVipLine } from "react-icons/ri";
 
 const User = () => {
-  // Bring the user number Id 
-  const { userId } = useParams();
+  
+  
+  const navigate = useNavigate();
+
   //get data (rtk redux) 
-  const { isLoading, isSuccess, data, error } = useGetOneQuery(`users/getMe`);
-  console.log(data);
+   const { isLoading, isSuccess, data, error } = useGetOneQuery(`users/getMe`);
+  
   // update data (rtk redux)
   const [updateOne, { error: updateError, isLoading: updateLoading, isSuccess: updateSuccess, data: updatedUser }] = useUpdateOneMutation();
   // states
+  console.log(data);
+  
+
+
   const [formData, setFormData] = useState({
     firstname: '',
     lastname: '',
-    role: '',
-    active: '',
+
   });
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+ 
 
   const isDisabled = isLoading || updateLoading;
 
 
   // handel isSuccess  oue error
   useEffect(() => {
+  
+
+    if (error?.status === 401) {
+      infoNotify('يجب عليك تسجيل الدخول');
+    }
     if (isSuccess) {
       setFormData({
         firstname: data.data.firstname,
-        lastname: data.data.lastname,
-        role: data.data.role,
-        active: data.data.active,
+        lastname: data.data.lastname, 
+    
       });
     }
     if (updateSuccess) {
       successNotify('تمت التعديل بنجاح');
-      navigate('/dashboard/users');
+      password &&  navigate('/login');
     }
     if (updateError) {
       errorNotify('خطأ في الخادم');
     }
-  }, [data, isSuccess, updateSuccess, navigate, updateError, updatedUser]);
+  }, [data, isSuccess, updateSuccess, navigate, updateError, updatedUser, error?.status, password]);
 
 
 
   // handleSubmit
   const handleSubmit = useCallback((e) => {
     e.preventDefault();
+  
     const form = new FormData();
     Object.keys(formData).forEach((key) => form.append(key, formData[key]));
     if (image) form.append('image', image);
+ 
     //  send form data to serve
     updateOne({
-      url: `/users/${userId}`,
+      url: `/users/updatLoggedUser`,
       body: form,
       method: 'put',
     });
-  }, [formData, image, updateOne, userId]);
+  }, [formData, image, updateOne, ]);
 
 
 // handelPassowrd
   const handlePasswordChange = useCallback(() => {
     if (password.length >= 6) {
       updateOne({
-        url: `/users/changePassword/${userId}`,
+        url: `/users/changeMyPassword`,
         body: { password },
         method: 'put',
       });
+    
     } else {
       infoNotify('كلمة المرور يجب أن تكون أكثر من 6 حروف');
-    }}, [password, updateOne, userId]);
+    }}, [password, updateOne, ]);
 
   // handleChange
   const handleChange = useCallback((e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
+ 
   }, [formData]);
 
 
@@ -103,7 +122,9 @@ const User = () => {
 
 
 
-  return (
+  return (<>
+  
+  
     <div className="container pt-5">
       <ToastContainer
         position="top-right"
@@ -118,6 +139,8 @@ const User = () => {
       />
 
       <form onSubmit={handleSubmit} className="m-auto p-3">
+      <Link to={'/mytransfer'} className=' fs-3 m-1'> <BiTransfer />  الذهاب الى معاملاتي</Link>
+
         <div className="w-100 py-2">
           <img
             className="logo rounded m-auto d-none d-sm-block"
@@ -126,18 +149,23 @@ const User = () => {
           />
         </div>
         {isSuccess && (
-          <><h2 className="w-75 text-center m-auto py-2 border-bottom">
-                      محفظتي:
-                      {data?.data.wallet}$
-                  </h2><h2 className="w-75 text-center m-auto py-2 border-bottom">
-                  vip:
-                          {data?.data.vip}$
-                      </h2>
-                    {  data?.data.AmountTransferred > 0 && <h2 className="w-75 text-center m-auto py-2 border-bottom">
+          <div className='row fs-3 text-center '>
+
+                <span className="col-sm-6 my-2 py-2 border-bottom">                      
+                    <span className='ps-1 text-success'>$</span>( { data?.data.wallet.toFixed(2) }) :
+                       <IoWalletOutline />
+                </span>
+                <span className="col-sm-6  my-2   py-2 border-bottom">
+                          ({data?.data.vip}) : 
+                          <RiVipLine color='gold'/>
+                </span>
+                    {data?.data.AmountTransferred > 0 && 
+                <span className="col-sm-12 text-center  py-2 border-bottom">
                           المبلغ الذي في انتظار التاكيد:
-                          {data?.data.AmountTransferred}$
-                      </h2>}
-                      </>
+                           ({data?.data.AmountTransferred})<span className='ps-1 text-success'>$</span>
+                </span>
+                    }
+          </div>
         )}
         <div className="col-md-12 py-2">
           <label className="p-1 fs-5 d-flex align-items-center gap-1" htmlFor="firstname">
@@ -246,7 +274,7 @@ const User = () => {
       </form>
  
     </div>
-  );
+  </>);
 };
 
 export default User;

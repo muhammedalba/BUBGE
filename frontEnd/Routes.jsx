@@ -37,6 +37,9 @@ import Category from "./src/dashboard/dashPage/categories/Category";
 import ProductsCategory from "./src/pages/ProductsCategory";
 import Cart from "./src/pages/cart/Cart";
 import ProfileAccount from "./src/pages/ProfileAccount/ProfileAccount";
+import UserTransfer from "./src/pages/userTransfer/UserTransfer";
+
+
 
 
 // export const routes = createBrowserRouter(
@@ -71,7 +74,8 @@ export const routes = createBrowserRouter([
       { path: "login", element: <Login /> },
       { path: "forgotPassword", element: <ForgotPassword /> },
       { path: "cart", element: <Cart /> },
-      { path: "ProfileAccount", element: <ProfileAccount /> },
+      { path: "ProfileAccount", element:<ProfileAccount /> },
+      { path: "mytransfer", element:<UserTransfer/>},
     ],
   },
 
@@ -79,6 +83,7 @@ export const routes = createBrowserRouter([
   {
     path: "/dashboard",
     element: (
+      // Path protection
       <ProtectedRoute>
         <Dashboard />
       </ProtectedRoute>

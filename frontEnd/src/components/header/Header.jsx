@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 import Cookies from "universal-cookie";
@@ -17,35 +17,45 @@ import { FaRegUser } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 
 import "./header.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { searchItem } from "../../redux/features/Slice/SerchSlice";
 
 const Header = () => {
   const cookies = new Cookies();
   const imgeUrl = cookies.get("imageUrl");
   const image = cookies.get("image");
-  const role = cookies.get("role") || "user";
+  const role = cookies.get("role") ;
   const [scroll, setscroll] = useState(false);
   const dispatch = useDispatch();
   const [trans, settrans] = useState(false);
 
-const cart=useSelector(state=>state.cart)
-console.log(cart,'cart');
-  window.onscroll = () => {
-    if (window.scrollY > 60 && window.scrollY < 301) {
-      settrans(true);
-    } else if (window.scrollY > 130) {
-      settrans(false);
-      setscroll(true);
-    } else {
-      setscroll(false);
-      settrans(false);
-    }
-  };
 
-  const Scrolto = () => {
-    window.scrollTo(0, 0);
-  };
+console.log(role,'cart');
+
+const handleScroll = useCallback(() => {
+  const scrollY = window.scrollY;
+
+  if (scrollY > 60 && scrollY < 301) {
+    settrans(true);
+  } else {
+    settrans(false);
+  }
+
+  if (scrollY > 130) {
+    setscroll(true);
+  } else {
+    setscroll(false);
+  }
+}, []);
+
+  
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [handleScroll]);
 
   // handel serche
   const handelserche = (e) => {
@@ -54,8 +64,10 @@ console.log(cart,'cart');
 
 
   };
-  
-  // handel user profile
+  const Scrolto = () => {
+    window.scrollTo(0, 0);
+  };
+
 
   // handel Logout
   const Logout = () => {
@@ -139,7 +151,7 @@ console.log(cart,'cart');
       <li
         key={index}
         className={
-          role === "user" && link.path === "/dashboard"
+         (link.path === "/dashboard"  && role === "user") ||( role=== undefined && link.path === "/dashboard")
             ? "d-none"
             : "nav-item d-flex align-items-center "
         }
@@ -149,7 +161,7 @@ console.log(cart,'cart');
           className="nav-link p-2 d-flex  align-items-center "
         >
           <span className="px-1 d-none d-md-block ">{link.title}</span>
-          {link.icon}{link.path === '/cart'&& ( cart )}
+          {link.icon}
         </NavLink>
       </li>
     );
@@ -188,7 +200,7 @@ console.log(cart,'cart');
               <ul className="my-0 h-100 d-flex  align-items-center ">
                 {nav_link_show}
                 
-                <Link to={'ProfileAccount'}>
+                <Link to={ role ? 'ProfileAccount' : 'login'}>
                   <img
                     className="logo d-none d-sm-block rounded-circle dropdown-toggle border-1"
                     src={

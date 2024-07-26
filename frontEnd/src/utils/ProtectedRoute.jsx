@@ -4,7 +4,7 @@ import Cookies from "universal-cookie";
 const ProtectedRoute = ({   children }) => {
 const cookies= new Cookies();
  const token = cookies.get("token");
- const role = cookies.get("role").toLowerCase();
+ const role = cookies.get("role")?.toLowerCase();
 
 
 const redirectPath = "/login";
@@ -13,9 +13,12 @@ const redirectPath = "/login";
     return <Navigate to={redirectPath} replace />;
   }
 
-  if (role === 'admin'||role === 'manger') {
+  if (token && role === 'admin' || role === 'manger') {
     return children ? children : <Outlet />;
   }
+  // if (token && role === 'user') {
+  //   return children ? children : <Outlet />;
+  // }
   return <Navigate to="/" replace />;
 
 };
