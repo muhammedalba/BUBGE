@@ -39,7 +39,11 @@ import Cart from "./src/pages/cart/Cart";
 import ProfileAccount from "./src/pages/ProfileAccount/ProfileAccount";
 import UserTransfer from "./src/pages/userTransfer/UserTransfer";
 
-
+import AddTransfer from "./src/pages/userTransfer/AddTransfer";
+import TransFer from "./src/pages/userTransfer/TransFer";
+import UserOrders from "./src/pages/userOrder/userOrders";
+import UserOrder from "./src/pages/userOrder/UserOrder";
+import Orders from "./src/dashboard/dashPage/orders/Orders";
 
 
 // export const routes = createBrowserRouter(
@@ -74,8 +78,12 @@ export const routes = createBrowserRouter([
       { path: "login", element: <Login /> },
       { path: "forgotPassword", element: <ForgotPassword /> },
       { path: "cart", element: <Cart /> },
-      { path: "ProfileAccount", element:<ProfileAccount /> },
-      { path: "mytransfer", element:<UserTransfer/>},
+      { path: "orders", element: <UserOrders /> },
+      { path: "orders/:orderId", element: <UserOrder /> },
+      { path: "ProfileAccount", element: <ProfileAccount /> },
+      { path: "createtransfer", element: <AddTransfer /> },
+      { path: "transfers/:TransferId", element: < TransFer/> },
+      { path: "ProfileAccount/:userid/transfer", element: <UserTransfer /> },
     ],
   },
 
@@ -108,8 +116,9 @@ export const routes = createBrowserRouter([
       { path: "brands/createBrand", element: <CreateBrands /> },
       { path: "brands/:brandId", element: <Brand /> },
       { path: "transfers", element: <Transfers /> },
-      { path: "transfers/createTransfers", element: <CreateBrands /> },
+      
       { path: "transfers/:transfersId", element: <Transfer /> },
+      { path: "orders", element: <Orders /> },
     ],
   },
 ]);

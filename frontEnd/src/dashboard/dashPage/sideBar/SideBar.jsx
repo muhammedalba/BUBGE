@@ -66,6 +66,11 @@ const handelchang=() => {
             path: "transfers",
             icon:<TbTransfer/> ,
           }, 
+          {
+            title: "الطلبات ",
+            path: "orders",
+            icon:<TbTransfer/> ,
+          }, 
       ];
     
       // get property

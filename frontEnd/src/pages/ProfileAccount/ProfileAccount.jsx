@@ -139,7 +139,8 @@ const User = () => {
       />
 
       <form onSubmit={handleSubmit} className="m-auto p-3">
-      <Link to={'/mytransfer'} className=' fs-3 m-1'> <BiTransfer />  الذهاب الى معاملاتي</Link>
+      <Link to={`${data?.data._id}/transfer`} className=' fs-3 m-1'> <BiTransfer />  الذهاب الى معاملاتي</Link>
+      <Link to={`/orders`} className=' fs-3 m-1'> <BiTransfer />  الذهاب الى طلباتي </Link>
 
         <div className="w-100 py-2">
           <img

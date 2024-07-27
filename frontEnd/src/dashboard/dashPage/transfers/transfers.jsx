@@ -132,7 +132,7 @@ const Transfers = () => {
         })
       : Transfers &&
         [...Transfers.data].sort(
-          (a, b) => sorted && b._id.localeCompare(a._id)
+          (a, b) => sorted ?  b._id.localeCompare(a._id):a._id.localeCompare(b._id)
         );
 
   // if sucsses and data is not empty  show the Transfers

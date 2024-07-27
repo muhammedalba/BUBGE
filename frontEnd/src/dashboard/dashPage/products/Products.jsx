@@ -115,7 +115,7 @@ const Products = () => {
     const regex = new RegExp(escapeRegExp(search), "i");
     return products ? products.data.filter((product) => regex.test(product.description) || regex.test(product.title)) : [];
   }, [search, products, sorted]);
-
+console.log(filteredProducts);
   // if sucsses and data is not empty  show the products
   const showData = useMemo(() => {
     if (isLoading) {

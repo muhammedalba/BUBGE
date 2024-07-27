@@ -209,7 +209,7 @@
                       name={"confirmed"}
                       type={"text"}
                       placeholder={"  ادخل سعر المنتج بعد الخصم"}
-                      defaultValue={transfers?.data.confirmed ?'تم التاكيد' :'لم يتم التاكيد '}
+                      value={transfers?.data.confirmed ?'تم التاكيد' :'لم يتم التاكيد '}
                      
                     />
                   </div>
@@ -224,7 +224,7 @@
                       htmlFor={"email"}
                     >
                       <FaStore />
-                      الكميه
+                      الايميل
                     </label>
                     <input
                       disabled={ true }

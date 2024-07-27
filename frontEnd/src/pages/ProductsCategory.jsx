@@ -22,8 +22,8 @@ import Cookies from "universal-cookie";
 const ProductsCategory = () => {
   // Get the lookup value from the store
   const search = useSelector((state) => state.serch);
-  const cart = useSelector((state) => state.cart);
-  console.log(cart,'cart');
+
+
   // Bring the product
   const { CategoryId } = useParams();
   // 
@@ -42,12 +42,11 @@ const ProductsCategory = () => {
       error: createError,
       isSuccess: createsuccess,
       isLoading: Createloading,
-      data: createdata,
+      
     },
   ] = useCreateOneMutation();
 
-  console.log(createError, "createError");
-  console.log(createdata, "createdata");
+
   const [ProductData, setProductData] = useState([]);
   const [formData, setformData] = useState({
     productId: "",
@@ -55,18 +54,19 @@ const ProductsCategory = () => {
   });
   const cookies=new Cookies()
   const [display, setdisplay] = useState(false);
-  products && console.log(products?.data);
+   console.log(products?.data,'products');
   
 
   // handel order
   const handelOrder = (product) => {
+    console.log(product);
     setProductData(product);
     setformData({ ...formData, productId: product.id });
     setdisplay(true);
   };
   //handel error our  success message
   const dispatch = useDispatch();
-
+console.log(ProductData.priceAfterDiscount,'ProductData.priceAfterDiscount');
  
   useEffect(() => {
     if (createsuccess) {
@@ -273,7 +273,7 @@ const ProductsCategory = () => {
                           name={"price"}
                           type={"text"}
                           placeholder={" سعر المنتج"}
-                          defaultValue={`$ ${ProductData.price} `}
+                          value={`$ ${ProductData.price} `}
                         />
                       </div>
                       <div className="col-sm-6">
@@ -291,7 +291,7 @@ const ProductsCategory = () => {
                           name={"priceAfterDiscount"}
                           type={"text"}
                           placeholder={"   سعر المنتج بعد الخصم"}
-                          defaultValue={`$ ${ProductData.priceAfterDiscount} `}
+                          value={`$ ${ProductData.priceAfterDiscount} `}
                         />
                       </div>
                     </div>
