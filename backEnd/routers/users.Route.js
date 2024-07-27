@@ -28,7 +28,7 @@ const TransferRouter = require("./TransferRouter");
 
 const router = express.Router();
 
-router.use("/:userid/transfer", TransferRouter);
+router.use("/:userid/transfers", TransferRouter);
 // user
 router.get(
   "/getMe",

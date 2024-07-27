@@ -28,7 +28,7 @@ router
   updateTransfersValidator, ConfirmTransfer)
   .delete(
     protect,
-    allowedTo(role.ADMIN),
+    allowedTo(role.ADMIN,role.MANGER),
    deletTransfersValidator,
     deletTransfer
   );

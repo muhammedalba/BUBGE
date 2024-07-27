@@ -67,6 +67,9 @@ exports.filterOrderForLoggedUser = asyncHandler(async (req, res, next) => {
 // /api/orders
 exports.getAllOrders = factory.getAll(orderModul);
 
+
+
+
 //  get  get all orders
 // /api/orders/:id
 exports.findSpecificOrder = factory.getOne(orderModul);

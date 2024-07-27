@@ -16,7 +16,7 @@ const orderSchema = new mongoose.Schema(
         quantity: {
           type: Number,
         },
-        color: { type: String },
+        Playerid: { type: String },
         price: { type: Number },
        
       },
@@ -56,7 +56,7 @@ orderSchema.pre(/^find/, function (next) {
     select: "firstname image phone email wallet",
   }).populate({
     path: "cartItems.product",
-    select: "title price imageCover",
+    select: "title price imageCover ",
   });
 
   next();

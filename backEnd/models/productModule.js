@@ -90,20 +90,20 @@ const productSchema = new mongoose.Schema(
   
 );
 // mongoose  query middeware
-// productSchema.pre(/^find/, function(next){
-//   this.populate([
-//     {
-//       path: 'category',
-//       select: 'name',
-//     },
-//     {
-//       path: 'brand',
-//       select: 'name',
-//     }
-//   ]);
+productSchema.pre(/^find/, function(next){
+  this.populate([
+    {
+      path: 'category',
+      select: 'name',
+    },
+    {
+      path: 'brand',
+      select: 'name',
+    }
+  ]);
 
-//   next();
-// })
+  next();
+})
 
 // const setImageURL = (doc) => {
 
