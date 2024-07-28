@@ -90,7 +90,7 @@ exports.resizeImge = asyncHandler(async (req, res, next) => {
     await sharp(buffer)
       .resize(width, height)
       .toFormat("jpeg")
-      .jpeg({ quality: 90 })
+      .jpeg({ quality: 100 })
       .toFile(filePath);
   }
 
@@ -177,11 +177,12 @@ if(findImgeInDB){
 
     if (req.body.images && findImgeInDB.images.length > 0) {
       findImgeInDB.images.forEach((imge) => {
-        console.log(imge);
+        
         // const imgePaths = imge.split("/").slice(3).join("/");
         const pathImge=req.baseUrl.split("/").slice(2).join("/");
         const base = `uploads/${pathImge}/${imge}`
         // Verify the file exists before deleting it
+        console.log(pathImge);
         if (fs.existsSync(base))fs.unlinkSync(base );
       });
     }
