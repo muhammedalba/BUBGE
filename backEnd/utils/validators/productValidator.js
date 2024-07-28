@@ -3,7 +3,7 @@ const { check } = require("express-validator");
 const { default: slugify } = require("slugify");
 const validatorMiddleware = require("../../middleWare/validatorMiddleware");
 const categoryModule = require("../../models/categoryModule");
-const subCategoryModel = require("../../models/subCategoryModel");
+// const subCategoryModel = require("../../models/subCategoryModel");
 const brandModule = require("../../models/prandModule ");
 
 
@@ -93,24 +93,24 @@ exports.createProductValidator = [
         }
       })
     ),
-  check("supCategories")
-    .optional()
-    .isMongoId()
-    .withMessage("invalid id formate")
-    .custom((SubCategoryIds) =>
-      subCategoryModel
-        .find({ _id: { $exists: true, $in: SubCategoryIds } })
-        .then((subCategory) => {
-          console.log(subCategory.length,"subCategory");
-          console.log(SubCategoryIds.length,"SubCategoryIds");
-          if (
-            subCategory.length < 1 ||
-            subCategory.length !== SubCategoryIds.length
-          ) {
-            return Promise.reject(new Error(`invalid subcategory ids`));
-          }
-        })
-    )
+  // check("supCategories")
+  //   .optional()
+  //   .isMongoId()
+  //   .withMessage("invalid id formate")
+  //   .custom((SubCategoryIds) =>
+  //     subCategoryModel
+  //       .find({ _id: { $exists: true, $in: SubCategoryIds } })
+  //       .then((subCategory) => {
+  //         console.log(subCategory.length,"subCategory");
+  //         console.log(SubCategoryIds.length,"SubCategoryIds");
+  //         if (
+  //           subCategory.length < 1 ||
+  //           subCategory.length !== SubCategoryIds.length
+  //         ) {
+  //           return Promise.reject(new Error(`invalid subcategory ids`));
+  //         }
+  //       })
+  //   )
     // .custom((val, { req }) =>
     //   subCategoryModel.find({ category: req.body.category }).then(
     //     (subcategories) => {
@@ -129,25 +129,25 @@ exports.createProductValidator = [
     //   )
     // ),
 
-    .custom(async(val, { req }) => 
-     await subCategoryModel
-        .find({category: req.body.category})
-        .then((SubCategories) => {
-          const subCategoryIdsInDB = [];
-          console.log(SubCategories,"supcategory");
-          SubCategories.forEach((subCat) => {
-            subCategoryIdsInDB.push(subCat._id.toString());
-          });
+  //   .custom(async(val, { req }) => 
+  //    await subCategoryModel
+  //       .find({category: req.body.category})
+  //       .then((SubCategories) => {
+  //         const subCategoryIdsInDB = [];
+  //         console.log(SubCategories,"supcategory");
+  //         SubCategories.forEach((subCat) => {
+  //           subCategoryIdsInDB.push(subCat._id.toString());
+  //         });
           
-  //check if subcategories ids in db include subcategories in req.body (true)
-               // const checker = (target, arr) => target.every((v) => arr.includes(v));
-          if (!val.every((v) => subCategoryIdsInDB.includes(v))) {
-            return Promise.reject(
-              new Error("subcategories not belong to  category")
-            );
-          }
-        })
-    ),
+  // //check if subcategories ids in db include subcategories in req.body (true)
+  //              // const checker = (target, arr) => target.every((v) => arr.includes(v));
+  //         if (!val.every((v) => subCategoryIdsInDB.includes(v))) {
+  //           return Promise.reject(
+  //             new Error("subcategories not belong to  category")
+  //           );
+  //         }
+  //       })
+  //   ),
 
   check("brand").optional().isMongoId().withMessage("invalid id formate")
   .custom(async(val,{req}) =>

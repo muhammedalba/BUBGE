@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 
 const cartModel = require("../models/cartModel");
-const couponModel = require("../models/couponModel");
+// const couponModel = require("../models/couponModel");
 const productModel = require("../models/productModule");
 const ApiError = require("../utils/apiError");
 
@@ -172,31 +172,31 @@ exports.clearCart = asyncHandler(async (req, res, next) => {
 
 // Applay coupon on logged cart
 // put http://localhost:4000/api/cart/applayCoupon
-exports.applayCoupon = asyncHandler(async (req, res, next) => {
-  // 1- get coupon  based on coupon name
-  const coupon = await couponModel.findOne({
-    name: req.body.coupon,
-    expires: { $gt: Date.now()},
-  });
+// exports.applayCoupon = asyncHandler(async (req, res, next) => {
+//   // 1- get coupon  based on coupon name
+//   const coupon = await couponModel.findOne({
+//     name: req.body.coupon,
+//     expires: { $gt: Date.now()},
+//   });
 
-  if (!coupon) {
-    return next(
-      new ApiError(`  coupon is invalid or expired${req.body.coupon} `, 404)
-    );
-  }
-  //   2- get logged user  cart to get total cart price
-  const cart = await cartModel.findOne({ user: req.user._id });
-  const totalPrice = cart.totalCartPrice;
+//   if (!coupon) {
+//     return next(
+//       new ApiError(`  coupon is invalid or expired${req.body.coupon} `, 404)
+//     );
+//   }
+//   //   2- get logged user  cart to get total cart price
+//   const cart = await cartModel.findOne({ user: req.user._id });
+//   const totalPrice = cart.totalCartPrice;
 
-  // 3- Calculate price after priceAfterDiscount
-  const priceAfterDiscount =( totalPrice - (totalPrice * coupon.discount) / 100).toFixed(2);
-  cart.totalPriceAfterDiscount=priceAfterDiscount;
+//   // 3- Calculate price after priceAfterDiscount
+//   const priceAfterDiscount =( totalPrice - (totalPrice * coupon.discount) / 100).toFixed(2);
+//   cart.totalPriceAfterDiscount=priceAfterDiscount;
 
 
-  await cart.save();
-  res.status(201).json({
-    resnumOfCartItems: cart.cartItems.length,
-    data: cart,
-    msg: "  success",
-  });
-});
+//   await cart.save();
+//   res.status(201).json({
+//     resnumOfCartItems: cart.cartItems.length,
+//     data: cart,
+//     msg: "  success",
+//   });
+// });

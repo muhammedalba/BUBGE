@@ -8,14 +8,14 @@ const {
   removeCartItem,
   clearCart,
   // updateCartItemQuantity,
-  applayCoupon,
+  // applayCoupon,
 } = require("../Controllers/cartControler");
 
 const router = express.Router();
 router.use(protect, allowedTo(role.USER, role.ADMIN));
 router.route("/").post(addProductToCart).get(getCart).delete(clearCart);
-router
-  .route("/applayCoupon").put(applayCoupon)
+// router
+  // .route("/applayCoupon").put(applayCoupon)
 router.route("/:itemid")
 // .put(updateCartItemQuantity)
 .delete(removeCartItem);

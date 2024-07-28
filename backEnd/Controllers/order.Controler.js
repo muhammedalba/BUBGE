@@ -16,7 +16,7 @@ exports.createcashOrder = asyncHandler(async (req, res, next) => {
   // app settings
   const shippingPrice = 0;
   const taxtPrice = 0;
-  console.log(req.user);
+  
   // 1- get cart depend on cardid 
   const cart = await cartModel.findById(req.params.cartId);
   if (!cart) {

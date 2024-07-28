@@ -132,10 +132,5 @@ productSchema.pre(/^find/, function(next){
 //   setImageURL(doc);
 // });
 // 2- Create a link between reviews with the product
-productSchema.virtual("reviews",{
-  ref: "Review",
-  localField: "_id",
-  foreignField: "Product",
-  justOne: false,
-})
+
 module.exports = mongoose.model("Product", productSchema);
