@@ -29,7 +29,7 @@ const TransfersSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-},{timestamps: true ,});
+},{timestamps: true });
 // // mongoose  query middeware
 TransfersSchema.pre(/^find/, function (next) {
   this.populate({

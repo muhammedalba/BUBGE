@@ -21,7 +21,7 @@ const createFilteropject = (req, res, next) => {
         req.filteropject = filteropject;
         
     } else{
-      filteropject = { user:req.user._id};
+      filteropject = { user:req.user.id};
   
       req.filteropject = filteropject;
      
