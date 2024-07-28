@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 //
 import "react-toastify/dist/ReactToastify.css";
+import { Fade } from "react-awesome-reveal";
 
 const FormInputs = ({ formdata, InputData, name, title, method, path }) => {
   const [Autapi, { data: user, error: eror, isLoading, isSuccess }] =
@@ -209,6 +210,8 @@ console.log(eror);
       />
 
       <form onSubmit={handleSubmit} className="m-auto p-3">
+      <Fade duration={500} direction='up' triggerOnce={true} cascade>
+
         <div className="w-100 py-2">
           <img
             className="logo m-auto d-none d-sm-block"
@@ -275,6 +278,8 @@ console.log(eror);
           {isLoading && <span className="spinner-border"></span>}
           {!isLoading && <span className="">ارسال</span>}
         </button>
+
+          </Fade>
       </form>
     </div>
   );

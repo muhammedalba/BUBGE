@@ -18,6 +18,7 @@ import { ToastContainer } from "react-toastify";
 
 import logo from '../../../imges/logo.png'
 import { errorNotify, infoNotify, successNotify, warnNotify } from "../../../utils/Toast";
+import { Fade } from "react-awesome-reveal";
 
 
 
@@ -306,6 +307,9 @@ const CreatProduct = () => {
         />
 
         <form onSubmit={handleSubmit} className="m-auto p-3">
+          <Fade delay={0} direction='up' triggerOnce={true}  >
+
+         
           <div className="w-100 py-2">
             <img
               className="logo rounded m-auto d-none d-sm-block"
@@ -603,7 +607,8 @@ const CreatProduct = () => {
             ) : (
               <span className="">اضف </span>
             )}
-          </button>
+          </button> 
+          </Fade>
         </form>
 
 

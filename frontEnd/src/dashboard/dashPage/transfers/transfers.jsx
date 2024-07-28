@@ -19,6 +19,7 @@ import {
   infoNotify,
   successNotify,
 } from "../../../utils/Toast";
+import { Fade } from "react-awesome-reveal";
 
 const Transfers = () => {
   // Get the lookup value from the store
@@ -139,27 +140,39 @@ const Transfers = () => {
   const showData =
     isSuccess && (!isLoading && filteredUsers.length > 0) ? (
       filteredUsers.map((transfer, index) => {
-        console.log(transfer.confirmed, "transfer");
+   
         return (
           <tr className="text-center" key={index}>
             <td className="" scope="row">
+              <Fade delay={0} direction='up' triggerOnce={true}  >
               {index + 1}
+              </Fade>
             </td>
             <td className="d-none d-md-table-cell">
+              <Fade delay={0} direction='up' triggerOnce={true}>
               <span className="">{transfer.user.firstname}</span>
+              </Fade>
             </td>
             <td className="text-center">
+            <Fade delay={0} direction='up' triggerOnce={true}>
+
               <span>
                 {transfer.confirmed
                   ? transfer.Quantitytransferred
                   : transfer.amount}
               </span>
+              </Fade>
             </td>
             <td className="text-center">
+            <Fade delay={0} direction='up' triggerOnce={true}>
+
               <span>{transfer.user.email.slice(0, -9)}</span>
+              </Fade>
             </td>
 
             <td className="d-none d-md-table-cell">
+            <Fade delay={0} direction='up' triggerOnce={true}>
+
               {transfer.image ? (
                 <img
                   style={{ width: "50px", height: "50px", borderRadius: "50%" }}
@@ -168,9 +181,11 @@ const Transfers = () => {
                 />
               ) : (
                 "لا يوجد صورة"
-              )}
+              )}</Fade>
             </td>
             <td className={transfer.confirmed ? "d-none d-md-table-cell" : ""}>
+            <Fade delay={0} direction='up' triggerOnce={true}>
+
               <button
                 type="submit"
                 className={
@@ -187,9 +202,11 @@ const Transfers = () => {
                 ) : (
                   "   تاكيد"
                 )}
-              </button>
+              </button></Fade>
             </td>
             <td>
+            <Fade delay={0} direction='up' triggerOnce={true}>
+
               <Link to={transfer._id} className="btn btn-success">
 
               {LoadingDelet ? (
@@ -200,8 +217,11 @@ const Transfers = () => {
               
                 
               </Link>
+              </Fade>
             </td>
             <td>
+            <Fade delay={0} direction='up' triggerOnce={true}>
+
               <button
                 disabled={LoadingDelet ? true : false}
                 onClick={() => handelDelet(transfer._id)}
@@ -213,20 +233,24 @@ const Transfers = () => {
                   "حذف"
                 )}
               </button>
+              </Fade>
             </td>
           </tr>
         );
       })
     ) : (
       <tr>
+          
+
         <td
           className="text-center p-3 fs-5 text-primary"
           colSpan={8}
           scope="row"
-        >
+        ><Fade delay={0} direction='up' triggerOnce={true}>
        {   search.length !== 0? " العنصر المراد البحث عنه غير موجود في هذه الصفحه":
-        "لا توجد أي عناصر"}
+        "لا توجد أي عناصر"}</Fade>
         </td>
+        
       </tr>
     );
 

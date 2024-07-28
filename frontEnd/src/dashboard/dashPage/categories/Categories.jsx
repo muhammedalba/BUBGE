@@ -8,7 +8,7 @@ import { ToastContainer, Zoom, toast } from "react-toastify";
 
 import { TiArrowSortedDown } from "react-icons/ti";
 import { TiArrowSortedUp } from "react-icons/ti";
-
+import { Fade } from "react-awesome-reveal";
 import Navigation from "../../../components/navigation/Navigation";
 import { useSelector } from "react-redux";
 import QuantityResults from "../../../components/QuantityResults/QuantityResults";
@@ -134,23 +134,36 @@ const Categories = () => {
       return (
         <tr key={index}>
           <td className="" scope="row">
+          <Fade delay={0} direction='right' triggerOnce={true}   >
             {index + 1}
+            </Fade>
           </td>
-          <td  ><span className="">{category.name}</span></td>
+          <td  >
+          <Fade delay={0} direction='up' triggerOnce={true}   >
+            <span className="">{category.name}</span>
+            </Fade>
+            </td>
 
           <td className="d-none d-md-table-cell">
+          <Fade delay={0} direction='up' triggerOnce={true}   >
+
             { category.image?<img
               style={{ width: "50px", height: "50px", borderRadius: "50%" }}
               src={`${categories.imageUrl}/${category.image}`}
               alt="avatar"
             />:'لا يوجد صورة'}
-          </td>
+         </Fade> </td>
           <td>
+          <Fade delay={0} direction='up' triggerOnce={true}   >
+
             <Link to={category._id} className="btn btn-success">
               تعديل
             </Link>
+            </Fade>
           </td>
           <td>
+          <Fade delay={0} direction='left' triggerOnce={true}   >
+
             <button
               disabled={LoadingDelet ? true : false}
                 onClick={() => handelDelet(category._id)}
@@ -158,6 +171,7 @@ const Categories = () => {
             >
               {LoadingDelet ? <span className="spinner-border"></span> : "حذف"}
             </button>
+            </Fade>
           </td>
         </tr>
       );

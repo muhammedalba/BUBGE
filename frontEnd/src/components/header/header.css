@@ -9,7 +9,7 @@ header {
   -ms-transition: 1.5s;
   transition: 1.5s;
   background-color: var(--bgColor);
-  box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+  box-shadow: var(--spancolor) 0px 10px 10px -10px;
   .logo {
     width: 50px;
     height: 50px;
@@ -31,16 +31,14 @@ header {
     border-radius: 20px;
   }
 }
-
+nav ul li:hover svg,
 nav ul li:hover a {
-  color: var(--bg-color) !important;
-  -o-transition: 0.5;
-  -webkit-transition: 0.5;
-  -moz-transition: 0.5;
-  -ms-transition: 0.5;
-  transition: 0.5;
+  transition: 0.5 !important;
+  color: var(--spancolor) !important;
+
 }
 nav a {
+  transition: 0.5 !important;
   color: var(--text-color) !important;
   text-decoration: none;
 }
@@ -51,19 +49,19 @@ nav a {
   font-size: 20px;
   font-weight: 500;
 }
-.serch input:focus {
-}
+
  .serch {
   color: var(--text-color);
   height: 35px;
   label {
     width: 35px;
     height: 35px;
-    background-color: var(--text-color);
+    background-color: var(--bg-color);
     color: var(--minColor);
     display: flex;
     align-items: center;
   }
+ 
   div {
     border: 1px solid rgba(17, 17, 26, 0.267);
     -o-border-radius: 20px;
@@ -74,6 +72,20 @@ nav a {
     overflow: hidden;
   }
 }
+
+/* dropdown-menu */
+.dropdown-menu ,
+.dropdown-menu  .dropdown-item{
+    background-color: var(--bgColor)!important;
+    color: var(--text-color);
+  }
+  .dropdown-menu  .dropdown-item:hover svg{
+    color: var(--bg-color) !important;
+  }
+  .dropdown-menu  .dropdown-item:hover{
+    background-color: var(--text-color) !important;
+    color: var(--bg-color) !important;
+  }
 @media screen and (max-width: 760px) {
   /* header .serch{
         width: 80%;
@@ -81,7 +93,7 @@ nav a {
     } */
 }
  .serch svg {
-  color: white;
+  color: var(--text-color);
   font-size: 30px;
   cursor: pointer;
   z-index: 100;

@@ -16,6 +16,7 @@ import Navigation from "../../../components/navigation/Navigation";
 import { useSelector } from "react-redux";
 import QuantityResults from "../../../components/QuantityResults/QuantityResults";
 import { errorNotify, infoNotify, successNotify } from "../../../utils/Toast";
+import { Fade } from "react-awesome-reveal";
 
 const Products = () => {
   // Get the lookup value from the store
@@ -154,32 +155,56 @@ console.log(filteredProducts);
     }
     if (isSuccess && filteredProducts.length > 0) {
       return filteredProducts.map((product, index) => (
-        <tr key={index}>
+        <tr  key={index}>
           <td className="" scope="row">
+          <Fade delay={0} direction='up' triggerOnce={true}    >
+
             {index + 1}
+            </Fade>
           </td>
-          <td>{product.title?.slice(0, 20)}..</td>
+          <td>
+          <Fade delay={0} direction='up' triggerOnce={true}     >
+
+            {product.title?.slice(0, 20) }
+            </Fade>
+            </td>
           <td
             style={{ maxWidth: "140px", overflow: "hidden" }}
             className="d-none d-sm-table-cell"
           >
+            <Fade delay={0} direction='up' triggerOnce={true}    >
+
             {product?.category ? product.category?.name : "غير محدد"}
+            </Fade>
           </td>
           <td
             style={{ maxWidth: "140px", overflow: "hidden" }}
             className="d-none d-sm-table-cell"
           >
+          <Fade delay={0} direction='up' triggerOnce={true}    >
+
             {product?.brand ? product.brand?.name : "غير محدد"}
+            </Fade>
           </td>
-          <td className="d-none d-md-table-cell">{product.price}$</td>
           <td className="d-none d-md-table-cell">
+          <Fade delay={0} direction='up' triggerOnce={true}    >
+
+            {' $ '+ product.price }
+            </Fade>
+            </td>
+          <td className="d-none d-md-table-cell">
+          <Fade delay={0} direction='up' triggerOnce={true}    >
+
             <img
               style={{ width: "100px", height: "80px" }}
               src={`${products.imageUrl}/${product.imageCover}`}
               alt="avatar"
             />
+            </Fade>
           </td>
           <td>
+          <Fade delay={0} direction='up' triggerOnce={true}    >
+
             <Link to={!LoadingDelet && product._id} className="btn btn-success">
               {LoadingDelet ? (
                 <span className="spinner-border"></span>
@@ -187,8 +212,11 @@ console.log(filteredProducts);
                 "تعديل"
               )}
             </Link>
+            </Fade>
           </td>
           <td>
+          <Fade delay={0} direction='up' triggerOnce={true}    >
+
             <button
               disabled={LoadingDelet}
               onClick={() => handelDelet(product._id)}
@@ -196,6 +224,7 @@ console.log(filteredProducts);
             >
               {LoadingDelet ? <span className="spinner-border"></span> : "حذف"}
             </button>
+            </Fade>
           </td>
         </tr>
       ));

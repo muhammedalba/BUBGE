@@ -8,6 +8,8 @@ import { FaProductHunt } from "react-icons/fa6";
 import { MdOutlineMapsHomeWork } from "react-icons/md";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { TbTransfer } from "react-icons/tb";
+import { Fade } from 'react-awesome-reveal';
+import { MdOutlineBorderColor } from "react-icons/md";
 
 
 
@@ -69,7 +71,7 @@ const handelchang=() => {
           {
             title: "الطلبات ",
             path: "orders",
-            icon:<TbTransfer/> ,
+            icon:<MdOutlineBorderColor/> ,
           }, 
       ];
     
@@ -83,8 +85,10 @@ const handelchang=() => {
       
       const nav_link_show = nav_Links.map((link, index) => {
         return (
-          
-          <li key={index} 
+          <Fade  key={index} delay={0} direction='right' triggerOnce={true}  >
+
+         
+          <li
           className= "nav-item d-flex align-items-center ">
             <NavLink
             style={{height:'40px'}}
@@ -96,7 +100,7 @@ const handelchang=() => {
                 {link.title}
                 </span>
               </NavLink>  
-          </li>
+          </li> </Fade>
         );
       });
 

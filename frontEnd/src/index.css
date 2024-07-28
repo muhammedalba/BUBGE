@@ -1,22 +1,27 @@
 *{
   margin: 0;
   padding: 0;
-  
+
   /* transition: .3s; */
   
   box-sizing: border-box;
 }
 
-/* :root {
-  --minColor: #f8f8f8;
-  --bgColor: #F7F7FF;
-  --text-color: #495867
-} */
 :root {
-  --minColor: #FCF8F3;
+  --minColor: #021526;
+  --bgColor: #021526;
+  --text-color: #eeee;
+/* }  */
+/* :root { */
+  /* --minColor: #FCF8F3;
   --bgColor: #EEEDEB;
-  --text-color: #2F3645;
-  --spancolor: #C80036;
+  --text-color: #2F3645;*/
+  --spancolor: #C80036; 
+
+  /* --minColor: #f8f8f8;
+  --bgColor: #F7F7FF;
+  --text-color: #495867 */
+
   /* stars */
   --primary-colour: #EEEDEB;
   --secondary-colour: hsl(233 80% 70%);
@@ -24,10 +29,26 @@
 }
 
 body {
+  overflow-x: hidden;
   background-color: var(--minColor) !important;
-  color: var(--text-color);
+  color: var(--text-color) !important;
  a{ text-decoration: none !important;
  }
+input{
+  background-color: var(--text-color) !important;
+}
+
+ .table   th {
+  background-color: var(--bgColor);
+  color: var(--text-color) !important;
+ }
+ .table  td {
+  background-color: #5f6f6541;
+  color: var(--text-color) !important;
+ 
+  border-color: var(--spancolor)
+ }
+
 }
 .skeleton-loading{
   opacity: .7;

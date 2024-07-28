@@ -2,7 +2,7 @@
 
 
 import  { useEffect, useState } from 'react';
-
+import {Fade} from 'react-awesome-reveal'
 
 import {  useNavigate, useParams } from 'react-router-dom';
 import { useUpdateOneMutation, useGetOneQuery } from '../../../redux/features/api/apiSlice';
@@ -129,6 +129,8 @@ const handleChange=(e)=>{
       <form 
       onSubmit={handleSubmit} 
       className="m-auto p-3">
+      <Fade delay={0} direction='up' triggerOnce={true}   >
+
         <div className="w-100 py-2">
           <img
             className="logo rounded  m-auto d-none d-sm-block"
@@ -198,6 +200,7 @@ const handleChange=(e)=>{
            <span className="">تعديل</span>}
         
         </button>
+        </Fade>
       </form>
 
  

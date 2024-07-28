@@ -4,6 +4,7 @@ import { Zoom, toast, ToastContainer } from "react-toastify";
 import { FaImage } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import logo from '../../../imges/logo.png'
+import { Fade } from "react-awesome-reveal";
 const CreateUser = () => {
   const [createOne, { error, isLoading, isSuccess }] = useCreateOneMutation();
   const notify = (ERRoR) =>
@@ -115,11 +116,15 @@ const CreateUser = () => {
         theme="colored"
       />
       <form onSubmit={handleSubmit} className="m-auto p-3">
+      <Fade delay={0} direction='up' triggerOnce={true}>
+
       <div className="w-100 py-2">
             <img
               className="logo rounded m-auto d-none d-sm-block"
               src={
-                 preview?preview:logo
+                 preview.length>0  ?
+                  preview : 
+                  logo
               }
               alt="logo"
             />
@@ -291,6 +296,7 @@ const CreateUser = () => {
           {isLoading && <span className="spinner-border"></span>}
           {!isLoading && <span className=""></span>}
         </button>
+        </Fade>
       </form>
     </div>
   );

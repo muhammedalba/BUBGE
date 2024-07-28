@@ -11,14 +11,16 @@ import { IoChevronUpOutline } from "react-icons/io5";
 import { IoMdHome } from "react-icons/io";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { BsCart2 } from "react-icons/bs";
-import { CiHeart } from "react-icons/ci";
 import { CiLogin } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
+import { BsFillTelephoneFill } from "react-icons/bs";
+
 
 import "./header.css";
 import { useDispatch } from "react-redux";
 import { searchItem } from "../../redux/features/Slice/SerchSlice";
+import { Fade } from "react-awesome-reveal";
 
 const Header = () => {
   const cookies = new Cookies();
@@ -30,7 +32,7 @@ const Header = () => {
   const [trans, settrans] = useState(false);
 
 
-console.log(role,'cart');
+
 
 const handleScroll = useCallback(() => {
   const scrollY = window.scrollY;
@@ -103,9 +105,9 @@ const handleScroll = useCallback(() => {
   const AuthLinksShow = AuthLinks.map((link, index) => {
     return (
       <li key={index}>
-        <Link
+        <Link 
           to={`${link.path}`}
-          className="dropdown-item d-flex align-items-center gap-2"
+          className="dropdown-item d-flex align-items-center gap-2 "
           onClick={link.path === "/" && Logout}
         >
           {link.icon}
@@ -117,11 +119,7 @@ const handleScroll = useCallback(() => {
 
   // Nav links
   const nav_Links = [
-    {
-      title: "المفضلة",
-      path: "/WishList",
-      icon: <CiHeart fontSize={"1.7rem"} color="var(--text-color)" />,
-    },
+
     {
       title: "سلة مشترياتي",
       path: "/cart",
@@ -153,7 +151,7 @@ const handleScroll = useCallback(() => {
         className={
          (link.path === "/dashboard"  && role === "user") ||( role=== undefined && link.path === "/dashboard")
             ? "d-none"
-            : "nav-item d-flex align-items-center "
+            : "nav-item d-flex align-items-center  "
         }
       >
         <NavLink
@@ -187,18 +185,28 @@ const handleScroll = useCallback(() => {
           <div className=" d-flex w-100 px-2 py-2  justify-content-between container-fluid">
             {/* logo start */}
             <div className="logo  d-flex   align-items-center">
+              <Fade delay={0} direction='down' triggerOnce={true} cascade>
+
+             
               <img style={{width:'50px ',height:'50px'}} className="logo  rounded-circle  d-sm-block  " src={logo} alt="logo" />
-              <p
+              <div
                 style={{ color: "var(--text-color)"   , whiteSpace: 'nowrap' }}
-                className="  mb-0 d-none d-sm-block px-1"
+                className="  mb-0 d-none d-sm-block px-1 "
               >
+                  <Fade  triggerOnce={true} cascade>
+                
                      متجرك بين يديك
-              </p>
+                  </Fade>
+              </div>
+               </Fade>
             </div>
             {/* logo end */}
             <div className=" d-lg-block">
-              <ul className="my-0 h-100 d-flex  align-items-center ">
-                {nav_link_show}
+              <ul className="my-0 h-100 d-flex  align-items-center gap-2">
+                <Fade delay={0} direction='down' triggerOnce={true} cascade>
+                  {nav_link_show}
+
+                </Fade>
                 
                 <Link to={ role ? 'ProfileAccount' : 'login'}>
                   <img
@@ -216,13 +224,17 @@ const handleScroll = useCallback(() => {
           </div>
         </nav>
 
-        {/* seareh input start */}
+        {/* seareh input && dropdown start */}
         <div className="serch px-3 justify-content-between  position-relative my-3 w-100 d-flex gap-2 align-items-center">
-          <span className="d-none d-sm-block">+905346833726</span>
-          <div className="h-100  d-flex align-items-center ">
+        <Fade delay={0} direction='left' triggerOnce={true} cascade>
+          <span style={{color:'var( --spancolor)'}} className="d-none d-sm-flex align-items-center gap-1">
+            <BsFillTelephoneFill color="red"  className="fs-5"/>
+            <Fade  direction='up' triggerOnce={true} cascade>
+             : +905346833726 </Fade>
+          </span>
+          </Fade>
+          <div style={{border:'1px solid var(--text-color)'}} className="h-100  d-flex align-items-center ">
             <input
-              // style={{ backgroundColor:"transparent" }}
-              // style={{ backgroundColor: scroll ? "#171d22" : "transparent" }}
               type="search"
               className="h-100 px-2 w-100 text-end"
               placeholder="...بحث"
@@ -236,12 +248,15 @@ const handleScroll = useCallback(() => {
           {/* {error && <p className="position-absolute w-100"> not fonde </p>} */}
 
           {/* dropdown */}
+          
           <span
             className=" d-none d-sm-block dropdown-toggle "
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
+            <Fade delay={0} direction='right' triggerOnce={true} cascade>
             تسجيل دخول \انشاء حساب
+          </Fade>
           </span>
           <FaUser
             className="d-block d-sm-none dropdown-toggle "
@@ -250,9 +265,10 @@ const handleScroll = useCallback(() => {
             color="var(--spanColo)"
             fontSize={"1.5rem"}
           />
+          
           <ul
-            style={{ background: "var(--bgColor)" }}
-            className="dropdown-menu dropdown-menu"
+           
+            className=" dropdown-menu"
           >
             {AuthLinksShow}
           </ul>

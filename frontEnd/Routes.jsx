@@ -44,26 +44,10 @@ import TransFer from "./src/pages/userTransfer/TransFer";
 import UserOrders from "./src/pages/userOrder/userOrders";
 import UserOrder from "./src/pages/userOrder/UserOrder";
 import Orders from "./src/dashboard/dashPage/orders/Orders";
+import MinPage from "./src/dashboard/dashPage/MinPage";
 
 
-// export const routes = createBrowserRouter(
-//     createRoutesFromElements([
-//       <Route key={1} path="/" element={<HomePage />} >
-//           <Route key={2} path="/signup" element={<SignUp />} />,
-//           <Route key={3} path="/login" element={<Login />} />,
-//           <Route key={3} path="/forgotPassword" element={<ForgotPassword />} />,
-//           <Route key={3} path="/resetPassword" element={<ResetPassword />} />,
 
-//       </Route>,
-
-//       <Route key={4} path="/dashboard" element={<Dashboard />}>
-//           <Route key={3} path="createuser" element={<CreateUser />} />,
-//           <Route key={3} path="users" element={<Users />} />,
-
-//       </Route>
-
-//     ])
-//   );
 
 export const routes = createBrowserRouter([
   {
@@ -97,6 +81,7 @@ export const routes = createBrowserRouter([
       </ProtectedRoute>
     ),
     children: [
+      { path: "", element: <MinPage /> },
       { path: "users", element: <Users /> },
       { path: "users/createUser", element: <CreateUser /> },
       { path: "users/:userId", element: <User /> },
@@ -119,6 +104,7 @@ export const routes = createBrowserRouter([
       
       { path: "transfers/:transfersId", element: <Transfer /> },
       { path: "orders", element: <Orders /> },
+      { path: "orders/:orderId", element: <UserOrder /> },
     ],
   },
 ]);

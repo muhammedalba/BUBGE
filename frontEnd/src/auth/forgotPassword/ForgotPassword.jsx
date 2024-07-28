@@ -7,6 +7,8 @@ import { useAutapiMutation } from "../../redux/features/api/users/AuthSlice";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 //
 import "react-toastify/dist/ReactToastify.css";
+import { FaD } from "react-icons/fa6";
+import { Fade } from "react-awesome-reveal";
 
 const ForgotPassword = () => {
   const [Autapi, { data: dat, error: eror, isLoading, isSuccess }] =
@@ -95,6 +97,8 @@ const ForgotPassword = () => {
       />
       {/*  */}
       <form onSubmit={handleSubmit} className="m-auto p-3 mt-5">
+      <Fade delay={0} direction='down' triggerOnce={true} cascade>
+
         <div className="w-100 py-2">
           <img
             className="logo m-auto d-none d-sm-block"
@@ -142,6 +146,7 @@ const ForgotPassword = () => {
           {isLoading && <span className="spinner-border"></span>}
           {!isLoading && <span className="">ارسال</span>}
         </button>
+        </Fade>
       </form>
     </div>
   );

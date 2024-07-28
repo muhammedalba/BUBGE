@@ -5,6 +5,7 @@
     import { useNavigate } from "react-router-dom";
     import { errorNotify, successNotify } from "../../../utils/Toast";
     import logo from '../../../imges/logo.png'
+import { Fade } from "react-awesome-reveal";
 
 
 
@@ -92,7 +93,7 @@ const Createcategory = () => {
 
       
       return (
-        <div className="container pt-5">
+        <div className="container mt-5 pt-5">
           <ToastContainer
             position="top-right"
             autoClose={2000}
@@ -107,6 +108,7 @@ const Createcategory = () => {
 
 
           <form onSubmit={handleSubmit} className="m-auto p-3">
+          <Fade delay={0} direction='up' triggerOnce={true}   >
 
             <div className="w-100 py-2">
               <img className="logo m-auto d-none d-sm-block rounded-circle" src={Preview ?Preview: logo} alt="avatar" />
@@ -174,7 +176,7 @@ const Createcategory = () => {
               {isLoading && <span className="spinner-border"></span>}
               {!isLoading && <span className=""></span>}
             </button>
-          </form>
+       </Fade>   </form>
         </div>
       );
     };

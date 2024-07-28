@@ -1,6 +1,6 @@
 
     import { useCallback, useEffect, useState } from "react";
-
+    import {Fade} from'react-awesome-reveal';
     import { Link } from "react-router-dom";
     
     import { ToastContainer } from "react-toastify";
@@ -127,21 +127,34 @@
             return (
               <tr className="text-center" key={index}>
                 <td className="d-none d-md-table-cell" scope="row">
+                <Fade delay={0} direction='up' triggerOnce={true}   >
+
                   {index + 1}
+                </Fade>
+
                 </td>
     
-                <td className="text-center">
-                  <span>{transfer.cartItems.length}</span>
+                <td className="text-center d-none d-sm-table-cell">
+                <Fade delay={0} direction='up' triggerOnce={true}    >
+
+                  <span>{transfer.user.email.slice(0,-9)}</span>
+                </Fade>
+
                 </td>
-                <td className="">
+                <td className="d-none d-md-table-cell ">
+                <Fade delay={0} direction='up' triggerOnce={true}    >
+
                   <span className="">{convertDateTime(transfer.createdAt)}</span>
+                  </Fade>
                 </td>
     
                 <td className={"d-none d-md-table-cell"}>
-                  <span
+                <Fade delay={0} direction='up' triggerOnce={true}    >
+
+                  <span style={{fontWeight:'500'}}
                     className={
                       transfer.isDelivered
-                        ? "text-success  fs-5"
+                        ? "text-info  fs-5"
                         : "text-danger fs-5"
                     }
                   >
@@ -153,22 +166,35 @@
                       "   لم يتم الارسال"
                     )}
                   </span>
+                  </Fade>
                 </td>
                 <td className="text-center">
+                <Fade delay={0} direction='up' triggerOnce={true}    >
+
                   <span>{transfer.cartItems[index].Playerid}</span>
+                  </Fade>
                 </td>
-                <td className="text-center">
+                <td className="text-center d-none d-sm-table-cell">
+                <Fade delay={0} direction='up' triggerOnce={true}    >
+
                   <span>{transfer.totalOrderPrice}</span>
+                  </Fade>
                 </td>
                 <td style={{ width: "50px" }}>
+                <Fade delay={0} direction='up' triggerOnce={true}    >
+
                 <button disabled={transfer.isDelivered} onClick={()=>handelDelivered(transfer._id)} className=" btn btn-primary   ">
                    ارسال
                 </button>
+                </Fade>
               </td>
                 <td>
-                  <Link to={`/orders/${transfer._id}`} className="btn btn-success">
+                <Fade delay={0} direction='up' triggerOnce={true}    >
+
+                  <Link to={`${transfer._id}`} className="btn btn-success">
                     عرض
                   </Link>
+                  </Fade>
                 </td>
               </tr>
             );
@@ -264,8 +290,8 @@
                   {sorted ? <TiArrowSortedUp /> : <TiArrowSortedDown />}ترتيب
                 </th>
     
-                <th scope="col"> عدد المنتجات </th>
-                <th className="" scope="col">
+                <th className="d-none d-sm-table-cell" scope="col">  ايميل المشتري </th>
+                <th className="d-none d-md-table-cell" scope="col">
                   {" "}
                   تاريخ الطلب{" "}
                 </th>
@@ -274,8 +300,8 @@
                   {confirmed ? " الطلبات الحاليه" : "الطلبات المؤكده"}
                 </th>
                 <th scope="col">ايد الاعب(id) </th>
-                <th scope="col">السعر الاجمالي </th>
-                <th scope="col">الحالة</th>
+                <th className="d-none d-sm-table-cell" scope="col">السعر الاجمالي </th>
+                <th className="" scope="col">الحالة</th>
                 <th scope="col">عرض</th>
               </tr>
             </thead>

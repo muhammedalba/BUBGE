@@ -11,6 +11,7 @@ import { AiOutlineDashboard } from "react-icons/ai";
 import { CiSearch } from "react-icons/ci";
 import { useDispatch } from "react-redux";
 import { searchItem } from "../../../redux/features/Slice/SerchSlice";
+import { Fade } from "react-awesome-reveal";
 
 
 
@@ -50,6 +51,8 @@ const TopBar = () => {
         
         <li key={index} 
         className= {role === 'user'&& link.path==='/dashboard'?"d-none" :"nav-item d-flex align-items-center "}>
+          <Fade delay={0} direction='down' triggerOnce={true} cascade  >
+
           <NavLink
               to={link.path}
               className="nav-link p-2 d-flex  align-items-center "
@@ -59,6 +62,7 @@ const TopBar = () => {
               </span>
                {link.icon}
             </NavLink>  
+          </Fade>
         </li>
       );
     });
@@ -75,6 +79,7 @@ const TopBar = () => {
         >
           <div className=" d-flex w-100 px-2 py-2  justify-content-between container-fluid">
             {/* logo start */}
+            <Fade delay={0} direction='up' triggerOnce={true}  >
             <div className="logo  d-flex   align-items-center">
               <img className="logo    d-sm-block  " src={logo} alt="logo" />
               <p
@@ -87,6 +92,7 @@ const TopBar = () => {
                 مجرة السماء للتجارة
               </p>
             </div>
+            </Fade>
             {/* logo end */}
             <div className=" d-lg-block">
               <ul className="my-0 h-100 d-flex  align-items-center ">
@@ -104,20 +110,21 @@ const TopBar = () => {
         </nav>
         
         <div  dir="rtl" className="serch px-3 position-relative my-3 w-100 align-items-center">
-        <div className="h-100 m-auto w-50 d-flex align-items-center">
-        <label>
-            <CiSearch />
-          </label>
-          <input
-            type="search"
-            className="h-100 px-2 w-100"
-            placeholder="...بحث"
-            onChange={(e) => dispatch(searchItem(e.target.value.toLowerCase()))}
-          />
- 
+          <Fade delay={0} direction='down' triggerOnce={true} cascade >
+            <div className="h-100 m-auto w-50 d-flex align-items-center">
+            <label>
+                <CiSearch />
+              </label>
+              <input
+                type="search"
+                className="h-100 px-2 w-100"
+                placeholder="...بحث"
+                onChange={(e) => dispatch(searchItem(e.target.value.toLowerCase()))}
+              />
+    
+            </div>
+          </Fade>
         </div>
-
-      </div>
 
       </header>
     );

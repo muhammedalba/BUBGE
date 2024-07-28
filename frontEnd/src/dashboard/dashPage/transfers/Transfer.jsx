@@ -237,7 +237,7 @@
                       defaultValue={transfers?.data.user.email.slice(0,-4)}
                     />
                   </div>
-                  <div className="col-sm-6">
+            { transfers?.data?.createdAt &&      <div className="col-sm-6">
                     <label
                       className="p-1 fs-5 d-flex align-items-center gap-2"
                       htmlFor="createdAt"
@@ -254,7 +254,7 @@
                       type="date"
                       value={ isSuccess && transfers?.data?.createdAt && convertDateTime(transfers?.data?.createdAt)}
                     />
-                  </div>
+                  </div>}
                 </div>
               </div>    
               {/* error msg */}
@@ -266,7 +266,7 @@
     
               <div className="d-flex align-items-center justify-content-between w-100">
                 <button
-                    disabled={isLoading || loading ? true : false}
+                    disabled={isLoading || loading ||transfers?.data.confirmed ? true : false}
                     className="btn btn-primary my-4 d-flex align-items-center w-25 "
                     type="submit"
                 >

@@ -27,7 +27,7 @@ const UserTransfer = () => {
   const search = useSelector((state) => state.serch);
 //   get user id from params
     const {userid}=useParams();
-    console.log(search,'search');
+
   const [Pagination, setPagination] = useState(1);
   // get transfers from the database
   const [limit, setlimit] = useState(10);
@@ -40,10 +40,10 @@ const UserTransfer = () => {
     isLoading,
     isSuccess,
   } = useGetDataQuery(
-    `users/${userid}/transfers?limit=${limit}&page=${Pagination}&confirmed=${confirmed}`
+    `users/${userid}/transfers`
   );
-  console.log(search);
-  console.log(Transfers);
+  
+  console.log(Transfers?.data);
 
 
   // states
@@ -125,7 +125,7 @@ const UserTransfer = () => {
               </span>
             </td>
             <td className="d-none d-md-table-cell">
-              <span className="">{convertDateTime(transfer.createdAt)}</span>
+              <span className="">{isSuccess && convertDateTime(transfer?.createdAt)}</span>
             </td>
 
             <td className="d-none d-md-table-cell">

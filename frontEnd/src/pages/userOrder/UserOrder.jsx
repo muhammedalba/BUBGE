@@ -11,6 +11,7 @@
     
     import { errorNotify } from "../../utils/Toast";
     import { useGetDataQuery } from "../../redux/features/api/apiSlice";
+import { Fade } from "react-awesome-reveal";
 
 
     
@@ -86,31 +87,50 @@
       return order.data?.cartItems?.map((product, index) => (
         <tr key={index}>
           <td className="" scope="row">
-            {index + 1}
+          <Fade delay={0} direction='up' triggerOnce={true} cascade>
+
+            {index + 1}</Fade>
           </td>
-          <td>{product.product.title?.slice(0, 20)}..</td>
+          <td>
+          <Fade delay={0} direction='up' triggerOnce={true} >
+
+            {product.product.title?.slice(0, 20)}</Fade></td>
           <td
             style={{ maxWidth: "140px", overflow: "hidden" }}
             className="d-none d-sm-table-cell"
           >
+                        <Fade delay={0} direction='up' triggerOnce={true} >
+
             {product.product?.category ? product.product.category?.name : "غير محدد"}
+            </Fade>
           </td>
           <td
             style={{ maxWidth: "140px", overflow: "hidden" }}
             className="d-none d-sm-table-cell"
           >
-            {product.product?.brand ? product.product.brand?.name : "غير محدد"}
+                        <Fade delay={0} direction='up' triggerOnce={true} >
+
+            {product.product?.brand ? product.product.brand?.name : "غير محدد"}</Fade>
           </td>
-          <td className="d-none d-md-table-cell">{product.price}$</td>
           <td className="d-none d-md-table-cell">
+          <Fade delay={0} direction='up' triggerOnce={true} >
+
+            {'$'+product.price}
+            </Fade>
+            </td>
+          <td className="d-none d-md-table-cell">
+          <Fade delay={0} direction='up' triggerOnce={true} cascade>
+
             <img
               style={{ width: "100px", height: "80px" }}
               src={`${order.imageUrl}/${product.product.imageCover}`}
               alt="avatar"
-            />
+            /></Fade>
           </td>
           <td>
-            <span className={order.data.isDelivered ? "text-success":" text-danger"}>
+          <Fade delay={0} direction='up' triggerOnce={true} >
+
+            <span className={order.data.isDelivered ? "text-success fw-bold":" text-danger fw-bold"}>
             
           { order.data.isDelivered ? (
                   "تم الارسال"
@@ -118,6 +138,7 @@
                   "لم يتم الارسال")}
              
             </span>
+            </Fade>
           </td>
 
         </tr>

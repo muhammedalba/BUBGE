@@ -14,6 +14,7 @@ import { BiTransfer } from "react-icons/bi";
 import { useGetOneQuery, useUpdateOneMutation } from '../../redux/features/api/apiSlice';
 import { errorNotify, infoNotify, successNotify } from '../../utils/Toast';
 import { RiVipLine } from "react-icons/ri";
+import { Fade } from 'react-awesome-reveal';
 
 const User = () => {
   
@@ -139,6 +140,8 @@ const User = () => {
       />
 
       <form onSubmit={handleSubmit} className="m-auto p-3">
+      <Fade delay={0} direction='up' triggerOnce={true} cascade>
+
       <Link to={`${data?.data._id}/transfer`} className=' fs-3 m-1'> <BiTransfer />  الذهاب الى معاملاتي</Link>
       <Link to={`/orders`} className=' fs-3 m-1'> <BiTransfer />  الذهاب الى طلباتي </Link>
 
@@ -272,6 +275,7 @@ const User = () => {
         >
           {isDisabled ? <span className="spinner-border"></span> : 'تعديل'}
         </button>
+        </Fade>
       </form>
  
     </div>

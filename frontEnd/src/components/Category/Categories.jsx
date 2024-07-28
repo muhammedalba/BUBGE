@@ -1,6 +1,6 @@
 
     import { useEffect } from "react";
-    
+    import './categories.css'
     import { Link } from "react-router-dom";
     import { ToastContainer} from "react-toastify";
     import logo from "../../imges/logo.png";
@@ -10,6 +10,8 @@
    
 import {  useGetDataQuery } from "../../redux/features/api/apiSlice";
 import { errorNotify } from "../../utils/Toast";
+import { Fade } from "react-awesome-reveal";
+// import { Fade } from "react-awesome-reveal"; <Fade delay={0} direction='right' triggerOnce={true} cascade>
 
     
     const Categories = () => {
@@ -22,7 +24,7 @@ import { errorNotify } from "../../utils/Toast";
         isLoading,
         isSuccess,
       } = useGetDataQuery(`categories`);
-      console.log(categories?.data);
+
   
     
       // view imagesShow
@@ -79,7 +81,9 @@ import { errorNotify } from "../../utils/Toast";
         !isLoading &&filteredUsers.length > 0 ?
         filteredUsers.map((category, index) => {
           return (
-            <div key={index} className="card  m-auto " style={{height:'200px',width: '18rem'}}>
+          <Fade style={{margin:'auto'}} delay={0}key={index} direction='up' triggerOnce={true} cascade>
+            <div  className="card  m-auto " style={{height:'200px',width: '18rem'}}>
+
                 <Link to={`category/${category._id}`} className="">
                     <img style={{height:'150px'}} 
                     src={category.image?`${categories.imageUrl}/${category.image}`:logo} 
@@ -89,6 +93,7 @@ import { errorNotify } from "../../utils/Toast";
                     </div>
                 </Link>
             </div>
+          </Fade>
           );
         }): (<div className="w-100">
                 <p className="text-center p-3 fs-5 text-primary">
@@ -118,7 +123,7 @@ import { errorNotify } from "../../utils/Toast";
         });
       // loading styles end
       return (
-        <div className="w-100 pt-3 ">
+        <div className="w-100 pt-3 categories ">
           {/* tosat compunenet */}
           <ToastContainer
             position="top-right"
@@ -132,8 +137,11 @@ import { errorNotify } from "../../utils/Toast";
             theme="colored"
           />
 
-          <div className="container-fluid my-2">
+          <div style={{maxWidth:'1300px'}} className="container-fluid my-2">
              {/* Carousel start */}
+             <Fade delay={0} direction='left' triggerOnce={true} cascade>
+
+             
             <div
                 style={{ width: "100%", height: "300px" }}
                 id="carouselExampleInterval"
@@ -166,13 +174,16 @@ import { errorNotify } from "../../utils/Toast";
                   <span className="visually-hidden">Next</span>
                 </button>
             </div>
+            </Fade>
             {/* Carousel end */}
             
             <div className="w-100 d-flex row-gap-3 mt-5  gap-2 flex-wrap align-items-center
                                 justify-content-between">
                 {/*category card */}
+  
+                  {isLoading ? spinner : showData}
+             
             
-                {isLoading ? spinner : showData}
     
             </div>
           </div>

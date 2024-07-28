@@ -13,6 +13,7 @@ import Navigation from "../../../components/navigation/Navigation";
 import { useSelector } from "react-redux";
 import QuantityResults from "../../../components/QuantityResults/QuantityResults";
 import { errorNotify, infoNotify, successNotify } from "../../../utils/Toast";
+import { Fade } from "react-awesome-reveal";
 
 const Brands = () => {
   // Get the lookup value from the store
@@ -114,20 +115,34 @@ const Brands = () => {
     !isLoading &&filteredUsers.length > 0 ?
     filteredUsers.map((brand, index) => {
       return (
-        <tr key={index}>
+    
+        <tr  key={index}>
           <td className="" scope="row">
+          <Fade delay={0} direction='up' triggerOnce={true} >
             {index + 1}
+          </Fade>
           </td>
-          <td  ><span className="">{brand.name}</span></td>
+          <td ><span className="">
+          <Fade delay={0} direction='up' triggerOnce={true} >
+            {brand.name}
+
+          </Fade>
+            </span>
+          </td>
 
           <td className="d-none d-md-table-cell">
+          <Fade delay={0} direction='up' triggerOnce={true} >
+
             { brand.image?<img
               style={{ width: "50px", height: "50px", borderRadius: "50%" }}
               src={`${brands.imageUrl}/${brand.image}`}
               alt="avatar"
             />:'لا يوجد صورة'}
+            </Fade>
           </td>
           <td>
+          <Fade delay={0} direction='up' triggerOnce={true} >
+
             <Link
               
               to={!LoadingDelet && brand._id}
@@ -135,9 +150,11 @@ const Brands = () => {
             {LoadingDelet ? <span className="spinner-border"></span> : "تعديل"}
 
               
-            </Link>
+            </Link></Fade>
           </td>
           <td>
+          <Fade delay={0} direction='up' triggerOnce={true} >
+
             <button
               disabled={LoadingDelet ? true : false}
                 onClick={() => handelDelet(brand._id)}
@@ -145,10 +162,18 @@ const Brands = () => {
             >
               {LoadingDelet ? <span className="spinner-border"></span> : "حذف"}
             </button>
+            </Fade>
           </td>
         </tr>
       );
-    }): (<tr><td className="text-center p-3 fs-5 text-primary"colSpan={7} scope="row">العنصر المراد البحث عنه غير موجود في هذه الصفحه</td></tr>);
+    }): (<tr>
+               
+
+      <td className="text-center p-3 fs-5 text-primary"colSpan={7} scope="row"> <Fade delay={0} direction='up' triggerOnce={true} >
+        العنصر المراد البحث عنه غير موجود في هذه الصفحه
+        </Fade>
+        </td>
+      </tr>);
 
   // loading styles st
   const arry = [1, 2, 3, 4, 5, 6, 7];
@@ -228,7 +253,13 @@ const Brands = () => {
             <th scope="col">الحذف</th>
           </tr>
         </thead>
-        <tbody className="">{isLoading ? spiner : showData}</tbody>
+        <tbody className="">
+          
+            {isLoading ? spiner : showData} 
+
+   
+
+          </tbody>
 
       </table>
        {/* data table end*/}

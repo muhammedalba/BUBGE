@@ -1,12 +1,7 @@
 
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import {
-
-  useGetOneQuery,
- 
-  
-} from "../../redux/features/api/apiSlice";
+import {useGetOneQuery,} from "../../redux/features/api/apiSlice";
 //    icons
 import { IoIosPricetag } from "react-icons/io";
 
@@ -29,7 +24,10 @@ const TransFer = () => {
     data: transfers,
     error,
   } = useGetOneQuery(`transfers/${TransferId}`);
-console.log(isLoading);
+
+
+
+  console.log(transfers,'transfers');
 
 
 

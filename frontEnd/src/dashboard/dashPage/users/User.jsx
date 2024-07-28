@@ -7,6 +7,7 @@ import { errorNotify, infoNotify, successNotify } from '../../../utils/Toast';
 import { FaImage, FaUser } from 'react-icons/fa';
 import { MdOutlineEmail } from "react-icons/md";
 import { ToastContainer } from 'react-toastify';
+import { Fade } from 'react-awesome-reveal';
 
 const User = () => {
   // Bring the user number Id 
@@ -116,6 +117,8 @@ const User = () => {
       />
 
       <form onSubmit={handleSubmit} className="m-auto p-3">
+      <Fade delay={0} direction='up' triggerOnce={true}>
+
         <div className="w-100 py-2">
           <img
             className="logo rounded m-auto d-none d-sm-block"
@@ -252,10 +255,10 @@ const User = () => {
           type="submit"
         >
           {isDisabled ? <span className="spinner-border"></span> : 'تعديل'}
-        </button>
+       </button>
+    </Fade> 
       </form>
-      <p>العنوين</p>
-      <p>المفضلة</p>
+
     </div>
   );
 };

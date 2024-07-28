@@ -3,7 +3,7 @@
 
 import  { useEffect, useState } from 'react';
 
-
+import logo from '../../../imges/logo.png'
 import {  useNavigate, useParams } from 'react-router-dom';
 import { useUpdateOneMutation, useGetOneQuery } from '../../../redux/features/api/apiSlice';
 // icons
@@ -11,6 +11,7 @@ import { FaImage, FaUser } from 'react-icons/fa';
 
 import { ToastContainer} from 'react-toastify';
 import { errorNotify, infoNotify, successNotify } from '../../../utils/Toast';
+import { Fade } from 'react-awesome-reveal';
 
 
 const Brand = () => {
@@ -130,14 +131,17 @@ const handleChange=(e)=>{
         pauseOnHover
         theme="colored"
       />
+   
 
+   
       <form 
       onSubmit={handleSubmit} 
       className="m-auto p-3">
+         <Fade delay={0} direction='up' triggerOnce={true} cascade  damping={0.1}>
         <div className="w-100 py-2">
           <img
             className="logo m-auto d-none d-sm-block"
-            src={isSuccess && !preview ?`${data?.imageUrl}/${data?.data?.image}`:preview}
+            src={isSuccess && !preview ?`${data?.imageUrl}/${data?.data?.image}`:preview||logo}
             
             alt="brand"
           />
@@ -203,6 +207,7 @@ const handleChange=(e)=>{
            <span className="">تعديل</span>}
         
         </button>
+        </Fade>
       </form>
 
  

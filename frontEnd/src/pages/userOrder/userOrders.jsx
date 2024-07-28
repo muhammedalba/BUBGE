@@ -13,6 +13,7 @@ import QuantityResults from "../../components/QuantityResults/QuantityResults";
 import Navigation from "../../components/navigation/Navigation";
 import { useSelector } from "react-redux";
 import { convertDateTime } from "../../utils/convertDateTime";
+import { Fade } from "react-awesome-reveal";
 
 const UserOrders = () => {
   // Get the lookup value from the store
@@ -101,17 +102,26 @@ const UserOrders = () => {
         return (
           <tr className="text-center" key={index}>
             <td className="d-none d-md-table-cell" scope="row">
+            <Fade delay={0} direction='up' triggerOnce={true} cascade>
+
               {index + 1}
+              </Fade>
             </td>
 
             <td className="text-center">
-              <span>{transfer.cartItems.length}</span>
+            <Fade delay={0} direction='up' triggerOnce={true} cascade>
+
+              <span>{transfer.cartItems.length}</span></Fade>
             </td>
             <td className="">
-              <span className="">{convertDateTime(transfer.createdAt)}</span>
+            <Fade delay={0} direction='up' triggerOnce={true} cascade>
+
+              <span className="">{convertDateTime(transfer.createdAt)}</span></Fade>
             </td>
 
             <td className={"d-none d-md-table-cell"}>
+            <Fade delay={0} direction='up' triggerOnce={true} cascade>
+
               <span
                 className={
                   transfer.isDelivered
@@ -126,15 +136,19 @@ const UserOrders = () => {
                 ) : (
                   "   لم يتم الارسال"
                 )}
-              </span>
+              </span></Fade>
             </td>
             <td className="text-center">
-              <span>{transfer.totalOrderPrice}</span>
+            <Fade delay={0} direction='up' triggerOnce={true} cascade>
+
+              <span>{transfer.totalOrderPrice}</span></Fade>
             </td>
             <td>
+            <Fade delay={0} direction='up' triggerOnce={true} cascade>
+
               <Link to={`/orders/${transfer._id}`} className="btn btn-success">
                 عرض
-              </Link>
+              </Link></Fade>
             </td>
           </tr>
         );

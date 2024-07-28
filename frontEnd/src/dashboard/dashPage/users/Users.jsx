@@ -13,6 +13,7 @@ import { TiArrowSortedUp } from "react-icons/ti";
 import Navigation from "../../../components/navigation/Navigation";
 import { useSelector } from "react-redux";
 import QuantityResults from "../../../components/QuantityResults/QuantityResults";
+import { Fade } from "react-awesome-reveal";
 
 
 
@@ -149,24 +150,48 @@ const handelLimetData=(limitData)=>{
   const showData = isSuccess && !isLoading &&filteredUsers.length > 0  ? filteredUsers.map((user, index) => {
     return (
       <tr key={index}>
-        <td className="" scope="row">{index +1}</td>
-        <td>{user.firstname}</td>
-        <td style={{ maxWidth: '140px', overflow: 'hidden' }} className="d-none d-sm-table-cell">{user.email}</td>
-        <td className="d-none d-md-table-cell">{user.role}</td>
+        <td className="" scope="row">
+            <Fade delay={0} direction='up' triggerOnce={true}>
+
+              {index +1}
+            </Fade>
+          </td>
+        <td>
+          <Fade delay={0} direction='up' triggerOnce={true}>
+
+            {user.firstname}
+          </Fade>
+        </td>
+        <td style={{ maxWidth: '140px', overflow: 'hidden' }} className="d-none d-sm-table-cell">
+        <Fade delay={0} direction='up' triggerOnce={true}>
+
+          {user.email}
+          </Fade>
+          </td>
         <td className="d-none d-md-table-cell">
+        <Fade delay={0} direction='up' triggerOnce={true}>
+        {user.role}
+        </Fade></td>
+        <td className="d-none d-md-table-cell">
+        <Fade delay={0} direction='up' triggerOnce={true}>
+
           <img
             style={{ width: "50px", height: "50px", borderRadius: "50%" }}
             src={`${users.imageUrl}/${user.image}`}
             alt="avatar"
-          />
+          /></Fade>
         </td>
         <td>
+        <Fade delay={0} direction='up' triggerOnce={true}>
+
           <Link to={user._id} className="btn btn-success">
             تعديل
-          </Link>
+          </Link></Fade>
         </td>
-        <td>
-          {user.role.toLowerCase() !== "admin" && (
+        <td>              
+          <Fade delay={0} direction='up' triggerOnce={true} >
+
+          {user.role.toLowerCase() !== "admin" ? (
             <button
               disabled={LoadingDelet ? true : false}
               onClick={() => handelDelet(user._id)}
@@ -175,7 +200,20 @@ const handelLimetData=(limitData)=>{
            {  LoadingDelet? <span className="spinner-border"></span>:
               'حذف'}
             </button>
-          )}
+          )
+          : (
+            <button
+              disabled
+             
+              className="d-none"
+            >
+           {  LoadingDelet? <span className="spinner-border"></span>:
+              'حذف'}
+            </button>
+          )
+          
+          }
+       </Fade>
         </td>
       </tr>
     );

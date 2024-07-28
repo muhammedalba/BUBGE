@@ -187,76 +187,81 @@ const Cart = () => {
         pauseOnHover
         theme="colored"
       />
-      <div className="container pt-5 ">
-        <h1 className="text-center m-3">سلة منتجات</h1>
-        {productsDetails?.resnumOfCartItems > 0 && (
-          <span className="fs-5 p-2">
-            عدد المنتجات : ( {isSuccess ? productsDetails?.resnumOfCartItems:0} )
-          </span>
-        )}
-      </div>
-      {/* data table */}
-      <table className="table pt-5 mt-3 text-center">
-        <thead>
-          <tr>
-            <th className="d-none d-md-table-cell" scope="col">
-              {" "}
-              عدد منتجات
-            </th>
-            <th className="d-sm-table-cell" scope="col">
-              صورة المنتج
-            </th>
-            <th className="d-none d-sm-table-cell" scope="col">
-              الاسم المنتج
-            </th>
-            <th className="d-table-cell" scope="col">
-              السعر
-            </th>
-            <th className="d-none d-md-table-cell" scope="col">
-              السعر بعد الخصم
-            </th>
-            <th scope="col">الحذف</th>
-          </tr>
-        </thead>
-        <tbody className="">{showData}</tbody>
-      </table>
-      <div className=" w-100  p-2 d-flex align-items-center justify-content-center gap-1">
-        { productsDetails?.resnumOfCartItems > 0 && (
-          <span className="  fs-2 ">
-            المجموع : (
-            {isSuccess && productsDetails?.totalCartPrice
-              ? productsDetails?.totalCartPrice
-              : 0}
-            )<span className="ps-1 text-success">$</span>
-          </span>
-        )}
+      <div className="container-fluid pt-5 ">
+          <h1 className="text-center m-3">سلة منتجات</h1>
+          {productsDetails?.resnumOfCartItems > 0 && (
+            <span className="fs-5 p-2">
+              عدد المنتجات : ( {isSuccess ? productsDetails?.resnumOfCartItems:0} )
+            </span>
+          )}
+          {/* data table */}
+          <table className="table pt-5 mt-3 text-center">
+            <thead>
+              <tr>
+                <th className="d-none d-md-table-cell" scope="col">
+                  {" "}
+                  عدد منتجات
+                </th>
+                <th className="d-sm-table-cell" scope="col">
+                  صورة المنتج
+                </th>
+                <th className="d-none d-sm-table-cell" scope="col">
+                  الاسم المنتج
+                </th>
+                <th className="d-table-cell" scope="col">
+                  السعر
+                </th>
+                <th className="d-none d-md-table-cell" scope="col">
+                  السعر بعد الخصم
+                </th>
+                <th scope="col">الحذف</th>
+              </tr>
+            </thead>
+            <tbody className="">{showData}</tbody>
+          </table>
+          {/* checkout */}
+          <div className=" w-100  p-2 d-flex align-items-center justify-content-center gap-1">
+            { productsDetails?.resnumOfCartItems > 0 && (
+              <span className="  fs-2 ">
+                المجموع : (
+                {isSuccess && productsDetails?.totalCartPrice
+                  ? productsDetails?.totalCartPrice
+                  : 0}
+                )<span className="ps-1 text-success">$</span>
+              </span>
+            )}
 
-        <button
-          disabled={
-            LoadingDelet || LoadingCreate || productsDetails?.length <= 0
-          }
-          onClick={handelCreateOrder}
-          className="btn btn-primary"
-        >
-          {LoadingDelet || LoadingCreate ? (
-            <span className="spinner-border"></span>
-          ) : (
-            "شراء"
-          )}
-        </button>
-  {  isSuccess && productsDetails?.resnumOfCartItems > 0 &&     <button
-          disabled={
-            LoadingDelet || LoadingCreate || productsDetails?.length <= 0
-          }
-          onClick={clearCart}
-          className="btn btn-danger "
-        >
-          {LoadingDelet || LoadingCreate ? (
-            <span className="spinner-border"></span>
-          ) : (
-            "حذف كل المنتجات"
-          )}
-        </button>}
+          
+      {  isSuccess && productsDetails?.resnumOfCartItems > 0 &&  
+          <>  <button
+                      disabled={
+                        ( LoadingDelet || LoadingCreate)?true:false
+                      }
+                      onClick={handelCreateOrder}
+                      className="btn btn-primary"
+                    >
+                      {LoadingDelet || LoadingCreate ? (
+                        <span className="spinner-border"></span>
+                      ) : (
+                        "شراء"
+                      )}
+          </button>
+
+            <button
+                  disabled={
+                    LoadingDelet || LoadingCreate || productsDetails?.length <= 0
+                  }
+                  onClick={clearCart}
+                  className="btn btn-danger "
+                >
+                  {LoadingDelet || LoadingCreate ? (
+                    <span className="spinner-border"></span>
+                  ) : (
+                    "حذف كل المنتجات"
+                  )}
+            </button>
+        </>  }
+          </div>
       </div>
     </>
   );
