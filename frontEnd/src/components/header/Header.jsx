@@ -78,9 +78,14 @@ const Header = () => {
   // Auth links
   const AuthLinks = [
     {
+      title: " حسابي الشخصي",
+      path: "/ProfileAccount",
+      icon: <IoMdHome fontSize={"1.2rem"} color="var(--text-color)" />,
+    },
+    {
       title: "انشاء حساب",
       path: "/signup",
-      icon: <FaRegUser fontSize={"1.6rem"} color="var(--text-color)" />,
+      icon: <FaRegUser fontSize={"1rem"} color="var(--text-color)" />,
     },
     {
       title: "تسجيل دخول",
@@ -98,7 +103,7 @@ const Header = () => {
       <li key={index}>
         <Link
           to={`${link.path}`}
-          className="dropdown-item d-flex align-items-center gap-2 "
+          className={role&&link.path === "/login"||role&&link.path === "/signup"?"d-none ":'dropdown-item d-flex align-items-center gap-2'}
           onClick={link.path === "/" && Logout}
         >
           {link.icon}
@@ -258,6 +263,7 @@ const Header = () => {
             </Fade>
           </span>
           <FaUser
+           
             className="d-block d-sm-none dropdown-toggle "
             data-bs-toggle="dropdown"
             aria-expanded="false"

@@ -22,7 +22,7 @@ import Cookies from "universal-cookie";
 const ProductsCategory = () => {
   // Get the lookup value from the store
   const search = useSelector((state) => state.serch);
-
+ 
 
   // Bring the product
   const { CategoryId } = useParams();
@@ -52,7 +52,10 @@ const ProductsCategory = () => {
     productId: "",
     Playerid: "",
   });
-  const cookies=new Cookies()
+  // get token
+  const cookies=new Cookies();
+   const token= cookies.get('token');
+
   const [display, setdisplay] = useState(false);
    console.log(products?.data,'products');
   
@@ -180,7 +183,7 @@ console.log(ProductData.priceAfterDiscount,'ProductData.priceAfterDiscount');
   // handle Submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    const token= cookies.get('token');
+    
     if(token){
       createOne({
         url: "/cart",
@@ -355,24 +358,26 @@ console.log(ProductData.priceAfterDiscount,'ProductData.priceAfterDiscount');
       
                         <div className=" d-flex align-items-center justify-content-between">
                           <button
-                            disabled={isLoading ? true : false}
+                            disabled={isLoading||Createloading ? true : false}
                             className="btn btn-primary my-4 d-flex align-items-center"
                             type="submit"
                           >
-                            {isLoading && Createloading? (
-                              <span className="spinner-border"></span>
-                            ) : (
-                              <span className="">اضافه الى السله </span>
-                            )}
+                           
+                          { Createloading  ?   <span className="spinner-border"></span>:
+                             <span className="">اضافه الى السله </span> 
+                          
+                          }
+                           
+                           
                           </button>
                           <span
                             onClick={useCallback(() => {
                               setdisplay(false);
                             }, [])}
-                            disabled={isLoading ? true : false}
+                            disabled={Createloading ? true : false}
                             className="btn btn-danger my-4 d-flex align-items-center"
                           >
-                            {isLoading ? (
+                            {Createloading ? (
                               <span className="spinner-border"></span>
                             ) : (
                               <span className="">الغاء</span>

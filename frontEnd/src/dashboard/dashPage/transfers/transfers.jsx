@@ -143,7 +143,7 @@ const Transfers = () => {
    
         return (
           <tr className="text-center" key={index}>
-            <td className="" scope="row">
+            <td className="d-none d-md-table-cell" scope="row">
               <Fade delay={0} direction='up' triggerOnce={true}  >
               {index + 1}
               </Fade>
@@ -153,7 +153,7 @@ const Transfers = () => {
               <span className="">{transfer.user.firstname}</span>
               </Fade>
             </td>
-            <td className="text-center">
+            <td className="text-center d-none d-md-table-cell">
             <Fade delay={0} direction='up' triggerOnce={true}>
 
               <span>
@@ -225,7 +225,7 @@ const Transfers = () => {
               <button
                 disabled={LoadingDelet ? true : false}
                 onClick={() => handelDelet(transfer._id)}
-                className="btn btn-danger"
+                className="btn btn-danger d-none d-md-table-cell"
               >
                 {LoadingDelet ? (
                   <span className="spinner-border"></span>
@@ -336,7 +336,7 @@ const Transfers = () => {
           <tr className="text-center">
             <th
               onClick={handleSort}
-              className="d-non  d-md-table-cell"
+              className="d-none  d-md-table-cell"
               scope="col"
             >
               {sorted ? <TiArrowSortedUp /> : <TiArrowSortedDown />}ترتيب
@@ -344,7 +344,7 @@ const Transfers = () => {
             <th className="d-none d-md-table-cell" scope="col">
               الاسم{" "}
             </th>
-            <th scope="col"> المبلغ المحول </th>
+            <th className="d-none d-md-table-cell" scope="col"> المبلغ المحول </th>
             <th scope="col"> البريد الالكتروني </th>
             <th className="d-none d-md-table-cell" scope="col">
               الصورة الوصل
@@ -357,7 +357,7 @@ const Transfers = () => {
             </th>
 
             <th scope="col">عرض</th>
-            <th scope="col">الحذف</th>
+            <th className="d-none d-md-table-cell" scope="col">الحذف</th>
           </tr>
         </thead>
         <tbody className="">{isLoading ? spiner : showData }</tbody>

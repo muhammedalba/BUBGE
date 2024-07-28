@@ -33,7 +33,8 @@ const Cart = () => {
     },
   ]);
 
-  console.log(productsDetails, "productsDetails");
+
+
   useEffect(() => {
     if (isSuccess && !isLoading) {
       const { _id, totalCartPrice, cartItems  } = products.data;
@@ -41,10 +42,7 @@ const Cart = () => {
       setProductsDetails({ id: _id, totalCartPrice, cartItems, resnumOfCartItems:products?.resnumOfCartItems, imageUrl :products?.imageUrl});
     }
     if (errorDelete) errorNotify("خطا في الخادم");
-    if ( productsDetails.resnumOfCartItems === 0 && successDelete  ){
-      setProductsDetails([]);
-      
-      }
+   
       if (successDelete) successNotify("تم حذف العنصر بنجاح");
 
     if (successCreate) {
@@ -54,7 +52,8 @@ const Cart = () => {
     if (errorCreate?.status===400) {
       warnNotify(' تاكد من وجود اموال كافيه في المحفظة');
     }
-  }, [dispatch, errorCreate?.status, errorDelete, isLoading, isSuccess, products, productsDetails.resnumOfCartItems, successCreate, successDelete]);
+    // products infinity loop 
+  }, [dispatch, errorCreate?.status, errorDelete, isLoading, isSuccess, productsDetails?.resnumOfCartItems, successCreate, successDelete]);
 
   // handel delet product
   const handelDelet = useCallback(
@@ -67,12 +66,13 @@ const Cart = () => {
     [deletOne]
   );
 // clear Cart
-  const clearCart = () => {
+  const clearCart = useCallback(
+    () => {
     if (confirm("هل انت متاكد بانك تريد مسح كافة العناصر من السلة")) {
       deletOne(`/cart`);
       setProductsDetails([])
-    }
-  };
+    }}
+   , [deletOne])
   // show products
   const showData = useMemo(() => {
     if (isLoading) {

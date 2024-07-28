@@ -173,7 +173,7 @@ const User = () => {
           </div>
         )}          
         <div className="d-flex align-items-center flex-wrap justify-content-between">
-            <Link to={`${data?.data._id}/transfer`} className=' fs-3 m-1'> <TbRelationManyToMany color='red'className='fs-1' /> رصيدي</Link>
+            <Link to={`${data?.data._id}/transfer`} className=' fs-3 m-1'> <TbRelationManyToMany color='red'className='fs-1' /> أضف رصيد</Link>
             <Link to={`/orders`} className=' fs-3 m-1'> <BiTransfer color='green' />  الذهاب الى طلباتي </Link>
         </div>
         <div className="col-md-12 py-2">

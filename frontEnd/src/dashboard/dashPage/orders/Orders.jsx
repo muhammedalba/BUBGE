@@ -1,5 +1,5 @@
 
-    import { useCallback, useEffect, useState } from "react";
+    import {  useEffect, useState } from "react";
     import {Fade} from'react-awesome-reveal';
     import { Link } from "react-router-dom";
     
@@ -134,7 +134,7 @@
 
                 </td>
     
-                <td className="text-center d-none d-sm-table-cell">
+                <td className="">
                 <Fade delay={0} direction='up' triggerOnce={true}    >
 
                   <span>{transfer.user.email.slice(0,-9)}</span>
@@ -285,7 +285,7 @@
                   {sorted ? <TiArrowSortedUp /> : <TiArrowSortedDown />}ترتيب
                 </th>
     
-                <th className="d-none d-sm-table-cell" scope="col">  ايميل المشتري </th>
+                <th className="" scope="col">  ايميل المشتري </th>
                 <th className="d-none d-md-table-cell" scope="col">
                  
                   تاريخ الطلب

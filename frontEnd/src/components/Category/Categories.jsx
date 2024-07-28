@@ -181,7 +181,7 @@ import { Fade } from "react-awesome-reveal";
                                 justify-content-between">
                 {/*category card */}
   
-                  {isLoading ? spinner : showData}
+                  {isLoading ?  spinner:showData }
              
             
     

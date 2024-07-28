@@ -44,7 +44,7 @@ input{
   color: var(--text-color) !important;
  }
  .table  td {
-  background-color: #5f6f6541;
+  background-color: #5f6f6596 ;
   color: var(--text-color) !important;
  
   border-color: var(--spancolor)
@@ -66,12 +66,20 @@ input{
 }
 @keyframes skeleton {
   0%{
-    background-color: hsl(200, 20%, 70%);
+    background-color: hsl(240, 78%, 9%);
   }
   100%{
-    background-color: hsl(200, 20%, 95%);
+    background-color: hsl(244, 18%, 53%);
   }
 }
 
 
-
+.MinPage{
+  white-space: normal !important;
+  color: var(--text-color);
+  
+}
+.card-body{
+  background-color: #5f6f6596 !important;
+  color: var(--text-color);
+}
