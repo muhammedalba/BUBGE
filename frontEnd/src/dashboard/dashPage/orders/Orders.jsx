@@ -43,7 +43,7 @@
       
       }] = useUpdateOneMutation();
     
-      console.log(updateError, "Transfers");
+      isSuccess&&  console.log(Transfers, "order");
     
       // states
       const [sorted, setsorted] = useState(false);
@@ -123,7 +123,7 @@
       const showData =
         isSuccess && !isLoading && filteredUsers.length > 0 ? (
           filteredUsers.map((transfer, index) => {
-            console.log(transfer.cartItems[0].Playerid ,'Playerid')
+            console.log(transfer.cartItems ,'Playerid')
             return (
               <tr className="text-center" key={index}>
                 <td className="d-none d-md-table-cell" scope="row">
@@ -168,12 +168,7 @@
                   </span>
                   </Fade>
                 </td>
-                <td className="text-center">
-                <Fade delay={0} direction='up' triggerOnce={true}    >
-
-                  <span>{transfer.cartItems[index].Playerid}</span>
-                  </Fade>
-                </td>
+       
                 <td className="text-center d-none d-sm-table-cell">
                 <Fade delay={0} direction='up' triggerOnce={true}    >
 
@@ -292,14 +287,13 @@
     
                 <th className="d-none d-sm-table-cell" scope="col">  ايميل المشتري </th>
                 <th className="d-none d-md-table-cell" scope="col">
-                  {" "}
-                  تاريخ الطلب{" "}
+                 
+                  تاريخ الطلب
                 </th>
     
                 <th className={"d-none d-md-table-cell"} scope="col">
                   {confirmed ? " الطلبات الحاليه" : "الطلبات المؤكده"}
                 </th>
-                <th scope="col">ايد الاعب(id) </th>
                 <th className="d-none d-sm-table-cell" scope="col">السعر الاجمالي </th>
                 <th className="" scope="col">الحالة</th>
                 <th scope="col">عرض</th>

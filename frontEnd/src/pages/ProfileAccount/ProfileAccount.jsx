@@ -8,6 +8,7 @@ import { MdOutlineEmail } from "react-icons/md";
 import { ToastContainer } from 'react-toastify';
 import { IoWalletOutline } from "react-icons/io5";
 import { BiTransfer } from "react-icons/bi";
+import { TbRelationManyToMany } from "react-icons/tb";
 
 
 
@@ -142,8 +143,7 @@ const User = () => {
       <form onSubmit={handleSubmit} className="m-auto p-3">
       <Fade delay={0} direction='up' triggerOnce={true} cascade>
 
-      <Link to={`${data?.data._id}/transfer`} className=' fs-3 m-1'> <BiTransfer />  الذهاب الى معاملاتي</Link>
-      <Link to={`/orders`} className=' fs-3 m-1'> <BiTransfer />  الذهاب الى طلباتي </Link>
+     
 
         <div className="w-100 py-2">
           <img
@@ -152,6 +152,7 @@ const User = () => {
             alt="avatar"
           />
         </div>
+
         {isSuccess && (
           <div className='row fs-3 text-center '>
 
@@ -170,7 +171,11 @@ const User = () => {
                 </span>
                     }
           </div>
-        )}
+        )}          
+        <div className="d-flex align-items-center flex-wrap justify-content-between">
+            <Link to={`${data?.data._id}/transfer`} className=' fs-3 m-1'> <TbRelationManyToMany color='red'className='fs-1' /> رصيدي</Link>
+            <Link to={`/orders`} className=' fs-3 m-1'> <BiTransfer color='green' />  الذهاب الى طلباتي </Link>
+        </div>
         <div className="col-md-12 py-2">
           <label className="p-1 fs-5 d-flex align-items-center gap-1" htmlFor="firstname">
             <FaUser />

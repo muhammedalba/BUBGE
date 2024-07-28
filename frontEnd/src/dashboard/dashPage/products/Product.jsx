@@ -33,7 +33,7 @@ const Product = () => {
     data: product,
     error,
   } = useGetOneQuery(`products/${productId}`);
-  // console.log(product?.data);
+  console.log(error);
   // get categories from db
   const {
     isLoading: loadingCatego,
@@ -86,7 +86,7 @@ const Product = () => {
     ratingsQuantity: "",
     category: {},
     colors: [],
-    reviews: [],
+   
     supCategories: [],
     createdAt: "",
     images: [],
@@ -115,7 +115,7 @@ const Product = () => {
         ratingsAverage: product.data.ratingsAverage,
         priceAfterDiscount: product.data.priceAfterDiscount,
         ratingsQuantity: product.data.ratingsQuantity,
-        reviews: product.data.reviews,
+       
         supCategories: product.data.supCategories,
         createdAt: convertDateTime(product.data.createdAt),
         category: product.data.category?.name,
@@ -155,8 +155,9 @@ const Product = () => {
  
   // handleSubmit
   const handleSubmit = (e) => {
+    console.log(formData);
     e.preventDefault();
-    if (formData.price <= formData.priceAfterDiscount && formData.price !== '') {
+    if (formData.price !== '' && +formData.price <= +formData.priceAfterDiscount ) {
       infoNotify(" يجب ان لايكون السعر بعد التخفيض اكبر من السعر ");
       setErrorMsge(" يجب ان لايكون السعر بعد التخفيض اكبر من السعر ");
       return;
@@ -203,27 +204,8 @@ const Product = () => {
       setErrorMsge("يجب ملأ جميع الحقول ");
     }
   };
-  // handel delet review 
-  const handelDelet = (id) => {
-    const delet = confirm("هل انت متاكد بانك تريد حذف هذا العنصر");
-    // if (confirm) true delet product from database
-    delet && deletOne(`/review/${id}`);
-  };
 
-  //  handle Image
-  // const handleImageChange = (event) => {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     setimageCover(file);
-  //     const reader = new FileReader();
-  //     // عرض المعاينة عند انتهاء القراءة
-  //     reader.onloadend = () => {
-  //       setPreview(reader.result);
-  //       console.log(reader.result);
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // };
+
 
   const handleImageChange = (event) => {
   
@@ -285,63 +267,13 @@ const Product = () => {
   // handleChange
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
-    console.log(formData);
+  
   };
 
   // handle rating change
   const handleRatings = () => {};
 
-  // View Reviews
-  const showReviews =
-    isSuccess && !isLoading && product.data?.reviews.length > 0 ? (
-      product.data?.reviews?.map((review, index) => {
-        return (
-          <tr key={index}>
-            <td className="" scope="row">
-              {index + 1}
-            </td>
-            <td>{review.title}</td>
-            <td
-              style={{ maxWidth: "140px", overflow: "hidden" }}
-              className="d-none d-sm-table-cell"
-            >
-              {review.ratings}
-            </td>
-            <td className="d-none d-md-table-cell">
-              {review.user?.firstname || "غير موجود"}
-            </td>
-
-            <td className="d-none d-md-table-cell">
-              {convertDateTime(review.createdAt)}
-            </td>
-
-            <td>
-              <button
-                disabled={isLoading || LoadingDelet ? true : false}
-                onClick={() => handelDelet(review._id)}
-                className="btn btn-danger"
-              >
-                {LoadingDelet || isLoading ? (
-                  <span className="spinner-border"></span>
-                ) : (
-                  "حذف"
-                )}
-              </button>
-            </td>
-          </tr>
-        );
-      })
-    ) : (
-      <tr>
-        <td
-          className="text-center p-3 fs-5 text-primary"
-          colSpan={6}
-          scope="row"
-        >
-          لايوجد تعليقات{" "}
-        </td>
-      </tr>
-    );
+  
 
   // view categories
   const showCategorie =
@@ -718,11 +650,12 @@ const Product = () => {
             />
           </div>
           {/* Carousel start */}
+      
           <span className="fs-5 text-center d-block my-2">
             ( {previews.length || ProductData.images.length} ) عدد الصور
           </span>
-          {
-            <div
+          
+        {  previews.length || ProductData.images.length> 0&&      <div
               style={{ width: "100%", height: "150px" }}
               id="carouselExampleInterval"
               className="carousel slide m-auto mt-5"
@@ -753,8 +686,8 @@ const Product = () => {
                 />
                 <span className="visually-hidden">Next</span>
               </button>
-            </div>
-          }
+            </div>}
+          
           {/* Carousel end */}
 
           {/* error msg */}
@@ -776,39 +709,6 @@ const Product = () => {
             )}
           </button>
         </form>
-
-        {/* data table */}
-        {isSuccess && product.data?.reviews.length > 0 && (
-          <h2 className="text-center my-4">
-            التعليقات ({product.data?.reviews.length}){" "}
-          </h2>
-        )}
-        {isSuccess && product.data?.reviews.length > 0 && (
-          <table className="table w-100  ">
-            <thead>
-              <tr>
-                <th className="d-non  d-md-table-cell" scope="col">
-                  {" "}
-                  ترتيب
-                </th>
-                <th scope="col"> التعليقات</th>
-                <th className="d-none d-sm-table-cell" scope="col">
-                  {" "}
-                  التقييم
-                </th>
-
-                <th className="d-none d-md-table-cell" scope="col">
-                  اسم المستخدم
-                </th>
-                <th className="d-none d-md-table-cell" scope="col">
-                  تاريخ الانشاء
-                </th>
-                <th scope="col">الحذف</th>
-              </tr>
-            </thead>
-            <tbody className="">{showReviews}</tbody>
-          </table>
-        )}
       </div>
     </>
   );

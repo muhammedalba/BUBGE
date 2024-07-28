@@ -35,7 +35,7 @@ const Cart = () => {
 
   console.log(productsDetails, "productsDetails");
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess && !isLoading) {
       const { _id, totalCartPrice, cartItems  } = products.data;
       dispatch(cartitems(products?.resnumOfCartItems));
       setProductsDetails({ id: _id, totalCartPrice, cartItems, resnumOfCartItems:products?.resnumOfCartItems, imageUrl :products?.imageUrl});
@@ -43,8 +43,9 @@ const Cart = () => {
     if (errorDelete) errorNotify("خطا في الخادم");
     if ( productsDetails.resnumOfCartItems === 0 && successDelete  ){
       setProductsDetails([]);
+      
       }
-      // if (successDelete) successNotify("تم حذف العنصر بنجاح");
+      if (successDelete) successNotify("تم حذف العنصر بنجاح");
 
     if (successCreate) {
       successNotify("تم طلب العنصر بنجاح");
@@ -53,7 +54,7 @@ const Cart = () => {
     if (errorCreate?.status===400) {
       warnNotify(' تاكد من وجود اموال كافيه في المحفظة');
     }
-  }, [dispatch, errorCreate?.status, errorDelete, isSuccess, products, productsDetails?.resnumOfCartItems, successCreate, successDelete]);
+  }, [dispatch, errorCreate?.status, errorDelete, isLoading, isSuccess, products, productsDetails.resnumOfCartItems, successCreate, successDelete]);
 
   // handel delet product
   const handelDelet = useCallback(
@@ -233,7 +234,7 @@ const Cart = () => {
 
           
       {  isSuccess && productsDetails?.resnumOfCartItems > 0 &&  
-          <>  <button
+          <>  <button type="button"
                       disabled={
                         ( LoadingDelet || LoadingCreate)?true:false
                       }

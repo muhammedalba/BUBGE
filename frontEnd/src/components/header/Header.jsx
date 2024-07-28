@@ -16,7 +16,6 @@ import { FaRegUser } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { BsFillTelephoneFill } from "react-icons/bs";
 
-
 import "./header.css";
 import { useDispatch } from "react-redux";
 import { searchItem } from "../../redux/features/Slice/SerchSlice";
@@ -26,31 +25,27 @@ const Header = () => {
   const cookies = new Cookies();
   const imgeUrl = cookies.get("imageUrl");
   const image = cookies.get("image");
-  const role = cookies.get("role") ;
+  const role = cookies.get("role");
   const [scroll, setscroll] = useState(false);
   const dispatch = useDispatch();
   const [trans, settrans] = useState(false);
 
+  const handleScroll = useCallback(() => {
+    const scrollY = window.scrollY;
 
+    if (scrollY > 60 && scrollY < 301) {
+      settrans(true);
+    } else {
+      settrans(false);
+    }
 
+    if (scrollY > 130) {
+      setscroll(true);
+    } else {
+      setscroll(false);
+    }
+  }, []);
 
-const handleScroll = useCallback(() => {
-  const scrollY = window.scrollY;
-
-  if (scrollY > 60 && scrollY < 301) {
-    settrans(true);
-  } else {
-    settrans(false);
-  }
-
-  if (scrollY > 130) {
-    setscroll(true);
-  } else {
-    setscroll(false);
-  }
-}, []);
-
-  
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
 
@@ -63,17 +58,13 @@ const handleScroll = useCallback(() => {
   const handelserche = (e) => {
     // console.log(e.target.value);
     dispatch(searchItem(e.target.value));
-
-
   };
   const Scrolto = () => {
     window.scrollTo(0, 0);
   };
 
-
   // handel Logout
   const Logout = () => {
-   
     const cookies = new Cookies();
     cookies.remove();
     cookies.remove("token");
@@ -105,7 +96,7 @@ const handleScroll = useCallback(() => {
   const AuthLinksShow = AuthLinks.map((link, index) => {
     return (
       <li key={index}>
-        <Link 
+        <Link
           to={`${link.path}`}
           className="dropdown-item d-flex align-items-center gap-2 "
           onClick={link.path === "/" && Logout}
@@ -119,7 +110,6 @@ const handleScroll = useCallback(() => {
 
   // Nav links
   const nav_Links = [
-
     {
       title: "سلة مشترياتي",
       path: "/cart",
@@ -149,7 +139,8 @@ const handleScroll = useCallback(() => {
       <li
         key={index}
         className={
-         (link.path === "/dashboard"  && role === "user") ||( role=== undefined && link.path === "/dashboard")
+          (link.path === "/dashboard" && role === "user") ||
+          (role === undefined && link.path === "/dashboard")
             ? "d-none"
             : "nav-item d-flex align-items-center  "
         }
@@ -184,31 +175,32 @@ const handleScroll = useCallback(() => {
         >
           <div className=" d-flex w-100 px-2 py-2  justify-content-between container-fluid">
             {/* logo start */}
-            <div className="logo  d-flex   align-items-center">
-              <Fade delay={0} direction='down' triggerOnce={true} cascade>
-
-             
-              <img style={{width:'50px ',height:'50px'}} className="logo  rounded-circle  d-sm-block  " src={logo} alt="logo" />
-              <div
-                style={{ color: "var(--text-color)"   , whiteSpace: 'nowrap' }}
-                className="  mb-0 d-none d-sm-block px-1 "
-              >
-                  <Fade  triggerOnce={true} cascade>
-                
-                     متجرك بين يديك
+            <div className="logo  d-flex align-items-center">
+              <Fade delay={0} direction="down" triggerOnce={true} cascade>
+                <img
+                  style={{ width: "50px ", height: "50px" }}
+                  className="logo  rounded-circle  d-sm-block  "
+                  src={logo}
+                  alt="logo"
+                />
+                <div
+                  style={{ color: "var(--text-color)", whiteSpace: "nowrap" }}
+                  className="  mb-0 d-none d-sm-block px-1 "
+                >
+                  <Fade triggerOnce={true} cascade>
+                    متجرك بين يديك
                   </Fade>
-              </div>
-               </Fade>
+                </div>
+              </Fade>
             </div>
             {/* logo end */}
             <div className=" d-lg-block">
               <ul className="my-0 h-100 d-flex  align-items-center gap-2">
-                <Fade delay={0} direction='down' triggerOnce={true} cascade>
+                <Fade delay={0} direction="down" triggerOnce={true} cascade>
                   {nav_link_show}
-
                 </Fade>
-                
-                <Link to={ role ? 'ProfileAccount' : 'login'}>
+
+                <Link to={role ? "ProfileAccount" : "login"}>
                   <img
                     className="logo d-none d-sm-block rounded-circle dropdown-toggle border-1"
                     src={
@@ -226,14 +218,21 @@ const handleScroll = useCallback(() => {
 
         {/* seareh input && dropdown start */}
         <div className="serch px-3 justify-content-between  position-relative my-3 w-100 d-flex gap-2 align-items-center">
-        <Fade delay={0} direction='left' triggerOnce={true} cascade>
-          <span style={{color:'var( --spancolor)'}} className="d-none d-sm-flex align-items-center gap-1">
-            <BsFillTelephoneFill color="red"  className="fs-5"/>
-            <Fade  direction='up' triggerOnce={true} cascade>
-             : +905346833726 </Fade>
-          </span>
+          <Fade delay={0} direction="left" triggerOnce={true} cascade>
+            <span
+              style={{ color: "var( --spancolor)" }}
+              className="d-none d-sm-flex align-items-center gap-1"
+            >
+              <BsFillTelephoneFill color="red" className="fs-5" />
+              <Fade direction="up" triggerOnce={true} cascade>
+                : +905346833726
+              </Fade>
+            </span>
           </Fade>
-          <div style={{border:'1px solid var(--text-color)'}} className="h-100  d-flex align-items-center ">
+          <div
+            style={{ border: "1px solid var(--text-color)" }}
+            className="h-100  d-flex align-items-center "
+          >
             <input
               type="search"
               className="h-100 px-2 w-100 text-end"
@@ -248,15 +247,15 @@ const handleScroll = useCallback(() => {
           {/* {error && <p className="position-absolute w-100"> not fonde </p>} */}
 
           {/* dropdown */}
-          
+
           <span
             className=" d-none d-sm-block dropdown-toggle "
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <Fade delay={0} direction='right' triggerOnce={true} cascade>
-            تسجيل دخول \انشاء حساب
-          </Fade>
+            <Fade delay={0} direction="right" triggerOnce={true} cascade>
+              تسجيل دخول \انشاء حساب
+            </Fade>
           </span>
           <FaUser
             className="d-block d-sm-none dropdown-toggle "
@@ -265,13 +264,8 @@ const handleScroll = useCallback(() => {
             color="var(--spanColo)"
             fontSize={"1.5rem"}
           />
-          
-          <ul
-           
-            className=" dropdown-menu"
-          >
-            {AuthLinksShow}
-          </ul>
+
+          <ul className=" dropdown-menu">{AuthLinksShow}</ul>
         </div>
         {/* seareh input end */}
       </header>

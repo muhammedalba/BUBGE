@@ -125,7 +125,7 @@ const UserTransfer = () => {
               </span>
             </td>
             <td className="d-none d-md-table-cell">
-              <span className="">{isSuccess && convertDateTime(transfer?.createdAt)}</span>
+              <span className="">{isSuccess &&transfer?.createdAt ? convertDateTime(transfer?.createdAt):'غير معروف'}</span>
             </td>
 
             <td className="d-none d-md-table-cell">
@@ -139,7 +139,7 @@ const UserTransfer = () => {
                 "لا يوجد صورة"
               )}
             </td>
-            <td className={transfer.confirmed ? "d-none d-md-table-cell" : ""}>
+            <td className="">
               <span
                 type="submit"
                 className={

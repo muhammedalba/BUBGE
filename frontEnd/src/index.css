@@ -33,6 +33,7 @@ body {
   background-color: var(--minColor) !important;
   color: var(--text-color) !important;
  a{ text-decoration: none !important;
+  color: var(--text-color) !important;
  }
 input{
   background-color: var(--text-color) !important;

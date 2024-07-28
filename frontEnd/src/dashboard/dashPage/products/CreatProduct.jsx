@@ -136,6 +136,11 @@ const CreatProduct = () => {
       setErrorMsge(" يجب ان لايكون الشركه فارغ  ");
       return;
     }
+    if (formData.quantity <=0) {
+      errorNotify(" يجب ان لايكون الكميه فارغ  ");
+      setErrorMsge(" يجب ان لايكون الكميه فارغ  ");
+      return;
+    }
     if (
       formData.title != "" &&
       formData.description.length >= 15  &&

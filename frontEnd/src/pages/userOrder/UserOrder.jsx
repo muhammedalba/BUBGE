@@ -85,13 +85,14 @@ import { Fade } from "react-awesome-reveal";
     }
     if (isSuccess ) {
       return order.data?.cartItems?.map((product, index) => (
+        
         <tr key={index}>
-          <td className="" scope="row">
+          <td className="d-none  d-md-table-cell" scope="row">
           <Fade delay={0} direction='up' triggerOnce={true} cascade>
 
             {index + 1}</Fade>
           </td>
-          <td>
+          <td className="d-none  d-sm-table-cell">
           <Fade delay={0} direction='up' triggerOnce={true} >
 
             {product.product.title?.slice(0, 20)}</Fade></td>
@@ -116,6 +117,12 @@ import { Fade } from "react-awesome-reveal";
           <Fade delay={0} direction='up' triggerOnce={true} >
 
             {'$'+product.price}
+            </Fade>
+            </td>
+            <td className="">
+          <Fade delay={0} direction='up' triggerOnce={true} >
+
+            {product.Playerid}
             </Fade>
             </td>
           <td className="d-none d-md-table-cell">
@@ -181,12 +188,12 @@ import { Fade } from "react-awesome-reveal";
           <tr>
             <th
               onClick={handleSort}
-              className="d-non  d-md-table-cell"
+              className="d-none  d-md-table-cell"
               scope="col"
             >
               {sorted ? <TiArrowSortedUp /> : <TiArrowSortedDown />}ترتيب
             </th>
-            <th scope="col">الاسم المنتج</th>
+            <th className="d-none  d-sm-table-cell" scope="col">الاسم المنتج</th>
             <th className="d-none d-sm-table-cell" scope="col">
               اسم القسم
             </th>
@@ -196,6 +203,8 @@ import { Fade } from "react-awesome-reveal";
             <th className="d-none d-md-table-cell" scope="col">
               السعر
             </th>
+            <th scope="col">ايد الاعب(id) </th>
+
             <th className="d-none d-md-table-cell" scope="col">
               صورة المنتج
             </th>

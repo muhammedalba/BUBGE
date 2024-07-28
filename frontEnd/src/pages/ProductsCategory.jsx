@@ -197,7 +197,7 @@ console.log(ProductData.priceAfterDiscount,'ProductData.priceAfterDiscount');
   };
 
   return (
-    <div className="w-100 pt-5 ">
+    <div className="w-100 pt-5 position-relative ">
       {/* tosat compunenet */}
       <ToastContainer
         position="top-right"
@@ -218,10 +218,15 @@ console.log(ProductData.priceAfterDiscount,'ProductData.priceAfterDiscount');
 
       </div>
       {/* order form start */}
-      <div className=" top-0 px-4 w-100 h-100 pt-5 mt-5 z-3 position-absolute"
+      <div  className="  px-4 w-100 z-3 position-absolute"
            style={{
+            height:'100%',
               backgroundColor: "#0a0a0ab0",
               display: display ? "block" : "none",
+              top:' 50%',
+              right: '50%',
+            
+            transform:'translate(50%, -50%)',
             }}
            
           >  
