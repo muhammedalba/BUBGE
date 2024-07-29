@@ -41,7 +41,7 @@ router.get(
 router.put(
   "/changeMyPassword",
   protect,
-  allowedTo(role.USER),
+ 
   updateLoggedUserPassword
 );
 router.put(

@@ -18,7 +18,6 @@ const productSchema = new mongoose.Schema(
     description: {
       type: String,
       trim: true,
-      required: [true, "product description required"],
       minlength: [15, "Too short product description name"],
     },
     quantity: {
@@ -46,41 +45,41 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: [true, "produc imageCover is required"],
     },
-    // image:{type: String,},
+    
     images: [String],
     category: {
       type: mongoose.Schema.ObjectId,
       ref: "Category",
       required: [true, "product must be parent category"],
     },
-    supCategories: [
-      {
-        type:mongoose.Schema.ObjectId,
-        ref: "SubCategory",
-      },
-    ],
+    // supCategories: [
+    //   {
+    //     type:mongoose.Schema.ObjectId,
+    //     ref: "SubCategory",
+    //   },
+    // ],
     brand: {
       type: mongoose.Schema.ObjectId,
       ref: "Brand",
     },
-    rating: {
-      required: false,
-      type: Number,
-      min: [1, "rating must be above or equal 1.0 "],
-      max: [5, "rating must be below or equal 5.0 "],
-    },
-    ratingsQuantity: {
-      required: false,
-      type: Number,
-      default: 0,
-    },
-    ratingsAverage:{
-      type: Number,
-      min: [0, "rating must be above or equal 0.0 "],
-      max: [5, "rating must be below or equal 5.0 "],
-      default: 0,
+    // rating: {
+    //   required: false,
+    //   type: Number,
+    //   min: [1, "rating must be above or equal 1.0 "],
+    //   max: [5, "rating must be below or equal 5.0 "],
+    // },
+    // ratingsQuantity: {
+    //   required: false,
+    //   type: Number,
+    //   default: 0,
+    // },
+    // ratingsAverage:{
+    //   type: Number,
+    //   min: [0, "rating must be above or equal 0.0 "],
+    //   max: [5, "rating must be below or equal 5.0 "],
+    //   default: 0,
 
-    }
+    // }
   },
   { timestamps: true ,
     //1- to enable virtual populates
@@ -105,32 +104,6 @@ productSchema.pre(/^find/, function(next){
   next();
 })
 
-// const setImageURL = (doc) => {
 
-//   if (doc.imageCover) {
-//     const imageUrl = `${process.env.BASE_URL}/uploads/products/${doc.imageCover}`;
-//     doc.image = imageUrl;
-  
-//   }
-// //   if (doc.images) {
-// //     const imagesList = [];
-// //     doc.images.forEach((image) => {
-// //       const imageUrl = `${process.env.BASE_URL}/uploads/products/${image}`;
-      
-// //       imagesList.push(imageUrl)
-// //     });
-// // doc.images = imagesList
-// //   }
-// };
-
-//update , findOne and findAll
-// productSchema.post("init", (doc) => {
-//   setImageURL(doc);
-// });
-//  creat
-// productSchema.post("save", (doc) => {
-//   setImageURL(doc);
-// });
-// 2- Create a link between reviews with the product
 
 module.exports = mongoose.model("Product", productSchema);

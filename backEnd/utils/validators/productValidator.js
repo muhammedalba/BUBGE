@@ -3,7 +3,6 @@ const { check } = require("express-validator");
 const { default: slugify } = require("slugify");
 const validatorMiddleware = require("../../middleWare/validatorMiddleware");
 const categoryModule = require("../../models/categoryModule");
-// const subCategoryModel = require("../../models/subCategoryModel");
 const brandModule = require("../../models/prandModule ");
 
 
@@ -18,7 +17,7 @@ exports.createProductValidator = [
     .withMessage("product title required")
     .isLength({ min: 3 })
     .withMessage("too short product title  name")
-    .isLength({ max: 50 })
+    .isLength({ max: 100 })
     .withMessage("too long product title  name")
   .custom((val,{ req})=>{
     req.body.slug=slugify(val);
@@ -62,10 +61,6 @@ exports.createProductValidator = [
       }
       return true;
     }),
-  check("colors")
-    .optional()
-    .isArray()
-    .withMessage("availabcolors should  be  array of strings"),
   check("imageCover")
   .custom((value, { req }) => {
     if (!req.files) {
@@ -93,61 +88,6 @@ exports.createProductValidator = [
         }
       })
     ),
-  // check("supCategories")
-  //   .optional()
-  //   .isMongoId()
-  //   .withMessage("invalid id formate")
-  //   .custom((SubCategoryIds) =>
-  //     subCategoryModel
-  //       .find({ _id: { $exists: true, $in: SubCategoryIds } })
-  //       .then((subCategory) => {
-  //         console.log(subCategory.length,"subCategory");
-  //         console.log(SubCategoryIds.length,"SubCategoryIds");
-  //         if (
-  //           subCategory.length < 1 ||
-  //           subCategory.length !== SubCategoryIds.length
-  //         ) {
-  //           return Promise.reject(new Error(`invalid subcategory ids`));
-  //         }
-  //       })
-  //   )
-    // .custom((val, { req }) =>
-    //   subCategoryModel.find({ category: req.body.category }).then(
-    //     (subcategories) => {
-    //       const subCategoriesIdsInDB = [];
-    //       subcategories.forEach((subCategory) => {
-    //         subCategoriesIdsInDB.push(subCategory._id.toString());
-    //       });
-    //       // check if subcategories ids in db include subcategories in req.body (true)
-    //       const checker = (target, arr) => target.every((v) => arr.includes(v));
-    //       if (!checker(val, subCategoriesIdsInDB)) {
-    //         return Promise.reject(
-    //           new Error(`subcategories not belong to category`)
-    //         );
-    //       }
-    //     }
-    //   )
-    // ),
-
-  //   .custom(async(val, { req }) => 
-  //    await subCategoryModel
-  //       .find({category: req.body.category})
-  //       .then((SubCategories) => {
-  //         const subCategoryIdsInDB = [];
-  //         console.log(SubCategories,"supcategory");
-  //         SubCategories.forEach((subCat) => {
-  //           subCategoryIdsInDB.push(subCat._id.toString());
-  //         });
-          
-  // //check if subcategories ids in db include subcategories in req.body (true)
-  //              // const checker = (target, arr) => target.every((v) => arr.includes(v));
-  //         if (!val.every((v) => subCategoryIdsInDB.includes(v))) {
-  //           return Promise.reject(
-  //             new Error("subcategories not belong to  category")
-  //           );
-  //         }
-  //       })
-  //   ),
 
   check("brand").optional().isMongoId().withMessage("invalid id formate")
   .custom(async(val,{req}) =>
@@ -160,22 +100,7 @@ exports.createProductValidator = [
     })
   ),
 
-  check("rating")
-    .optional()
-    .isNumeric()
-    .withMessage("product rating must be a number")
-    .isLength({ men: 1 })
-    .withMessage("rating must be above or equal 1.0")
-    .isLength({ max: 5 })
-    .withMessage("rating must be below or equal 5.0"),
-  check("ratingsQuantity")
-    .optional()
-    .isNumeric()
-    .withMessage("product ratingsQuantity must be a number")
-    .isLength({ men: 1 })
-    .withMessage("ratingsQuantity must be above or equal 1.0")
-    .isLength({ max: 5 })
-    .withMessage("ratingsQuantity must be below or equal 5.0"),
+ 
   validatorMiddleware,
 ];
 exports.updateProductValidator = [

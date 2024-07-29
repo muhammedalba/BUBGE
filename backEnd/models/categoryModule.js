@@ -20,35 +20,5 @@ const categorySchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// const setImageURL = (doc) => {
-//   if (doc.image) {
-   
-    
-//     const imageUrl = `${process.env.BASE_URL}/uploads/categories/${doc.image}`;
-//     // console.log(doc,"doc");
-//     doc.image = imageUrl;
-//     // console.log(imageUrl,"imageUrl");
-//   }
-// };
-
-// // update , findOne and findAll
-// categorySchema.post("init", (doc) => {
-//   setImageURL(doc);
- 
-// });
-// //  creat
-// categorySchema.post("save", (doc) => {
-//   setImageURL(doc);
-// });
-
-
-
-
-
-
-
-
-
-
 const categoryModule = mongoose.model("Category", categorySchema);
 module.exports = categoryModule;

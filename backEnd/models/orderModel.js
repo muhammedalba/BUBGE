@@ -21,29 +21,9 @@ const orderSchema = new mongoose.Schema(
        
       },
     ],
-    taxtPrice: {
-      type: Number,
-      default: 0,
-    },
-    shippingPrice: {
-      type: Number,
-      default: 0,
-    },
-    shippingAddress: {
-      detalis: String,
-      phone: String,
-      city: String,
-      postalCode: String,
-      Playerid: Number ,
-    },
+
+   
     totalOrderPrice: { type: Number },
-    paymentMethodType: {
-      type: String,
-      enum: ["card", "cash"],
-      default: "cash",
-    },
-    isPaid: { type: Boolean, default: false },
-    paidAt: { type: Date },
     isDelivered: { type: Boolean, default: false },
     deliveredAt: { type: Date },
   },

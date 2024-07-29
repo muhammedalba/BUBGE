@@ -29,10 +29,10 @@ const userSchema = new mongoose.Schema(
       required: [true, "password required"],
       minlength: [6, "too short password"],
     },
-    // phone: {
-    //   type: String,
+    phone: {
+      type: String,
   
-    // },
+    },
     passwordChangeAt:  { type: Date,},
     passwordResetCode: { type: String,},
     passwordResetExpires: { type: Date,},
@@ -60,20 +60,7 @@ const userSchema = new mongoose.Schema(
       },
     ],
     
-    addresses: [
-      {
-        id: { type: mongoose.Schema.Types.ObjectId },
-        alias: { type: String },
-        details: { type: String },
-        phone: { type: String },
-        city: { type: String },
-        postalCode: { type: String },
-        state: { type: String },
-        country: { type: String },
-        pincode: { type: String },
-        isDefault: { type: Boolean, default: false },
-      },
-    ],
+
      wallet:{
       type:Number,
       default: 0,
