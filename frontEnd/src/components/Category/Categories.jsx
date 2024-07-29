@@ -143,7 +143,7 @@ import { Fade } from "react-awesome-reveal";
 
              
             <div
-                style={{ width: "100%", height: "300px" }}
+                style={{ width: "100%", height: "375px" }}
                 id="carouselExampleInterval"
                 className="carousel slide m-auto mt-5"
                 data-bs-ride="carousel"
