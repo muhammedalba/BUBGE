@@ -10,6 +10,7 @@ import { ToastContainer, Zoom, toast } from "react-toastify";
 //
 import "react-toastify/dist/ReactToastify.css";
 import { Fade } from "react-awesome-reveal";
+import { successNotify } from "../../utils/Toast";
 
 const FormInputs = ({ formdata, InputData, name, title, method, path }) => {
   const [Autapi, { data: user, error: eror, isLoading, isSuccess }] =
@@ -93,7 +94,7 @@ console.log(eror);
       cookies.set("token", user.token);
       cookies.set("imageUrl", user.imageUrl);
       //
-      toast.success(`تمت ${title} بنجاح`, {
+     successNotify(`تمت ${title} بنجاح`, {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: true,
@@ -230,7 +231,7 @@ console.log(eror);
                 className="p-1 fs-5 d-flex align-items-center gap-1"
                 htmlFor="image"
               >
-                <FaImage color="var(--spanColor)" fontSize="1rem" /> صورة
+                <FaImage color="var(--spancolor)" fontSize="1rem" /> صورة
                 الشخصية (اختياري)
               </label>
               <input
@@ -244,7 +245,7 @@ console.log(eror);
             </div>
             <div className="w-100 py-2">
               <span className="p-2 w-100 d-block">
-                هل لديك حساب بالفعل؟<Link to="/login"> تسجيل دخول</Link>
+                هل لديك حساب بالفعل؟<Link className="text-primary"  to="/login"> تسجيل دخول</Link>
               </span>
             </div>
           </>
@@ -256,10 +257,10 @@ console.log(eror);
         {name === "login" && (
           <div className="w-100 py-2">
             <span className="p-2 w-100 d-block" htmlFor="password">
-              انشاء حساب جديد:<Link to={"/signup"}> انشاء حساب</Link>
+              انشاء حساب جديد:<Link className="text-primary " to={"/signup"}> انشاء حساب</Link>
             </span>
             <span className="p-2" htmlFor="password">
-              هل نسيت كلمة السر؟<Link to={"/forgotPassword"}> اضغط هنا</Link>
+              هل نسيت كلمة السر؟<Link className="text-primary" to={"/forgotPassword"}> اضغط هنا</Link>
             </span>
           </div>
         )}
@@ -270,7 +271,7 @@ console.log(eror);
           </span>
         )}
 
-        <button
+        <button style={{ background:'var(--spancolor) '}}
           disabled={isLoading ? true : false}
           className="btn btn-primary my-4 d-flex align-items-center"
           type="submit"

@@ -103,7 +103,7 @@ const Header = () => {
       <li key={index}>
         <Link
           to={`${link.path}`}
-          className={role&&link.path === "/login"||role&&link.path === "/signup"?"d-none ":'dropdown-item d-flex align-items-center gap-2'}
+          className={role&&link.path === "/login"|| role&&link.path === "/signup"||!role&&link.path === "/ProfileAccount"||!role&&link.path === "/"?"d-none ":'dropdown-item d-flex align-items-center gap-2'}
           onClick={link.path === "/" && Logout}
         >
           {link.icon}

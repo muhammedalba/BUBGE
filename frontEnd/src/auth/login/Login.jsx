@@ -11,8 +11,8 @@ const Login = () => {
   // inputs data
 const inputs= [
 
-  { id: "email", type: "email", placeholder: "أدخل الايميل", icon: <MdOutlineEmail />, label: "الايميل" },
-  { id: "password", type: "password", placeholder: "ادخل كلمة المرور", icon: <RiLockPasswordFill />, label: "كلمة المرور" },
+  { id: "email", type: "email", placeholder: "أدخل الايميل", icon: <MdOutlineEmail color="var(--spancolor)" />, label: "الايميل" },
+  { id: "password", type: "password", placeholder: "ادخل كلمة المرور", icon: <RiLockPasswordFill color="var(--spancolor)" />, label: "كلمة المرور" },
 
 ]
 

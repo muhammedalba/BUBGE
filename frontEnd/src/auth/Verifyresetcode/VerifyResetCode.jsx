@@ -117,7 +117,7 @@ const Verifyresetcode = () => {
             className="p-1 fs-5 d-flex align-items-center gap-1"
             htmlFor={ "code" }
           >
-            <MdOutlineEmail color="var(--spanColo)" fontSize="1rem" />
+            <MdOutlineEmail color="var(--spancolor)"  fontSize="1rem" />
             { "الكود"}
           </label>
           <input

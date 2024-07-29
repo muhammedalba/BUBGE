@@ -16,11 +16,11 @@ const SignUp = () => {
   }
 // inputs data
 const inputs= [
-  { id: "firstname", type: "text", placeholder: "ادخل الاسم الاول", icon: <FaUser />, label: "الاسم الاول" },
-  { id: "lastname", type: "text", placeholder: "أدخل الاسم الثاني", icon: <FaUser />, label: "الاسم الثاني" },
-  { id: "email", type: "email", placeholder: "أدخل الايميل", icon: <MdOutlineEmail />, label: "الايميل" },
-  { id: "password", type: "password", placeholder: "ادخل كلمة المرور", icon: <RiLockPasswordFill />, label: "كلمة المرور" },
-  { id: "passwordConfirm", type: "password", placeholder: "ادخل تأكيد كلمة المرور", icon: <RiLockPasswordFill />, label: "تأكيد كلمة المرور" }
+  { id: "firstname", type: "text", placeholder: "ادخل الاسم الاول", icon: <FaUser color="var(--spancolor)" />, label: "الاسم الاول" },
+  { id: "lastname", type: "text", placeholder: "أدخل الاسم الثاني", icon: <FaUser color="var(--spancolor)" />, label: "الاسم الثاني" },
+  { id: "email", type: "email", placeholder: "أدخل الايميل", icon: <MdOutlineEmail color="var(--spancolor)" />, label: "الايميل" },
+  { id: "password", type: "password", placeholder: "ادخل كلمة المرور", icon: <RiLockPasswordFill color="var(--spancolor)" />, label: "كلمة المرور" },
+  { id: "passwordConfirm", type: "password", placeholder: "ادخل تأكيد كلمة المرور", icon: <RiLockPasswordFill color="var(--spancolor)" />, label: "تأكيد كلمة المرور" }
 ]
 
 

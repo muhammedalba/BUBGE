@@ -13,8 +13,8 @@ const ResetPassword = () => {
     // inputs data
 const inputs= [
 
-  { id: "email", type: "email", placeholder: " أدخل الايميل", icon: <MdOutlineEmail />, label: "الايميل" },
-  { id: "newPassword", type: "password", placeholder: "أدخل كلمه المرورالجديدة", icon: <RiLockPasswordFill />, label: "أدخل كلمه المرورالجديدة" },
+  { id: "email", type: "email", placeholder: " أدخل الايميل", icon: <MdOutlineEmail color="var(--spancolor)" />, label: "الايميل" },
+  { id: "newPassword", type: "password", placeholder: "أدخل كلمه المرورالجديدة", icon: <RiLockPasswordFill color="var(--spancolor)" />, label: "أدخل كلمه المرورالجديدة" },
 
 ]
   return (

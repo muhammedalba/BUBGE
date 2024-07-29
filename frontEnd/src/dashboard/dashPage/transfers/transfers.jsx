@@ -169,7 +169,6 @@ const Transfers = () => {
               <span>{transfer.user.email.slice(0, -9)}</span>
               </Fade>
             </td>
-
             <td className="d-none d-md-table-cell">
             <Fade delay={0} direction='up' triggerOnce={true}>
 
@@ -262,16 +261,16 @@ const Transfers = () => {
       arry.map((index) => {
         return (
           <tr className="text-center" key={index}>
-            <td className="" scope="row">
+            <td className="d-none d-md-table-cell" scope="row">
               <h5 className="skeleton-loading "></h5>
             </td>
-            <td>
+            <td className="d-none d-md-table-cell">
               <span className="skeleton-loading"></span>
             </td>
-            <td>
+            <td className="d-none d-md-table-cell">
               <span className="skeleton-loading"></span>
             </td>
-            <td>
+            <td className="d-none d-md-table-cell">
               <span className="skeleton-loading"></span>
             </td>
             <td>

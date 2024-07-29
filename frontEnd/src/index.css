@@ -29,6 +29,8 @@
 }
 
 body {
+
+ 
   overflow-x: hidden;
   background-color: var(--minColor) !important;
   color: var(--text-color) !important;
