@@ -21,7 +21,7 @@ function App() {
   <div className="App "> 
     <Header/>
     {/* <ProfileAccount/> */}
-    <div style={{minHeight:'calc(100vh - 120px)'}} className=" mt-5 pt-5 h-100">
+    <div style={{minHeight:'calc(100vh - 120px)'}} className=" mt-5 pt-5 h-100 position-relative">
       <Outlet/>
     </div>
 

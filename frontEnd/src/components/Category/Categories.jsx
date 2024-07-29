@@ -11,6 +11,7 @@
 import {  useGetDataQuery } from "../../redux/features/api/apiSlice";
 import { errorNotify } from "../../utils/Toast";
 import { Fade } from "react-awesome-reveal";
+import LoadingPage from "../LoadingPage/LoadingPage";
 // import { Fade } from "react-awesome-reveal"; <Fade delay={0} direction='right' triggerOnce={true} cascade>
 
     
@@ -122,7 +123,9 @@ import { Fade } from "react-awesome-reveal";
           );
         });
       // loading styles end
-      return (
+      return (<>
+       { isLoading&&  <LoadingPage/>}
+
         <div className="w-100 pt-3 categories ">
           {/* tosat compunenet */}
           <ToastContainer
@@ -190,7 +193,7 @@ import { Fade } from "react-awesome-reveal";
 
  
         </div>
-      );
+      </>);
     };
 
     export default Categories;

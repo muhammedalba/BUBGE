@@ -28,7 +28,8 @@ const User = () => {
   // update data (rtk redux)
   const [updateOne, { error: updateError, isLoading: updateLoading, isSuccess: updateSuccess, data: updatedUser }] = useUpdateOneMutation();
   // states
-  console.log(data);
+  // console.log(data);
+  console.log(updateError);
   
 
 
@@ -64,6 +65,7 @@ const User = () => {
       password &&  navigate('/login');
     }
     if (updateError) {
+     
       errorNotify('خطأ في الخادم');
     }
   }, [data, isSuccess, updateSuccess, navigate, updateError, updatedUser, error?.status, password]);
