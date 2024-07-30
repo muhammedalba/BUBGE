@@ -69,7 +69,7 @@ console.log(createError);
     setdisplay(true);
   };
   //handel error our  success message
-  const dispatch = useDispatch();
+
 
  
   useEffect(() => {
@@ -222,22 +222,29 @@ console.log(createError);
 
       </div>
       {/* order form start */}
-      <div  className="  px-4 w-100 z-3 position-absolute"
+      <div  className="  px-4 w-100 z-3 position-fixed"
            style={{
             height:'100%',
               backgroundColor: "#0a0a0ab0",
               display: display ? "block" : "none",
-              top:' 50%',
-              right: '50%',
+              top:' 0%',
+              right: '0%',
             
-            transform:'translate(50%, -50%)',
+            // transform:'translate(0%, -50%)',
             }}
            
           >  
               <form
                   style={{
                     backgroundColor: "var(--bgColor)",
-                    color: "var(--text-color)",
+                    color: "var(--text-color)",zIndex: 99999,
+                    position:'fixed',
+                    // top:' 0%',
+                    right:'50%',
+                    transform:' translate(50%,  50%)',
+                    bottom: '46%',
+                    maxHeight: '100vh',
+
                   }}
                   onSubmit={handleSubmit}
                   className="m-auto p-3 rounded-4 mt-5 "

@@ -149,7 +149,8 @@ const User = () => {
 
         <div className="w-100 py-2">
           <img
-            className="logo rounded m-auto d-none d-sm-block"
+          style={{border:' 5px solid var(--spancolor)'}}
+            className="logo rounded-circle m-auto d-none d-sm-block "
             src={isSuccess && !preview ? `${data?.imageUrl}/${data?.data?.image}` : preview}
             alt="avatar"
           />
