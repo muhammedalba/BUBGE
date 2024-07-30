@@ -57,19 +57,20 @@ const ProductsCategory = () => {
    const token= cookies.get('token');
 
   const [display, setdisplay] = useState(false);
-   console.log(products?.data,'products');
+  //  console.log(products?.data,'products');
   
+console.log(createError);
 
   // handel order
   const handelOrder = (product) => {
-    console.log(product);
+    // console.log(product);
     setProductData(product);
     setformData({ ...formData, productId: product.id });
     setdisplay(true);
   };
   //handel error our  success message
   const dispatch = useDispatch();
-console.log(ProductData.priceAfterDiscount,'ProductData.priceAfterDiscount');
+
  
   useEffect(() => {
     if (createsuccess) {
@@ -183,14 +184,14 @@ console.log(ProductData.priceAfterDiscount,'ProductData.priceAfterDiscount');
   // handle Submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+    console.log(formData);
     if(token){
       createOne({
         url: "/cart",
         body: formData,
         method: "post",
       });
-      dispatch(cartitems(formData));
+      // dispatch(cartitems(formData));
 
 
     } else{

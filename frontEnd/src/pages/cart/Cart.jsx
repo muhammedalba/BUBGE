@@ -114,21 +114,21 @@ const Cart = () => {
           <td className="d-sm-table-cell">
             <img
               style={{ width: "100px", height: "80px" }}
-              src={`${products.imageUrl}/${product.product.imageCover}`}
+              src={`${products.imageUrl}/${product?.product?.imageCover}`}
               alt="avatar"
             />
           </td>
           <td className="d-none d-sm-table-cell">
-            {product.product.title?.slice(0, 20)}..
+            {product.product?.title?.slice(0, 20)}..
           </td>
-          <td>{product.product.price}$</td>
+          <td>{product?.product?.price}$</td>
           <td className="d-none d-md-table-cell">
-            {product.product.priceAfterDiscount}$
+            {product?.product?.priceAfterDiscount}$
           </td>
           <td>
             <button
               disabled={LoadingDelet}
-              onClick={() => handelDelet(product.product._id)}
+              onClick={() => handelDelet(product?.product?._id)}
               className="btn btn-danger"
             >
               {LoadingDelet || LoadingCreate ? (

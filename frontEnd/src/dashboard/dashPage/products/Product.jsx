@@ -112,11 +112,7 @@ const Product = () => {
         price: product.data.price,
         quantity: product.data.quantity,
         sold: product.data.sold,
-        ratingsAverage: product.data.ratingsAverage,
         priceAfterDiscount: product.data.priceAfterDiscount,
-        ratingsQuantity: product.data.ratingsQuantity,
-       
-        supCategories: product.data.supCategories,
         createdAt: convertDateTime(product.data.createdAt),
         category: product.data.category?.name,
         brand: product.data.brand?.name,
@@ -152,14 +148,19 @@ const Product = () => {
     }
   }, [updateError, error, errorDelet]);
 
- 
   // handleSubmit
   const handleSubmit = (e) => {
     console.log(formData);
+   
     e.preventDefault();
     if (formData.price !== '' && +formData.price <= +formData.priceAfterDiscount ) {
       infoNotify(" يجب ان لايكون السعر بعد التخفيض اكبر من السعر ");
       setErrorMsge(" يجب ان لايكون السعر بعد التخفيض اكبر من السعر ");
+      return;
+    }
+    if (formData.priceAfterDiscount == undefined) {
+      infoNotify("  يجب ان لايكون السعر بعد التخفيض فارغ    ");
+      setErrorMsge(" يجب ان لايكون السعر بعد التخفيض  فارغ");
       return;
     }
     if (formData.category === undefined || formData.category == ''||
@@ -173,6 +174,7 @@ const Product = () => {
       formData.description.length >= 20  &&
       formData.quantity !== 0 &&
       formData.price > 0 &&
+      formData.priceAfterDiscount > 0 &&
       formData.category !== undefined &&
       formData.category !== "" &&
       formData.brand !== undefined &&
@@ -652,10 +654,10 @@ const Product = () => {
           {/* Carousel start */}
       
           <span className="fs-5 text-center d-block my-2">
-            ( {previews.length || ProductData.images.length} ) عدد الصور
+            ( {imagesShow.length} ) عدد الصور
           </span>
           
-        {  previews.length || ProductData.images.length> 0&&      <div
+        {imagesShow.length > 0 &&      <div
               style={{ width: "100%", height: "150px" }}
               id="carouselExampleInterval"
               className="carousel slide m-auto mt-5"
