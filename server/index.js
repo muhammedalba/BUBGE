@@ -1,6 +1,6 @@
+const express = require("express");
 const path = require("path");
 
-const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
 const cors = require("cors");
@@ -30,13 +30,17 @@ app.options("*", cors());
 app.use(compression());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
+// Enable JSON and static files
+app.use(express.json({ limit: "25kb" }));
+
+
+
 // webhook-checkout
 app.post(
   "/webhook-checkout",
   express.raw({ type: "application/json" }),
   webhookCheckout
 );
-app.use(express.json({ limit: "25kb" }));
 // app.use(express.json({
 //   verify: (req, res, buf) => {
 //     if (req.originalUrl.startsWith('/stripe/webhook')) {
@@ -52,7 +56,7 @@ const limiter = rateLimit({
 	limit: 100,
   message:"to mony accounts created from this IP  ,please tray agin after an hours"
 })
-// app.use('/api/users/auth',limiter)
+app.use('/api/users/auth',limiter)
 
 // middleware to protect against HTTP Parameter Pollution attacks
 app.use(hpp({whitelist: ['price','sold','quantity','ratingsQuantity','ratingsAverage']}));
@@ -67,6 +71,15 @@ dbconnection();
 
 //mount Routes
 MountRoutes(app);
+
+// Static file declaration
+app.use(express.static(path.join(__dirname, '../frontEnd/dist')));
+// Serve the React app
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontEnd/dist', 'index.html'));
+});
+
+
 
 // create error and send it to error handling middleware
 app.use("*", (req, res, next) => {

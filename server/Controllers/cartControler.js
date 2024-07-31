@@ -23,7 +23,7 @@ exports.addProductToCart = asyncHandler(async (req, res, next) => {
   const product = await productModel.findById(productId);
 
   // 1-get cart for logged  user
-  let cart = await cartModel.findOne({ user: req.user.id });
+  let cart = await cartModel.findOne({ user: req.user._id });
   if (!cart) {
     cart = await cartModel.create({
       user: req.user._id,
